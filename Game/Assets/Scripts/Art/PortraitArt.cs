@@ -173,10 +173,9 @@ namespace SSD
                     k.front.Add(R(4, 12, 2, 4, "#16131f")); k.front.Add(R(5, 16, 5, 1, "#16131f"));
                     break;
                 }
-                case "vivi":
                 case "vboss":
                 {
-                    // 兩位角色原先共用的雛形頭像。
+                    // V老大：深紫色高馬尾、銳利眼線、紅唇、黑西裝白襯衫、金耳環
                     k.s1 = "#f0c9a4"; k.s2 = "#d6a580"; k.brow = "#2a1f33"; k.mouth = "#a8352d";
                     string hr = "#3e2a5c", hl = "#57497a";
                     k.back.Add(R(16, 1, 5, 4, hr)); k.back.Add(R(18, 4, 4, 12, hr)); k.back.Add(R(19, 15, 3, 5, hr));

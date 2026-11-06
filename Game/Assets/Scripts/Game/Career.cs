@@ -214,9 +214,6 @@ namespace SSD
                 if (member != null) ApplyTalentProfile(member, profile);
             }
 
-            foreach (Opportunity op in s.inbox)
-                if (op.type == "talent" && op.talent == "lily" && op.npc == "vboss") op.npc = "vivi";
-
             if (s.Has("xd_roster_v2")) return;
             foreach (Investment investment in s.investments)
                 investment.name = RefreshRosterLabel(investment.name);
