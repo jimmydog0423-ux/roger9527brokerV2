@@ -6,6 +6,10 @@ namespace SSD
     /// <summary>標題畫面：開新遊戲、繼續遊戲、設定、離開遊戲。</summary>
     public class TitleView : MonoBehaviour
     {
+        const int MenuX = 42;
+        const int MenuWidth = 196;
+        const int ItemHeight = 29;
+
         RectTransform rt;
         GameRoot game;
         Transform menu;
@@ -22,40 +26,40 @@ namespace SSD
 
         void BuildArt()
         {
-            Image bg = Px.Fill(rt, 0, 0, 640, 360, Pal.Hex("#14111e"));
+            Image bg = Px.Fill(rt, 0, 0, PixelScaler.Width, PixelScaler.Height, Pal.Ink);
             bg.raycastTarget = true;
+            Sprite office = Resources.Load<Sprite>("Title/broker-office-v2");
+            if (office != null)
+            {
+                bg.sprite = office;
+                bg.color = Color.white;
+            }
 
-            // 夜晚的城市剪影
-            Px.Fill(rt, 0, 0, 640, 200, Pal.Hex("#1a1630"));
-            int[,] stars = { { 40, 30 }, { 120, 18 }, { 210, 44 }, { 330, 22 }, { 420, 38 }, { 520, 16 }, { 600, 50 }, { 80, 70 }, { 470, 70 } };
-            for (int i = 0; i < stars.GetLength(0); i++) Px.Fill(rt, stars[i, 0], stars[i, 1], 2, 2, Pal.PlumLight);
-            int[,] city = { { 0, 150, 60, 210 }, { 56, 120, 50, 240 }, { 104, 160, 70, 200 }, { 170, 110, 44, 250 }, { 212, 140, 70, 220 },
-                            { 380, 130, 60, 230 }, { 436, 100, 46, 260 }, { 480, 150, 70, 210 }, { 546, 120, 50, 240 }, { 592, 160, 48, 200 } };
-            for (int i = 0; i < city.GetLength(0); i++)
-                Px.Fill(rt, city[i, 0], city[i, 1], city[i, 2], city[i, 3], i % 2 == 0 ? Pal.Hex("#231d3a") : Pal.Hex("#2a2346"));
-            int[,] wins = { { 70, 140 }, { 82, 170 }, { 120, 180 }, { 184, 130 }, { 196, 160 }, { 230, 170 }, { 396, 150 }, { 450, 120 },
-                            { 462, 150 }, { 496, 170 }, { 560, 140 }, { 606, 180 }, { 70, 200 }, { 450, 190 } };
-            for (int i = 0; i < wins.GetLength(0); i++) Px.Fill(rt, wins[i, 0], wins[i, 1], 4, 4, i % 3 == 0 ? Pal.Orange : Pal.Yellow);
-            Px.Fill(rt, 0, 300, 640, 60, Pal.Hex("#0d0b14"));
+            RectTransform badge = Px.Box(rt, "Version", MenuX, 37, 26, 17, Pal.Orange, Pal.Clear);
+            Px.Label(badge, "V2", 0, 1, 26, 14, Pal.Ink, TextAnchor.UpperCenter, false);
+            Px.Label(rt, "經紀模擬・正式營業", MenuX + 35, 38, 216, 14, Pal.Lav);
+            Px.Label(rt, "水蛇洞經紀人", MenuX + 2, 70, 286, 42, Pal.Ink).fontSize = 36;
+            Px.Label(rt, "水蛇洞經紀人", MenuX, 68, 286, 42, Pal.Cream).fontSize = 36;
+            Px.Fill(rt, MenuX, 117, 26, 2, Pal.Orange);
+            Px.Label(rt, "傳奇經紀人的最後一位學徒", MenuX, 130, 265, 14, Pal.Cream);
 
-            // 鬼東與羅傑
-            Px.Box(rt, "GuiDong", 40, 176, 100, 116, Pal.VideoWall, Pal.Ink);
-            PortraitArt.Draw(rt, "guidong", 42, 178, 4);
-            Px.Box(rt, "Roger", 500, 176, 100, 116, Pal.VideoWall, Pal.Ink);
-            PortraitArt.Draw(rt, "roger", 502, 178, 4);
-            Px.Label(rt, "傳奇經紀人・鬼東", 30, 296, 120, 14, Pal.Lav, TextAnchor.UpperCenter, false);
-            Px.Label(rt, "實況主・羅傑", 490, 296, 120, 14, Pal.Lav, TextAnchor.UpperCenter, false);
+            DrawPortrait("guidong", "鬼東", "傳奇經紀人", 350, 181, Pal.Teal);
+            DrawPortrait("roger", "羅傑", "實況主", 474, 181, Pal.Orange);
 
-            // 標題
-            Text shadow = Px.Label(rt, "水蛇洞經紀人", 3, 47, 640, 40, Pal.Ink, TextAnchor.UpperCenter, false);
-            shadow.fontSize = 36;
-            Text title = Px.Label(rt, "水蛇洞經紀人", 0, 44, 640, 40, Pal.Orange, TextAnchor.UpperCenter, false);
-            title.fontSize = 36;
-            Px.Label(rt, "傳奇經紀人的最後一位學徒", 0, 92, 640, 14, Pal.Cream, TextAnchor.UpperCenter, false);
-
+            Px.Fill(rt, 0, 337, 640, 23, Pal.Alpha(Pal.Ink, 230));
+            Px.Fill(rt, MenuX, 336, 556, 1, Pal.PlumLight);
+            Px.Label(rt, "遊戲中可點選畫面上的「選單」", 337, 342, 261, 14, Pal.Lav, TextAnchor.UpperRight, false);
             menu = Px.Rect(rt, "Menu", 0, 0, 640, 360);
-            Px.Label(rt, "雛形版 v0.4　正式營業", 8, 342, 200, 14, Pal.PlumLight);
-            Px.Label(rt, Px.Mobile ? "遊戲中點畫面上的「選單」打開選單" : "按 Esc 可以在遊戲中打開選單", 400, 342, 232, 14, Pal.PlumLight, TextAnchor.UpperRight, false);
+        }
+
+        void DrawPortrait(string id, string characterName, string role, int x, int y, Color32 accent)
+        {
+            RectTransform card = Px.Box(rt, "Title_" + id, x, y, 114, 144, Pal.Alpha(Pal.Ink, 224), Pal.PlumLight);
+            Px.Fill(card, 1, 1, 112, 112, Pal.Alpha(accent, 42));
+            PortraitArt.Draw(card, id, 9, 1, 4);
+            Px.Fill(card, 1, 113, 112, 1, accent);
+            Px.Label(card, characterName, 8, 121, 31, 14, Pal.Cream);
+            Px.Label(card, role, 40, 121, 66, 14, Pal.Lav, TextAnchor.UpperRight, false);
         }
 
         public void Show()
@@ -64,12 +68,11 @@ namespace SSD
             rt.SetAsLastSibling();
             Px.Clear(menu);
             bool hasSave = SaveSystem.Exists();
-            float y = 168;
-            Item("開新遊戲", y, true, () => game.NewGame()); y += 26;
-            Item("繼續遊戲", y, hasSave, () => game.ContinueGame()); y += 26;
-            Item("設定", y, true, () => game.OpenSettings()); y += 26;
+            Item("開新遊戲", 165, !hasSave, game.NewGame);
+            Item("繼續遊戲", 201, hasSave, hasSave ? game.ContinueGame : null);
+            Item("設定", 237, false, game.OpenSettings);
 #if !UNITY_WEBGL || UNITY_EDITOR
-            Item("離開遊戲", y, true, () => game.Quit());
+            Item("離開遊戲", 273, false, game.Quit);
 #endif
         }
 
@@ -78,12 +81,23 @@ namespace SSD
             gameObject.SetActive(false);
         }
 
-        void Item(string label, float y, bool enabled, System.Action act)
+        void Item(string label, int y, bool primary, System.Action act)
         {
-            Color32 bg = enabled ? Pal.Plum : Pal.PlumDeep;
-            Color32 fg = enabled ? Pal.Cream : Pal.PlumLight;
-            RectTransform b = Px.Button(menu, label, 250, y, 140, 20, bg, fg, enabled ? Pal.PlumLight : Pal.PlumLine, enabled ? act : null);
-            if (!enabled) b.GetComponent<Image>().raycastTarget = false;
+            bool enabled = act != null;
+            Color32 bg = primary ? Pal.Orange : enabled ? Pal.Plum : Pal.PlumDeep;
+            Color32 fg = primary ? Pal.Ink : enabled ? Pal.Cream : Pal.Lav;
+            RectTransform button = Px.Button(menu, label, MenuX, y, MenuWidth, ItemHeight, bg, fg,
+                primary ? Pal.Yellow : Pal.PlumLight, act);
+            Text caption = button.GetComponentInChildren<Text>();
+            caption.alignment = TextAnchor.UpperLeft;
+            Px.Place(caption.rectTransform, 12, 7, 96, 14);
+            Px.Label(button, enabled ? ">" : "尚無存檔", 110, 7, 74, 14, fg, TextAnchor.UpperRight, false);
+            Image surface = button.GetComponent<Image>();
+            surface.raycastTarget = enabled;
+            if (enabled)
+                button.gameObject.AddComponent<Hover>().onHover = over => surface.color = over
+                    ? (primary ? Pal.Yellow : Pal.PlumLine)
+                    : bg;
         }
     }
 }
