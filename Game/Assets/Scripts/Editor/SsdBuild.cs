@@ -40,6 +40,7 @@ namespace SSD.EditorTools
             };
             BuildReport report = BuildPipeline.BuildPlayer(opts);
             bool ok = report.summary.result == BuildResult.Succeeded;
+            if (ok) CopyPortraitCredit(OutputDir);
             Debug.Log("[水蛇洞] 輸出" + (ok ? "完成：" + exe : "失敗：" + report.summary.result));
             if (Application.isBatchMode)
             {
@@ -83,6 +84,7 @@ namespace SSD.EditorTools
                 const string fontLicense = "Cubic11-LICENSE.txt";
                 File.Copy(Path.Combine(Application.dataPath, "Resources", "Fonts", fontLicense),
                     Path.Combine(output, fontLicense), overwrite: true);
+                CopyPortraitCredit(output);
                 Debug.Log("[水蛇洞] 網頁版輸出完成：" + output);
             }
             finally
@@ -92,6 +94,13 @@ namespace SSD.EditorTools
                 PlayerSettings.WebGL.nameFilesAsHashes = hashedNames;
                 PlayerSettings.WebGL.template = template;
             }
+        }
+
+        static void CopyPortraitCredit(string output)
+        {
+            const string credit = "Vivi-portrait-LICENSE.txt";
+            string project = Directory.GetParent(Application.dataPath).FullName;
+            File.Copy(Path.Combine(project, credit), Path.Combine(output, credit), overwrite: true);
         }
     }
 }
