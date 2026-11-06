@@ -43,3 +43,13 @@ https://rayterent.com/
 人物參考：巴哈姆特 GNN 報導《爐石戰記》選手威傅加入 J Team 遊戲娛樂的真人照片。
 https://gnn.gamer.com.tw/detail.php?sn=159209
 以 imagegen 參考臉部、眼鏡與神情，重新構圖並改繪為像素胸像。
+
+超負荷
+人物參考：雷特娛樂官網的拼經紀娛樂藝人名單。
+https://rayterent.com/
+以官方真人照參考臉部、細框眼鏡、髮型與深藍上衣，重新構圖並繪製像素胸像。
+
+花輪 Gear
+人物參考：鍇睿國際官網的鍇睿藝人名單。
+https://www.carry.live/artists.php
+以官方真人照參考臉部、圓框眼鏡、捲髮與白色上衣，重新構圖並繪製像素胸像。
