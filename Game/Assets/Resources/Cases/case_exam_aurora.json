@@ -1,0 +1,103 @@
+{
+  "id": "case_exam_aurora",
+  "title": "極光電競工商直播",
+  "client": { "id": "zhang", "name": "張經理", "company": "極光電競", "role": "贊助方" },
+  "greeting": "嗨！極光電競的張經理。我們新出的耳機想找羅傑，合約報價都在這，今天能簽嗎？",
+  "patience": 5,
+  "baseFee": 180000,
+  "startSlots": ["c", "q", "", ""],
+  "storage": ["c", "q", "r", "hb", "offer", "bc"],
+  "documents": [
+    {
+      "id": "c", "title": "合作合約", "tray": "合約", "icon": "contract", "paper": "#ecdcc8", "head": "#d9bfa8", "labelWidth": 56, "stamp": true,
+      "fields": [
+        { "id": "c_a", "label": "甲方", "value": "極光電競" },
+        { "id": "c_t", "label": "實況主", "value": "羅傑" },
+        { "id": "c_k", "label": "合作形式", "value": "耳機實機開箱" },
+        { "id": "c_d", "label": "直播日期", "value": "8月25日" },
+        { "id": "c_h", "label": "直播時數", "value": "4 小時" },
+        { "id": "c_f", "label": "合作費用", "value": "NT$180,000" },
+        { "id": "c_p", "label": "違約賠償", "value": "費用 3 倍" },
+        { "id": "c_x", "label": "排他條款", "value": "無" }
+      ]
+    },
+    {
+      "id": "q", "title": "報價單", "tray": "報價單", "icon": "quote", "paper": "#d6e0e6", "head": "#b8c8d4", "labelWidth": 56,
+      "fields": [
+        { "id": "q_a", "label": "客戶", "value": "極光電競" },
+        { "id": "q_t", "label": "實況主", "value": "羅傑" },
+        { "id": "q_i", "label": "項目", "value": "開箱直播3小時" },
+        { "id": "q_f", "label": "報價金額", "value": "NT$200,000" },
+        { "id": "q_v", "label": "有效期限", "value": "14 天" }
+      ]
+    },
+    {
+      "id": "r", "title": "藝人檔案・羅傑", "tray": "藝人檔", "kind": "talent", "icon": "folder", "paper": "#e6d3a6", "head": "#cdb27a", "portrait": "roger", "labelWidth": 32,
+      "info": [
+        { "id": "r_n", "label": "藝名", "value": "羅傑" },
+        { "id": "r_t", "label": "類型", "value": "遊戲實況" },
+        { "id": "r_o", "label": "所屬", "value": "水蛇洞" },
+        { "id": "r_p", "label": "偏好", "value": "愛電競設備" }
+      ],
+      "fields": [
+        { "id": "k_22", "label": "8/22", "value": "喵喵聯名客串" },
+        { "id": "k_25", "label": "8/25", "value": "鬼東退休派對" },
+        { "id": "k_26", "label": "8/26", "value": "空檔" },
+        { "id": "k_28", "label": "8/28", "value": "個人直播" }
+      ]
+    },
+    {
+      "id": "hb", "title": "手冊・合約規則", "tray": "手冊", "icon": "book", "paper": "#e9dcbc", "head": "#cdbd96", "labelWidth": 44,
+      "fields": [
+        { "id": "h_1", "label": "第1條", "value": "金額同報價單" },
+        { "id": "h_2", "label": "第2條", "value": "時數同報價單" },
+        { "id": "h_3", "label": "第3條", "value": "日期不可撞期" },
+        { "id": "h_4", "label": "第4條", "value": "賠償上限1倍" }
+      ]
+    },
+    {
+      "id": "bc", "title": "名片", "tray": "名片", "icon": "card", "paper": "#f1e6cc", "head": "#d8cba8", "labelWidth": 32,
+      "fields": [
+        { "id": "b_c", "label": "公司", "value": "極光電競" },
+        { "id": "b_n", "label": "姓名", "value": "張經理" },
+        { "id": "b_j", "label": "職稱", "value": "品牌經理" },
+        { "id": "b_e", "label": "分機", "value": "715" }
+      ]
+    },
+    {
+      "id": "offer", "title": "議價單", "tray": "議價單", "kind": "offer", "icon": "receipt", "paper": "#f1e6cc", "head": "#e8c35a"
+    }
+  ],
+  "contradictions": [
+    { "key": "fee", "a": "c_f", "b": "q_f", "name": "金額不一致", "fixField": "c_f", "fixValue": "NT$200,000", "fee": 200000, "shift": 5000,
+      "reply": "哎呀，業務抄錯了，以報價單的 20 萬為準。", "risk": "合約少寫 NT$20,000" },
+    { "key": "hours", "a": "c_h", "b": "q_i", "name": "時數不一致", "fixField": "c_h", "fixValue": "3 小時", "shift": 5000,
+      "reply": "報價是 3 小時沒錯，合約我改回來。", "risk": "多播 1 小時卻沒有多收錢" },
+    { "key": "pen", "a": "c_p", "b": "h_4", "name": "賠償過高", "fixField": "c_p", "fixValue": "費用 1 倍", "shift": 5000,
+      "reply": "3 倍是嚇人用的啦……改 1 倍。", "risk": "違約賠償 3 倍" },
+    { "key": "date", "a": "c_d", "b": "k_25", "name": "日期撞期", "fixField": "c_d", "fixValue": "8月26日", "shift": 5000,
+      "reply": "那天是鬼東的退休派對？那改 26 號吧，我也想去捧場。", "risk": "8/25 羅傑要參加退休派對" }
+  ],
+  "offer": {
+    "docId": "offer", "mode": "raise", "label": "合作費用", "apply": "fee", "feeField": "c_f",
+    "ask": 200000, "start": 200000, "step": 5000, "min": 150000, "max": 300000, "accept": 210000, "walk": 240000,
+    "acceptText": "{v}，成交！羅傑最近話題很多嘛。",
+    "counterText": "最多 {v}，不能再高了。",
+    "refuseText": "這個價……我們可以找別人了。"
+  },
+  "contacts": [
+    { "id": "zhang", "name": "張經理", "caller": true },
+    { "id": "roger", "name": "羅傑", "message": "電競耳機！這個我愛！這次我保證不亂講話！" },
+    { "id": "guidong", "name": "鬼東", "status": "只看不說" }
+  ],
+  "tasks": [
+    { "text": "找出合約裡所有問題", "doneWhen": "found==all" },
+    { "text": "爭取更好的費用（可選）", "doneWhen": "offer" },
+    { "text": "簽約", "doneWhen": "result==signed" }
+  ],
+  "replyWrong": "嗯？這哪裡有問題？",
+  "replyLeave": "看來今天談不成，我們改天吧。",
+  "replySigned": "合作愉快！到時候派對我也帶耳機去！",
+  "replyHold": "好，那等你消息。",
+  "replyReject": "咦？那我們再回去改改看……"
+}

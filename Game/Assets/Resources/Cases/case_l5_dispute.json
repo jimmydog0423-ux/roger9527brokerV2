@@ -1,0 +1,97 @@
+{
+  "id": "case_l5_dispute",
+  "title": "星海飲料求償",
+  "client": { "id": "lin", "name": "林經理", "company": "星海飲料", "role": "求償方" },
+  "greeting": "你們家羅傑在直播上說我們的飲料「不喜歡」！求償單傳過去了，五十萬，一毛都不能少！",
+  "patience": 6,
+  "startSlots": ["claim", "c", "", ""],
+  "storage": ["claim", "c", "rec", "hb", "offer", "log"],
+  "documents": [
+    {
+      "id": "claim", "title": "求償單", "tray": "求償單", "icon": "claim", "paper": "#efd6cf", "head": "#d9aaa0", "labelWidth": 56,
+      "fields": [
+        { "id": "cl_a", "label": "求償方", "value": "星海飲料公司" },
+        { "id": "cl_r", "label": "事由", "value": "實況主負評" },
+        { "id": "cl_1", "label": "主張一", "value": "直播沒播完" },
+        { "id": "cl_2", "label": "主張二", "value": "拒喝產品" },
+        { "id": "cl_3", "label": "負面發言", "value": "1 次" },
+        { "id": "cl_m", "label": "求償金額", "value": "NT$500,000" }
+      ]
+    },
+    {
+      "id": "c", "title": "合作合約（已簽）", "tray": "合約", "icon": "contract", "paper": "#ecdcc8", "head": "#d9bfa8", "labelWidth": 56,
+      "fields": [
+        { "id": "c_a", "label": "甲方", "value": "星海飲料公司" },
+        { "id": "c_t", "label": "實況主", "value": "羅傑" },
+        { "id": "c_d", "label": "直播日期", "value": "8月18日" },
+        { "id": "c_h", "label": "直播時數", "value": "2 小時" },
+        { "id": "c_k", "label": "產品環節", "value": "現場試喝" },
+        { "id": "c_f", "label": "合作費用", "value": "NT$350,000" },
+        { "id": "c_p", "label": "違約賠償", "value": "費用 1 倍" }
+      ]
+    },
+    {
+      "id": "rec", "title": "直播紀錄", "tray": "紀錄", "icon": "record", "paper": "#e3dcef", "head": "#c6bbdc", "labelWidth": 56,
+      "fields": [
+        { "id": "r_l", "label": "直播時長", "value": "2小時04分" },
+        { "id": "r_p", "label": "產品環節", "value": "有喝，表情差" },
+        { "id": "r_s", "label": "失言", "value": "「不喜歡欸」" },
+        { "id": "r_v", "label": "觀看人數", "value": "12,400 人" },
+        { "id": "r_c", "label": "聊天室", "value": "多數覺得好笑" }
+      ]
+    },
+    {
+      "id": "hb", "title": "手冊・糾紛", "tray": "手冊", "icon": "book", "paper": "#e9dcbc", "head": "#cdbd96", "labelWidth": 44,
+      "fields": [
+        { "id": "h_1", "label": "第1條", "value": "先道歉再談" },
+        { "id": "h_2", "label": "第2條", "value": "不否認事實" },
+        { "id": "h_3", "label": "第3條", "value": "逐條核對主張" },
+        { "id": "h_4", "label": "第4條", "value": "賠償看合約" }
+      ]
+    },
+    {
+      "id": "log", "title": "通話錄音", "tray": "錄音筆", "kind": "log", "icon": "recorder", "paper": "#e3dcef", "head": "#c6bbdc"
+    },
+    {
+      "id": "offer", "title": "和解單", "tray": "和解單", "kind": "offer", "icon": "receipt", "paper": "#f1e6cc", "head": "#e8c35a"
+    }
+  ],
+  "contradictions": [
+    { "key": "done", "a": "cl_1", "b": "r_l", "name": "直播有播完", "fixField": "cl_1", "fixValue": "（已撤回）", "shift": 120000,
+      "reply": "……兩小時零四分？好，這條我收回。" },
+    { "key": "drink", "a": "cl_2", "b": "r_p", "name": "他有喝", "fixField": "cl_2", "fixValue": "（已撤回）", "shift": 80000,
+      "reply": "他是有喝啦……表情很臭就是了。這條也收回。" },
+    { "key": "cap", "a": "cl_m", "b": "c_p", "name": "超過賠償上限", "fixField": "cl_m", "fixValue": "NT$350,000", "shift": 80000,
+      "reply": "合約寫上限 1 倍……好，最多就是 35 萬。" },
+    { "key": "deny", "a": "cl_3", "b": "r_s", "name": "否認事實", "bad": true, "shift": -60000,
+      "reply": "你現在是要說他沒講？一萬多人都聽到了好嗎！" }
+  ],
+  "replies": [
+    { "id": "sorry", "text": "先道歉", "say": "林經理，這件事是我們藝人失言，先跟您道歉。",
+      "response": "……至少你還有誠意。好，我聽你說。", "patience": 2, "shift": 20000 },
+    { "id": "repost", "text": "免費補一支影片", "say": "我們可以讓羅傑免費補拍一支正面的推薦影片。",
+      "response": "補拍？……如果他願意好好講，這倒是可以談。", "requires": "tried", "shift": 40000 }
+  ],
+  "offer": {
+    "docId": "offer", "mode": "lower", "label": "和解金", "apply": "settle",
+    "ask": 500000, "start": 500000, "step": 10000, "min": 0, "max": 500000, "accept": 420000, "walk": 340000,
+    "acceptText": "好，{v}，這件事就到此為止。",
+    "counterText": "{v}，不能再少了。",
+    "refuseText": "你在開玩笑嗎？那我們法院見！",
+    "endsCall": true
+  },
+  "contacts": [
+    { "id": "lin", "name": "林經理", "caller": true },
+    { "id": "roger", "name": "羅傑", "message": "我真的只是嘴快……鬼東哥會不會殺了我？" },
+    { "id": "guidong", "name": "鬼東", "status": "在旁邊看" }
+  ],
+  "tasks": [
+    { "text": "先穩住對方", "doneWhen": "reply:sorry" },
+    { "text": "逐條核對求償", "doneWhen": "found>=2" },
+    { "text": "談和解金", "doneWhen": "offer" }
+  ],
+  "replyWrong": "你到底在找什麼？我很忙！",
+  "replyLeave": "不用談了，我們直接寄存證信函。",
+  "replyHold": "好，給你們一天時間。",
+  "dealTitle": "和解成立：星海飲料"
+}

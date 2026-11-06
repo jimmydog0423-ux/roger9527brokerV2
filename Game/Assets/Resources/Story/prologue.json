@@ -1,0 +1,1833 @@
+{
+ "title": "序章：傳奇經紀人的最後一堂課",
+ "steps": [
+  {
+   "type": "lesson",
+   "lesson": 0,
+   "text": "第一課：接待客戶"
+  },
+  {
+   "type": "scene",
+   "bg": "black"
+  },
+  {
+   "type": "card",
+   "text": "水蛇洞經紀人",
+   "hint": "序章　傳奇經紀人的最後一堂課"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "在台灣的實況圈，有一個名字大家都聽過——鬼東。"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "他帶過的實況主，紅的紅、上電視的上電視。廠商之間流傳一句話：鬼東點頭的工商，就穩了。"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "而你，是他收的最後一個學徒。"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "來了啊。坐。這間就是水蛇洞工作室。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "我下個月退休，搬去海島曬太陽。工作室、客戶、還有那個……全部交給你。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "鬼東哥，你走了誰幫我接工商？"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "他。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "蛤？"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "羅傑，我們家的台柱。人氣很高，嘴巴很快。你以後會很常替他收拾。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "喂！我也是有優點的好嗎！"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "接下來幾天，我教你七堂課，最後還有一場考試。考過了，這裡就是你的。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "工作室帳上現在有 {cash}。我只要你答應我一件事：把它變成三千萬。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "……先別發呆，電腦響了。"
+  },
+  {
+   "type": "scene",
+   "bg": "none"
+  },
+  {
+   "type": "card",
+   "text": "第一課",
+   "hint": "接待客戶"
+  },
+  {
+   "type": "case",
+   "id": "case_l1_meow"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "有客戶打視訊電話進來。點電腦上的「接聽」。",
+   "focus": "office_popup"
+  },
+  {
+   "type": "wait",
+   "hint": "接聽王小姐的來電",
+   "ev": "answered",
+   "focus": "office_popup"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "接起來之後，整個螢幕就是你的工作台。中間是視訊，客戶說的話會出現在泡泡裡。",
+   "focus": "video"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "左邊是聯絡人，有人傳訊息會亮起來。右上角是今天的狀態，還有現在要做的事。",
+   "focus": "contacts"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "客戶在等你開口。視訊下面那排按鈕，是你能說的話。先問清楚她想做什麼。",
+   "focus": "replies"
+  },
+  {
+   "type": "wait",
+   "hint": "點「想合作什麼？」詢問需求",
+   "cond": "reply:ask|result",
+   "focus": "replies"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "嘴巴說的不算數。請她把需求寫成文件傳過來。",
+   "focus": "replies"
+  },
+  {
+   "type": "wait",
+   "hint": "點「請傳資料過來」",
+   "cond": "reply:docs|result",
+   "focus": "replies"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "收到的文件會放進最下面的資料倉庫。點一下，或拖到上面的檢視區，就能打開。",
+   "focus": "hotbar"
+  },
+  {
+   "type": "wait",
+   "hint": "打開「需求單」",
+   "cond": "open:need|result",
+   "focus": "item:need"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "上面這四格是檢視區，最多同時攤開四份文件。不需要的，按右上角「收回」。",
+   "focus": "slots"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "倉庫裡還有一本手冊，規則都寫在裡面。看不懂就翻手冊，這是我教你的第一件事。",
+   "focus": "item:hb"
+  },
+  {
+   "type": "wait",
+   "hint": "打開「手冊」",
+   "cond": "open:hb|result",
+   "focus": "item:hb"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "手冊第 4 條：別急著當場答應。需求拿到了，跟她說確認後再回覆。",
+   "focus": "doc:hb"
+  },
+  {
+   "type": "wait",
+   "hint": "點「確認後再回覆」",
+   "cond": "result",
+   "focus": "replies"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "很好。每通電話結束都會有一張結果單，看完按「繼續」。",
+   "focus": "overlay_button"
+  },
+  {
+   "type": "wait",
+   "hint": "看完結果，按「繼續」",
+   "ev": "case_closed",
+   "focus": "overlay_button"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "第一課就這樣：先問清楚、要文件、翻手冊、不急著答應。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "王小姐等一下應該會把合約傳過來。下一課，教你看文件。"
+  },
+  {
+   "type": "lesson",
+   "lesson": 1,
+   "text": "第二課：文件查驗"
+  },
+  {
+   "type": "card",
+   "text": "第二課",
+   "hint": "文件查驗"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "這一行，錢都藏在文件的細節裡。合約上寫錯一個字，可能就是幾萬塊。"
+  },
+  {
+   "type": "case",
+   "id": "case_l2_meow"
+  },
+  {
+   "type": "coach",
+   "text": "對不上的才要質疑。找同一件事，在兩份文件裡寫得不一樣的地方。"
+  },
+  {
+   "type": "wait",
+   "hint": "接聽王小姐的來電",
+   "ev": "answered",
+   "focus": "office_popup"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "合約和報價單已經攤開了。先看錢——合約上的「合作費用」寫多少？",
+   "focus": "field:c_f"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "再看報價單的「報價金額」。……是不是對不上？",
+   "focus": "field:q_f"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "點合約的「合作費用」，再點報價單的「報價金額」，兩格連起來之後，按「提出質疑」。",
+   "focus": "slots"
+  },
+  {
+   "type": "wait",
+   "hint": "點「合作費用」和「報價金額」，按「提出質疑」",
+   "cond": "found:fee|result",
+   "focus": "field:c_f"
+  },
+  {
+   "type": "branch",
+   "cond": "result",
+   "go": "l2_result"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "抓到了。對方改過的地方會變成綠色。少寫的五千塊，就是你剛剛救回來的。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "接下來看人。藝人檔案在倉庫裡，打開它。",
+   "focus": "item:r"
+  },
+  {
+   "type": "wait",
+   "hint": "打開「藝人檔」",
+   "cond": "open:r|result",
+   "focus": "item:r"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "合約上的「實況主」，跟藝人檔案的「藝名」，一個字一個字看。",
+   "focus": "field:c_t"
+  },
+  {
+   "type": "wait",
+   "hint": "找出名字寫錯的地方",
+   "cond": "found:name|result",
+   "focus": "field:c_t"
+  },
+  {
+   "type": "branch",
+   "cond": "result",
+   "go": "l2_result"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "名字寫錯，合約可能直接無效。最後看日期：羅傑那天有空嗎？",
+   "focus": "field:c_d"
+  },
+  {
+   "type": "wait",
+   "hint": "比對合約的「直播日期」和羅傑的行程",
+   "cond": "found:date|result",
+   "focus": "field:c_d"
+  },
+  {
+   "type": "branch",
+   "cond": "result",
+   "go": "l2_result"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "三個問題都抓到了，現在才能蓋章。這份合約的問題沒抓完之前，章是蓋不下去的。",
+   "focus": "stamp"
+  },
+  {
+   "type": "wait",
+   "hint": "按「核准簽約」",
+   "cond": "result",
+   "focus": "stamp"
+  },
+  {
+   "type": "label",
+   "id": "l2_result"
+  },
+  {
+   "type": "branch",
+   "cond": "result==signed",
+   "go": "l2_signed"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "……沒簽成。沒關係，這通我打回去幫你收尾。記住：問題全部抓到，才簽。"
+  },
+  {
+   "type": "goto",
+   "go": "l2_next"
+  },
+  {
+   "type": "label",
+   "id": "l2_signed"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "簽了。三萬塊會先記進「應收款」，下班結算的時候才會變成現金。"
+  },
+  {
+   "type": "label",
+   "id": "l2_next"
+  },
+  {
+   "type": "wait",
+   "hint": "看完結果，按「繼續」",
+   "ev": "case_closed",
+   "focus": "overlay_button"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "又有電話進來了。這次是周記滷味的周老闆，你自己處理，我只看。"
+  },
+  {
+   "type": "case",
+   "id": "case_l2_zhou"
+  },
+  {
+   "type": "coach",
+   "text": "不確定就打開其他文件比對，別亂槍打鳥。"
+  },
+  {
+   "type": "wait",
+   "hint": "接聽周老闆的來電",
+   "ev": "answered",
+   "focus": "office_popup"
+  },
+  {
+   "type": "wait",
+   "hint": "檢查合約，決定簽約或退回",
+   "cond": "result"
+  },
+  {
+   "type": "branch",
+   "cond": "result==signed&wrong==0",
+   "go": "l2z_good"
+  },
+  {
+   "type": "branch",
+   "cond": "result==signed",
+   "go": "l2z_wrong"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "其實這份合約沒有問題。不是每份文件都有問題——疑心太重，生意也會跑掉。"
+  },
+  {
+   "type": "goto",
+   "go": "l2z_end"
+  },
+  {
+   "type": "label",
+   "id": "l2z_good"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "沒有亂質疑，看清楚就簽。很好。不是每份文件都有問題，確認沒事就要敢簽。"
+  },
+  {
+   "type": "goto",
+   "go": "l2z_end"
+  },
+  {
+   "type": "label",
+   "id": "l2z_wrong"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "簽了，不過你剛剛亂質疑了 {wrong} 次。這份本來就沒問題，客戶的耐心是有限的。"
+  },
+  {
+   "type": "label",
+   "id": "l2z_end"
+  },
+  {
+   "type": "wait",
+   "hint": "看完結果，按「繼續」",
+   "ev": "case_closed",
+   "focus": "overlay_button"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "今天就到這。按「結束營業」，看看今天的帳。",
+   "focus": "endday"
+  },
+  {
+   "type": "wait",
+   "hint": "按「結束營業」，再按「下班」",
+   "ev": "day_closed",
+   "focus": "endday"
+  },
+  {
+   "type": "office"
+  },
+  {
+   "type": "lesson",
+   "lesson": 2,
+   "text": "第三課：商品交易"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "第二天。經紀人不只接工商，設備買賣也是生意。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "陳老闆要賣一張二手擷取卡。記住：賣家說的話，都要查證。"
+  },
+  {
+   "type": "scene",
+   "bg": "none"
+  },
+  {
+   "type": "card",
+   "text": "第三課",
+   "hint": "商品交易"
+  },
+  {
+   "type": "case",
+   "id": "case_l3_chen"
+  },
+  {
+   "type": "coach",
+   "text": "比對商品資料和檢測報告，找出寫得不一樣的地方。"
+  },
+  {
+   "type": "wait",
+   "hint": "接聽陳老闆的來電",
+   "ev": "answered",
+   "focus": "office_popup"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "他說近全新。旁邊是市場行情：近全新跟有刮傷，差了一千四。",
+   "focus": "slots"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "先花三百塊送檢測。這筆錢會算進成本，但能幫你省下更多。",
+   "focus": "replies"
+  },
+  {
+   "type": "wait",
+   "hint": "點「先送檢測」",
+   "cond": "reply:inspect|result",
+   "focus": "replies"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "檢測報告放進倉庫了。打開來，跟商品資料比一比。",
+   "focus": "item:inspect"
+  },
+  {
+   "type": "wait",
+   "hint": "比對商品資料和檢測報告，提出質疑",
+   "cond": "found:cond|found:repair|offer|result",
+   "focus": "item:inspect"
+  },
+  {
+   "type": "branch",
+   "cond": "result",
+   "go": "l3_buyend"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "每抓到一個問題，他心裡的底價就會往下掉。看看還有沒有別的。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "差不多了就出價。把收購單拿出來，選要殺幾成：殺越多越賺，但殺太多他會翻臉。",
+   "focus": "item:offer"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "滑鼠移到出價按鈕上，會看到成功率。找到的瑕疵越多，他越心虛，成功率就越高。",
+   "focus": "item:offer"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "注意視訊下面的耐心條。出價太離譜會一次扣兩格，扣完他就掛電話。",
+   "focus": "patience"
+  },
+  {
+   "type": "wait",
+   "hint": "把收購單拖到檢視區，選一個出價",
+   "cond": "offer|result",
+   "focus": "item:offer"
+  },
+  {
+   "type": "label",
+   "id": "l3_buyend"
+  },
+  {
+   "type": "branch",
+   "cond": "result==deal",
+   "go": "l3_bought"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "沒談成……算了，這張我私下跟他收了，三千塊。庫存先交給你。"
+  },
+  {
+   "type": "item",
+   "id": "inv_cx4k",
+   "text": "擷取卡 CX-4K60",
+   "hint": "有刮傷、修過",
+   "amount": 3000
+  },
+  {
+   "type": "cash",
+   "amount": 3000
+  },
+  {
+   "type": "goto",
+   "go": "l3_sell"
+  },
+  {
+   "type": "label",
+   "id": "l3_bought"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "成交 {offer}。東西進了庫存，成本是收購價再加上檢測費。"
+  },
+  {
+   "type": "label",
+   "id": "l3_sell"
+  },
+  {
+   "type": "wait",
+   "hint": "看完結果，按「繼續」",
+   "ev": "case_closed",
+   "focus": "overlay_button"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "買進來只是一半。月希正在整理實況設備，想找一張擷取卡——電話來了。"
+  },
+  {
+   "type": "case",
+   "id": "case_l3_kui"
+  },
+  {
+   "type": "coach",
+   "text": "這通不用質疑，重點是價錢跟誠意。"
+  },
+  {
+   "type": "wait",
+   "hint": "接聽月希的來電",
+   "ev": "answered",
+   "focus": "office_popup"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "倉庫裡有一張庫存單，上面寫著成本。賣價要比成本高，才叫賺。",
+   "focus": "item:inv_cx4k"
+  },
+  {
+   "type": "wait",
+   "hint": "打開「庫存」看成本",
+   "cond": "open:inv_cx4k|offer|result",
+   "focus": "item:inv_cx4k"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "要不要先跟她說有刮傷？你自己決定。誠實，有時候也能換到錢。",
+   "focus": "replies"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "這次是賣，數字越高越好。把出售單拿出來，開價吧。",
+   "focus": "item:offer"
+  },
+  {
+   "type": "wait",
+   "hint": "用出售單開價，賣出擷取卡",
+   "cond": "offer|result",
+   "focus": "item:offer"
+  },
+  {
+   "type": "branch",
+   "cond": "profit>=1000",
+   "go": "l3_good"
+  },
+  {
+   "type": "branch",
+   "cond": "profit>0",
+   "go": "l3_ok"
+  },
+  {
+   "type": "branch",
+   "cond": "result==deal",
+   "go": "l3_loss"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "沒賣掉。沒關係，庫存會留著，以後還有機會。"
+  },
+  {
+   "type": "goto",
+   "go": "l3_end"
+  },
+  {
+   "type": "label",
+   "id": "l3_loss"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "賣掉了，可是這筆利潤是 {profit}。買得太貴，後面怎麼賣都難。"
+  },
+  {
+   "type": "goto",
+   "go": "l3_end"
+  },
+  {
+   "type": "label",
+   "id": "l3_ok"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "小賺 {profit}。有賺就好，下次收購時再壓低一點。"
+  },
+  {
+   "type": "goto",
+   "go": "l3_end"
+  },
+  {
+   "type": "label",
+   "id": "l3_good"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "賺了 {profit}。先查證、壓低買、誠實賣，這就是交易。"
+  },
+  {
+   "type": "label",
+   "id": "l3_end"
+  },
+  {
+   "type": "wait",
+   "hint": "看完結果，按「繼續」",
+   "ev": "case_closed",
+   "focus": "overlay_button"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "收工。結束營業。",
+   "focus": "endday"
+  },
+  {
+   "type": "wait",
+   "hint": "按「結束營業」，再按「下班」",
+   "ev": "day_closed",
+   "focus": "endday"
+  },
+  {
+   "type": "office"
+  },
+  {
+   "type": "lesson",
+   "lesson": 3,
+   "text": "第四課：工商談判"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "鬼東哥！聽說星海飲料要找我開工商，三十萬耶！"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "三十萬是他們說的。報價單寫多少、合約又寫多少，你未來的老闆會看。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "喔喔，靠你了！"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "這一課：先審合約，再談價錢。對方的報價只是起點，不是終點。"
+  },
+  {
+   "type": "scene",
+   "bg": "none"
+  },
+  {
+   "type": "card",
+   "text": "第四課",
+   "hint": "工商談判"
+  },
+  {
+   "type": "case",
+   "id": "case_l4_starsea"
+  },
+  {
+   "type": "coach",
+   "text": "合約、報價單、藝人檔、手冊，都拿出來比對。"
+  },
+  {
+   "type": "wait",
+   "hint": "接聽林經理的來電",
+   "ev": "answered",
+   "focus": "office_popup"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "先用你學過的：金額。",
+   "focus": "field:c_f"
+  },
+  {
+   "type": "wait",
+   "hint": "核對合約和報價單的金額",
+   "cond": "found:fee|result",
+   "focus": "field:c_f"
+  },
+  {
+   "type": "branch",
+   "cond": "result",
+   "go": "l4_after"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "現在是 35 萬。羅傑最近人氣不錯，可以試著往上談。倉庫裡有議價單。",
+   "focus": "item:offer"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "每多抓到一個合約問題，你的籌碼就多一點，成功率會跟著變高。喊太高的話，對方會生氣。"
+  },
+  {
+   "type": "wait",
+   "hint": "用議價單談合作費用",
+   "cond": "offer|result",
+   "focus": "item:offer"
+  },
+  {
+   "type": "branch",
+   "cond": "result",
+   "go": "l4_after"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "價錢談好了。先別急著蓋章——日期、賠償、排他條款，都要一條一條對過。",
+   "focus": "slots"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "同一個行程可能同時牽扯好幾條。撞到一個問題，旁邊的欄位也順便看看。"
+  },
+  {
+   "type": "wait",
+   "hint": "檢查剩下的條款（已找到 {found}/{total}），再決定簽約或退回",
+   "cond": "result"
+  },
+  {
+   "type": "label",
+   "id": "l4_after"
+  },
+  {
+   "type": "branch",
+   "cond": "result==signed",
+   "go": "l4_signed"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "……這單我先接了，羅傑這個月的房租要靠它。記住，談判是要談成，不是談掉。"
+  },
+  {
+   "type": "flag",
+   "id": "l4_forced"
+  },
+  {
+   "type": "earn",
+   "amount": 350000
+  },
+  {
+   "type": "goto",
+   "go": "l4_check"
+  },
+  {
+   "type": "label",
+   "id": "l4_signed"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "簽了，合作金額 {fee}。"
+  },
+  {
+   "type": "label",
+   "id": "l4_check"
+  },
+  {
+   "type": "branch",
+   "cond": "found==all",
+   "go": "l4_all"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "合約裡還有你漏掉的問題：{missed}。這次我私下幫你改了，下次可沒人幫你。"
+  },
+  {
+   "type": "goto",
+   "go": "l4_end"
+  },
+  {
+   "type": "label",
+   "id": "l4_all"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "四個問題全部抓到，漂亮。"
+  },
+  {
+   "type": "label",
+   "id": "l4_end"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "……只是，羅傑的檔案上寫著「討厭甜飲料」。星海是賣什麼的？"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "算了，簽都簽了。希望他到時候管好那張嘴。"
+  },
+  {
+   "type": "wait",
+   "hint": "看完結果，按「繼續」",
+   "ev": "case_closed",
+   "focus": "overlay_button"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "下班吧。",
+   "focus": "endday"
+  },
+  {
+   "type": "wait",
+   "hint": "按「結束營業」，再按「下班」",
+   "ev": "day_closed",
+   "focus": "endday"
+  },
+  {
+   "type": "office"
+  },
+  {
+   "type": "lesson",
+   "lesson": 4,
+   "text": "第五課：羅傑的工商災難"
+  },
+  {
+   "type": "scene",
+   "bg": "black"
+  },
+  {
+   "type": "card",
+   "text": "8月18日　星海飲料工商直播",
+   "hint": "直播進行到第 1 小時 40 分"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "好！接下來是我們今天的贊助商——星海飲料！我來喝一口……"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "……"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "蛤？這牌子我不喜歡欸。"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "聊天室瞬間洗版。三分鐘後，剪輯影片上了熱門。"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "鬼東哥……我真的只是嘴快……"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "嘴快？你一句話，人家要我們賠五十萬。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "徒弟，這是第五課：處理糾紛。爛攤子永遠會來，經紀人的工作就是收拾它。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "記住三件事：先道歉、不否認事實、逐條核對對方的主張。"
+  },
+  {
+   "type": "scene",
+   "bg": "none"
+  },
+  {
+   "type": "card",
+   "text": "第五課",
+   "hint": "處理糾紛"
+  },
+  {
+   "type": "case",
+   "id": "case_l5_dispute"
+  },
+  {
+   "type": "coach",
+   "text": "核對求償單的每一條主張，用直播紀錄和合約反駁。"
+  },
+  {
+   "type": "wait",
+   "hint": "接聽林經理的來電",
+   "ev": "answered",
+   "focus": "office_popup"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "對方在氣頭上。先道歉，讓他願意聽你說。",
+   "focus": "replies"
+  },
+  {
+   "type": "wait",
+   "hint": "點「先道歉」",
+   "cond": "reply:sorry|result",
+   "focus": "replies"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "求償單上的每一條，都要拿證據來對。直播紀錄在倉庫裡。",
+   "focus": "item:rec"
+  },
+  {
+   "type": "wait",
+   "hint": "打開「紀錄」，比對求償單的主張",
+   "cond": "found>=1|offer|result",
+   "focus": "item:rec"
+  },
+  {
+   "type": "branch",
+   "cond": "result",
+   "go": "l5_end_call"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "很好。其他幾條也不一定站得住，合約上的賠償上限也看一下。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "但羅傑說了那句話是事實。拿事實去辯，只會讓人更生氣。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "抓到的越多，和解金就能壓得越低。也可以提議讓羅傑免費補拍影片。準備好了，就用和解單出價。",
+   "focus": "item:offer"
+  },
+  {
+   "type": "wait",
+   "hint": "核對求償單，再用和解單談和解金",
+   "cond": "offer|result",
+   "focus": "item:offer"
+  },
+  {
+   "type": "label",
+   "id": "l5_end_call"
+  },
+  {
+   "type": "branch",
+   "cond": "result==deal",
+   "go": "l5_deal"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "談崩了。對方寄了存證信函……最後照合約上限，賠了 35 萬。"
+  },
+  {
+   "type": "cash",
+   "amount": 350000
+  },
+  {
+   "type": "goto",
+   "go": "l5_after"
+  },
+  {
+   "type": "label",
+   "id": "l5_deal"
+  },
+  {
+   "type": "branch",
+   "cond": "settle<=150000",
+   "go": "l5_great"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "和解金 {settle}。不算便宜，但事情總算結束了。"
+  },
+  {
+   "type": "goto",
+   "go": "l5_after"
+  },
+  {
+   "type": "label",
+   "id": "l5_great"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "從五十萬壓到 {settle}。……你比我想的還會收拾爛攤子。"
+  },
+  {
+   "type": "label",
+   "id": "l5_after"
+  },
+  {
+   "type": "wait",
+   "hint": "看完結果，按「繼續」",
+   "ev": "case_closed",
+   "focus": "overlay_button"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "對不起……這筆錢從我的抽成扣吧。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "當然從你的扣。還有，以後甜飲料的工商，一律不接。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "徒弟，今天學到的：爛攤子不會因為你不想處理就消失。下班。",
+   "focus": "endday"
+  },
+  {
+   "type": "wait",
+   "hint": "按「結束營業」，再按「下班」",
+   "ev": "day_closed",
+   "focus": "endday"
+  },
+  {
+   "type": "office"
+  },
+  {
+   "type": "lesson",
+   "lesson": 5,
+   "text": "第六課：商業仲介與企劃"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "羅傑那件事傳開了，這陣子他的工商會少一點。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "不過經紀人手上不只一個藝人。客戶要人，我們有人，中間這條線，就是仲介。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "這一課：照需求找對的人，再幫客戶把企劃組起來。"
+  },
+  {
+   "type": "scene",
+   "bg": "none"
+  },
+  {
+   "type": "card",
+   "text": "第六課",
+   "hint": "商業仲介與企劃組裝"
+  },
+  {
+   "type": "case",
+   "id": "case_l6_broker"
+  },
+  {
+   "type": "wait",
+   "hint": "接聽王小姐的來電",
+   "ev": "answered",
+   "focus": "office_popup"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "需求單攤開了。她要會玩遊戲的，最好有手遊試玩經驗，預算一萬，而且……不要羅傑。",
+   "focus": "doc:req"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "倉庫裡有三份藝人檔案。一份一份打開來看，找出最符合的那位，按「推薦給客戶」。",
+   "focus": "hotbar"
+  },
+  {
+   "type": "wait",
+   "hint": "比對需求單，推薦合適的藝人",
+   "cond": "recommend|result",
+   "focus": "hotbar"
+  },
+  {
+   "type": "branch",
+   "cond": "result",
+   "go": "l6_done"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "推薦成功，佣金記進應收款。王小姐還要一份企劃，企劃單放進倉庫了。",
+   "focus": "item:plan"
+  },
+  {
+   "type": "wait",
+   "hint": "打開「企劃單」",
+   "cond": "open:plan|plan|result",
+   "focus": "item:plan"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "企劃單上列著客戶的需求。按「開始組裝企劃」。",
+   "focus": "doc:plan"
+  },
+  {
+   "type": "wait",
+   "hint": "按「開始組裝企劃」",
+   "ev": "plan_open",
+   "cond": "plan|result",
+   "focus": "doc:plan"
+  },
+  {
+   "type": "branch",
+   "cond": "result",
+   "go": "l6_done"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "每一排選一個。右邊是客戶的需求，全部亮起來才算過關。注意總成本。",
+   "focus": "plan_panel"
+  },
+  {
+   "type": "wait",
+   "hint": "組好企劃，按「送出企劃」",
+   "cond": "result",
+   "focus": "plan_panel"
+  },
+  {
+   "type": "label",
+   "id": "l6_done"
+  },
+  {
+   "type": "branch",
+   "cond": "result==deal",
+   "go": "l6_ok"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "沒談成。仲介最怕的就是不看需求。下次先把需求單讀熟。"
+  },
+  {
+   "type": "goto",
+   "go": "l6_end"
+  },
+  {
+   "type": "label",
+   "id": "l6_ok"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "成交。佣金加上企劃費，兩筆錢都不用羅傑開口。"
+  },
+  {
+   "type": "label",
+   "id": "l6_end"
+  },
+  {
+   "type": "wait",
+   "hint": "看完結果，按「繼續」",
+   "ev": "case_closed",
+   "focus": "overlay_button"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "下班。",
+   "focus": "endday"
+  },
+  {
+   "type": "wait",
+   "hint": "按「結束營業」，再按「下班」",
+   "ev": "day_closed",
+   "focus": "endday"
+  },
+  {
+   "type": "office"
+  },
+  {
+   "type": "lesson",
+   "lesson": 6,
+   "text": "第七課：投資與財務"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "最後一課。賺了錢之後，要懂得看錢、管錢，再讓錢去賺錢。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "月希想開工作室，來找我們投資。投資不是做善事，數字要對得上。"
+  },
+  {
+   "type": "scene",
+   "bg": "none"
+  },
+  {
+   "type": "card",
+   "text": "第七課",
+   "hint": "投資與財務"
+  },
+  {
+   "type": "case",
+   "id": "case_l7_invest"
+  },
+  {
+   "type": "coach",
+   "text": "比對企劃書和財務試算的數字。"
+  },
+  {
+   "type": "wait",
+   "hint": "接聽月希的來電",
+   "ev": "answered",
+   "focus": "office_popup"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "企劃書上寫預估月收八萬。旁邊是她的財務試算，看看合理月收是多少。",
+   "focus": "field:p_r"
+  },
+  {
+   "type": "wait",
+   "hint": "比對企劃書和財務試算，提出質疑",
+   "cond": "found:proj|result",
+   "focus": "field:p_r"
+  },
+  {
+   "type": "branch",
+   "cond": "result",
+   "go": "l7_result"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "數字太樂觀，回本就會拖很久。現在你可以壓低投資金額，或者乾脆不投。",
+   "focus": "replies"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "倉庫裡有投資單。投多少、投不投，你決定。手冊第 2 條：別用光現金。",
+   "focus": "item:offer"
+  },
+  {
+   "type": "wait",
+   "hint": "用投資單談金額，或選「這次先不投」",
+   "cond": "result",
+   "focus": "item:offer"
+  },
+  {
+   "type": "label",
+   "id": "l7_result"
+  },
+  {
+   "type": "branch",
+   "cond": "result==deal",
+   "go": "l7_inv"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "不投，也是一種決定。會說不的經紀人，才活得久。"
+  },
+  {
+   "type": "goto",
+   "go": "l7_fin"
+  },
+  {
+   "type": "label",
+   "id": "l7_inv"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "投了 {offer}。這筆錢不見了嗎？沒有，它變成了「投資資產」。"
+  },
+  {
+   "type": "label",
+   "id": "l7_fin"
+  },
+  {
+   "type": "wait",
+   "hint": "看完結果，按「繼續」",
+   "ev": "case_closed",
+   "focus": "overlay_button"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "來看公司的財務報表。打開倉庫裡的「財報」。",
+   "focus": "item:report"
+  },
+  {
+   "type": "wait",
+   "hint": "打開「財報」",
+   "cond": "open:report",
+   "focus": "item:report"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "現金：現在就能用的錢。付錢、賠錢，都從這裡扣。",
+   "focus": "fin_cash"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "應收款：已經談成、但還沒入帳的錢。簽約的金額會先記在這裡，下班結算時才變成現金。",
+   "focus": "fin_recv"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "今日收入減掉今日成本，就是今日利潤。檢測費、收購價、和解金，都算成本。",
+   "focus": "fin_profit"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "投資資產：投出去的錢。它不能馬上拿來花，但以後會幫你賺。",
+   "focus": "fin_inv"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "庫存是還沒賣掉的商品。負債是欠別人的錢，現在是零——盡量保持。",
+   "focus": "fin_debt"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "每天下班都會結算一次。記得看，帳不會騙人。",
+   "focus": "endday"
+  },
+  {
+   "type": "wait",
+   "hint": "按「結束營業」，再按「下班」",
+   "ev": "day_closed",
+   "focus": "endday"
+  },
+  {
+   "type": "office"
+  },
+  {
+   "type": "lesson",
+   "lesson": 7,
+   "text": "最終考核"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "今天是考試。我一句話都不會說。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "合約、報價、藝人、手冊，該看的都看，該談的就談。問題全部抓到，而且簽下來，就算過關。"
+  },
+  {
+   "type": "scene",
+   "bg": "none"
+  },
+  {
+   "type": "card",
+   "text": "最終考核",
+   "hint": "極光電競工商直播"
+  },
+  {
+   "type": "label",
+   "id": "exam_start"
+  },
+  {
+   "type": "case",
+   "id": "case_exam_aurora"
+  },
+  {
+   "type": "coach",
+   "text": "……再看清楚。"
+  },
+  {
+   "type": "wait",
+   "hint": "接聽張經理的來電",
+   "ev": "answered",
+   "focus": "office_popup"
+  },
+  {
+   "type": "wait",
+   "hint": "最終考核：找出所有問題，然後簽約",
+   "cond": "result"
+  },
+  {
+   "type": "branch",
+   "cond": "result==signed&found==all",
+   "go": "exam_pass"
+  },
+  {
+   "type": "branch",
+   "cond": "found==all",
+   "go": "exam_unsigned"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "不及格。你漏掉了：{missed}。"
+  },
+  {
+   "type": "wait",
+   "hint": "看完結果，按「繼續」",
+   "ev": "case_closed",
+   "focus": "overlay_button"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "……電話我請他再打一次。"
+  },
+  {
+   "type": "goto",
+   "go": "exam_start"
+  },
+  {
+   "type": "label",
+   "id": "exam_unsigned"
+  },
+  {
+   "type": "wait",
+   "hint": "看完結果，按「繼續」",
+   "ev": "case_closed",
+   "focus": "overlay_button"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "不及格。問題都抓到了，但要簽下來才算。……電話我請他再打一次。"
+  },
+  {
+   "type": "goto",
+   "go": "exam_start"
+  },
+  {
+   "type": "label",
+   "id": "exam_pass"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "……"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "及格。"
+  },
+  {
+   "type": "wait",
+   "hint": "看完結果，按「繼續」",
+   "ev": "case_closed",
+   "focus": "overlay_button"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "最後一次，看著你按下「結束營業」。",
+   "focus": "endday"
+  },
+  {
+   "type": "wait",
+   "hint": "按「結束營業」，再按「下班」",
+   "ev": "day_closed",
+   "focus": "endday"
+  },
+  {
+   "type": "office"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "七堂課、一場考試，你都過了。水蛇洞，從今天起是你的。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "鬼東哥，你真的要走喔？"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "海島在等我。羅傑，以後聽你老闆的話。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "老闆……聽起來好怪。"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "徒弟，最後一件事。我說過的——"
+  },
+  {
+   "type": "say",
+   "who": "guidong",
+   "name": "鬼東",
+   "text": "目標：三千萬。加油。"
+  },
+  {
+   "type": "scene",
+   "bg": "black"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "隔天，鬼東搭上了往南的飛機。工作室的帳上，現在是 {cash}。"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "距離三千萬，還很遠。"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "電話，又響了。"
+  },
+  {
+   "type": "card",
+   "text": "序章完成",
+   "hint": "接下來，水蛇洞正式營業"
+  },
+  {
+   "type": "end"
+  }
+ ]
+}

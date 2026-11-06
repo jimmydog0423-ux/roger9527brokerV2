@@ -1,0 +1,724 @@
+{
+ "title": "正式營業",
+ "steps": [
+  {
+   "type": "label",
+   "id": "intro"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "branch",
+   "cond": "flag:skipped",
+   "go": "intro_skip"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "老闆早！……欸，叫你老闆還真不習慣。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "鬼東哥今天早上的飛機，他說工作室就交給你了。"
+  },
+  {
+   "type": "goto",
+   "go": "intro_main"
+  },
+  {
+   "type": "label",
+   "id": "intro_skip"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "傳奇經紀人鬼東退休了，把水蛇洞工作室交給了他最後的學徒——你。"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "鬼東只留下一句話：把公司的帳戶存到三千萬。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "老闆早！我是羅傑，公司的台柱！鬼東哥說以後都聽你的。"
+  },
+  {
+   "type": "label",
+   "id": "intro_main"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "電腦裡有一個委託信箱，每天都會有新的案子。工商、二手設備、找人、投資……"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "接哪個你決定。不過一天只講得了三通電話，要挑會賺錢的。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "工商簽了之後，要等我直播完才會入帳。還有……我討厭的牌子，你最好先看清楚。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "如果我出包，廠商會打來求償。放著不管的話，期限一到就照全額賠喔。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "每天下班有房租水電要付。三千萬只算現金。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "下班之後也可以出去晃晃，電子街、熱炒店、網咖都有機會。不過別玩太晚，睡過頭會漏接電話喔！"
+  },
+  {
+   "type": "card",
+   "text": "第一幕",
+   "hint": "一人工作室"
+  },
+  {
+   "type": "return"
+  },
+  {
+   "type": "label",
+   "id": "act2"
+  },
+  {
+   "type": "card",
+   "text": "第二幕",
+   "hint": "水蛇洞開始賺錢"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "公司的帳戶突破一百萬那天，有人推開了辦公室的門。"
+  },
+  {
+   "type": "say",
+   "who": "vboss",
+   "name": "V老大",
+   "text": "你就是新老闆？我是 V老大。鬼東說你這裡缺人，叫我來看看。"
+  },
+  {
+   "type": "say",
+   "who": "vboss",
+   "name": "V老大",
+   "text": "企劃、營運、排行程，我都會。從今天起，簡單的案子可以委派給我。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "（小聲）老闆……她好帥。"
+  },
+  {
+   "type": "say",
+   "who": "vboss",
+   "name": "V老大",
+   "text": "羅傑，你的行程表我看過了。很亂。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "是！我馬上整理！"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "V老大加入了水蛇洞。每天多一個通話時段，可以委派案子，也開始接得到企劃和更大的生意。"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "不過，報酬太好的案子，也開始找上門了。"
+  },
+  {
+   "type": "return"
+  },
+  {
+   "type": "label",
+   "id": "beat3m"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "晚上十點，辦公室的燈還亮著。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "V老大，這杯手搖給你！全糖的！"
+  },
+  {
+   "type": "say",
+   "who": "vboss",
+   "name": "V老大",
+   "text": "你不是最討厭甜飲料？"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "我、我是不喝啦，可是你喜歡啊。"
+  },
+  {
+   "type": "say",
+   "who": "vboss",
+   "name": "V老大",
+   "text": "……謝謝。"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "你假裝什麼都沒看到，繼續對帳。"
+  },
+  {
+   "type": "return"
+  },
+  {
+   "type": "label",
+   "id": "act3"
+  },
+  {
+   "type": "card",
+   "text": "第三幕",
+   "hint": "實況產業商人"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "vboss",
+   "name": "V老大",
+   "text": "老闆，五百萬了。公司的規模已經不一樣了。"
+  },
+  {
+   "type": "say",
+   "who": "vboss",
+   "name": "V老大",
+   "text": "大型授權、跨公司合作……來路不明的案子也會越來越多。"
+  },
+  {
+   "type": "say",
+   "who": "vboss",
+   "name": "V老大",
+   "text": "看清楚再簽。這是鬼東教你的吧？"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "對了老闆，問一下喔……辦一場婚禮大概要多少錢啊？"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "沒、沒事！我隨便問問！"
+  },
+  {
+   "type": "return"
+  },
+  {
+   "type": "label",
+   "id": "beat10m"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "老闆，公司網銀的密碼是幾號啊？"
+  },
+  {
+   "type": "say",
+   "who": "vboss",
+   "name": "V老大",
+   "text": "羅傑。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "我只是好奇啦！"
+  },
+  {
+   "type": "say",
+   "who": "vboss",
+   "name": "V老大",
+   "text": "老闆，我幫你把網銀的權限整理好了，以後轉帳比較方便。"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "你覺得 V老大真是可靠。"
+  },
+  {
+   "type": "return"
+  },
+  {
+   "type": "label",
+   "id": "act4"
+  },
+  {
+   "type": "card",
+   "text": "第四幕",
+   "hint": "三千萬計畫"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "vboss",
+   "name": "V老大",
+   "text": "一千五百萬。老闆，三千萬已經不是夢了。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "三千萬欸！到時候一定要辦一場超大的慶功宴！"
+  },
+  {
+   "type": "say",
+   "who": "vboss",
+   "name": "V老大",
+   "text": "對，超大的。"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "兩個人對看了一眼，笑得很開心。"
+  },
+  {
+   "type": "return"
+  },
+  {
+   "type": "label",
+   "id": "beat22m"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "你發現羅傑的手機桌布，換成了一張婚紗照範本。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "那、那是廣告！廠商傳來的！"
+  },
+  {
+   "type": "say",
+   "who": "vboss",
+   "name": "V老大",
+   "text": "羅傑，下午陪我去看場地……我是說，看攝影棚。"
+  },
+  {
+   "type": "return"
+  },
+  {
+   "type": "label",
+   "id": "beat28m"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "vboss",
+   "name": "V老大",
+   "text": "老闆，兩千八百萬。快到了呢。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "老闆……謝謝你。真的。"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "羅傑很少這麼正經。你心裡有一點不好的預感。"
+  },
+  {
+   "type": "return"
+  },
+  {
+   "type": "label",
+   "id": "ending"
+  },
+  {
+   "type": "card",
+   "text": "終章",
+   "hint": "三千萬的婚禮"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "老闆！三千萬！我們真的做到了！"
+  },
+  {
+   "type": "say",
+   "who": "vboss",
+   "name": "V老大",
+   "text": "帳我核過三次，一塊都不少。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "今天的慶功宴我請客！大家盡量點！"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "那天晚上，大家喝到很晚。羅傑一直在笑，V老大也是。"
+  },
+  {
+   "type": "scene",
+   "bg": "black"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "隔天早上。"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "你打開公司的網路銀行。"
+  },
+  {
+   "type": "card",
+   "text": "NT$30,000,000",
+   "hint": "已轉出"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "三千萬，一夜之間，全部轉走了。"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "辦公桌上放著一張紅色的卡片。"
+  },
+  {
+   "type": "card",
+   "text": "喜帖",
+   "hint": "羅傑　與　V老大　誠摯邀請您"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "老闆，對不起啦！婚禮場地真的好貴……"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "三千萬我們會慢慢還的。大概。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "婚禮在下週六，一定要來喔！"
+  },
+  {
+   "type": "scene",
+   "bg": "office"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "婚禮那天，來了很多熟面孔。"
+  },
+  {
+   "type": "branch",
+   "cond": "flag:mem_wang",
+   "go": "e_wang"
+  },
+  {
+   "type": "goto",
+   "go": "e_wang_end"
+  },
+  {
+   "type": "label",
+   "id": "e_wang"
+  },
+  {
+   "type": "say",
+   "who": "wang",
+   "name": "王小姐",
+   "text": "喵喵罐頭贊助了一整車罐頭當伴手禮！恭喜恭喜！"
+  },
+  {
+   "type": "label",
+   "id": "e_wang_end"
+  },
+  {
+   "type": "branch",
+   "cond": "flag:mem_zhou",
+   "go": "e_zhou"
+  },
+  {
+   "type": "goto",
+   "go": "e_zhou_end"
+  },
+  {
+   "type": "label",
+   "id": "e_zhou"
+  },
+  {
+   "type": "say",
+   "who": "zhou",
+   "name": "周老闆",
+   "text": "滷味我包了！今天吃到飽！"
+  },
+  {
+   "type": "label",
+   "id": "e_zhou_end"
+  },
+  {
+   "type": "branch",
+   "cond": "flag:mem_kui",
+   "go": "e_kui"
+  },
+  {
+   "type": "goto",
+   "go": "e_kui_end"
+  },
+  {
+   "type": "label",
+   "id": "e_kui"
+  },
+  {
+   "type": "say",
+   "who": "kui",
+   "name": "月希",
+   "text": "老闆，我開台幫你募款好不好？"
+  },
+  {
+   "type": "label",
+   "id": "e_kui_end"
+  },
+  {
+   "type": "branch",
+   "cond": "flag:mem_lin",
+   "go": "e_lin"
+  },
+  {
+   "type": "goto",
+   "go": "e_lin_end"
+  },
+  {
+   "type": "label",
+   "id": "e_lin"
+  },
+  {
+   "type": "say",
+   "who": "lin",
+   "name": "林經理",
+   "text": "星海飲料的祝賀……這次我們不讓他喝了。"
+  },
+  {
+   "type": "label",
+   "id": "e_lin_end"
+  },
+  {
+   "type": "branch",
+   "cond": "flag:mem_talents",
+   "go": "e_tal"
+  },
+  {
+   "type": "goto",
+   "go": "e_tal_end"
+  },
+  {
+   "type": "label",
+   "id": "e_tal"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "水蛇洞的藝人們坐了滿滿一桌，大家都在幫羅傑錄影。"
+  },
+  {
+   "type": "label",
+   "id": "e_tal_end"
+  },
+  {
+   "type": "branch",
+   "cond": "flag:mem_gray_take",
+   "go": "e_gray"
+  },
+  {
+   "type": "goto",
+   "go": "e_gray_end"
+  },
+  {
+   "type": "label",
+   "id": "e_gray"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "國稅局的稅務員也來了。坐在最後一排，一直盯著你。"
+  },
+  {
+   "type": "label",
+   "id": "e_gray_end"
+  },
+  {
+   "type": "branch",
+   "cond": "flag:mem_gray_refuse",
+   "go": "e_clean"
+  },
+  {
+   "type": "goto",
+   "go": "e_clean_end"
+  },
+  {
+   "type": "label",
+   "id": "e_clean"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "那些被你拒絕過的可疑中間人，一個都沒有出現。你覺得這樣很好。"
+  },
+  {
+   "type": "label",
+   "id": "e_clean_end"
+  },
+  {
+   "type": "branch",
+   "cond": "flag:mem_chaos",
+   "go": "e_chaos"
+  },
+  {
+   "type": "goto",
+   "go": "e_chaos_end"
+  },
+  {
+   "type": "label",
+   "id": "e_chaos"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "司儀細數羅傑出包的歷史，講了整整二十分鐘。全場笑到不行。"
+  },
+  {
+   "type": "label",
+   "id": "e_chaos_end"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "禮金桌上，有一張從海島寄來的明信片。上面只寫了一句：「早就跟你說過了。」署名是一個「東」字。"
+  },
+  {
+   "type": "say",
+   "who": "roger",
+   "name": "羅傑",
+   "text": "老闆！謝謝你一直幫我收爛攤子！"
+  },
+  {
+   "type": "say",
+   "who": "vboss",
+   "name": "V老大",
+   "text": "公司的錢，我們會幫你賺回來的……大概。"
+  },
+  {
+   "type": "scene",
+   "bg": "black"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "《水蛇洞經紀人》"
+  },
+  {
+   "type": "say",
+   "who": "",
+   "name": "",
+   "text": "一個靠商業頭腦努力賺錢，最後發現自己一直在替羅傑準備婚禮基金的故事。"
+  },
+  {
+   "type": "return"
+  }
+ ]
+}

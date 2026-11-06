@@ -1,0 +1,81 @@
+{
+  "id": "case_l2_meow",
+  "title": "喵喵罐頭口播",
+  "client": { "id": "wang", "name": "王小姐", "company": "喵喵罐頭", "role": "廠商" },
+  "greeting": "合約跟報價單都傳過去了！確認沒問題的話，就麻煩簽一下囉～",
+  "patience": 5,
+  "baseFee": 25000,
+  "requireAll": true,
+  "startSlots": ["c", "q", "", ""],
+  "storage": ["c", "q", "r", "hb"],
+  "documents": [
+    {
+      "id": "c", "title": "合作合約", "tray": "合約", "icon": "contract", "paper": "#ecdcc8", "head": "#d9bfa8", "labelWidth": 56, "stamp": true,
+      "fields": [
+        { "id": "c_a", "label": "甲方", "value": "喵喵罐頭" },
+        { "id": "c_b", "label": "乙方", "value": "水蛇洞工作室" },
+        { "id": "c_t", "label": "實況主", "value": "羅潔" },
+        { "id": "c_k", "label": "合作形式", "value": "口播 30 秒" },
+        { "id": "c_d", "label": "直播日期", "value": "8月9日" },
+        { "id": "c_f", "label": "合作費用", "value": "NT$25,000" },
+        { "id": "c_p", "label": "違約賠償", "value": "費用 1 倍" },
+        { "id": "c_s", "label": "簽約日", "value": "8月1日" }
+      ]
+    },
+    {
+      "id": "q", "title": "報價單", "tray": "報價單", "icon": "quote", "paper": "#d6e0e6", "head": "#b8c8d4", "labelWidth": 56,
+      "fields": [
+        { "id": "q_a", "label": "客戶", "value": "喵喵罐頭" },
+        { "id": "q_t", "label": "實況主", "value": "羅傑" },
+        { "id": "q_i", "label": "項目", "value": "口播 30 秒" },
+        { "id": "q_f", "label": "報價金額", "value": "NT$30,000" },
+        { "id": "q_v", "label": "有效期限", "value": "14 天" }
+      ]
+    },
+    {
+      "id": "r", "title": "藝人檔案・羅傑", "tray": "藝人檔", "kind": "talent", "icon": "folder", "paper": "#e6d3a6", "head": "#cdb27a", "portrait": "roger", "labelWidth": 32,
+      "info": [
+        { "id": "r_n", "label": "藝名", "value": "羅傑" },
+        { "id": "r_t", "label": "類型", "value": "實況主" },
+        { "id": "r_o", "label": "所屬", "value": "水蛇洞" },
+        { "id": "r_p", "label": "偏好", "value": "討厭甜飲料" }
+      ],
+      "fields": [
+        { "id": "k_8", "label": "8/8", "value": "個人直播" },
+        { "id": "k_9", "label": "8/9", "value": "家族旅行（請假）" },
+        { "id": "k_10", "label": "8/10", "value": "空檔" },
+        { "id": "k_12", "label": "8/12", "value": "個人直播" }
+      ]
+    },
+    {
+      "id": "hb", "title": "手冊・合約規則", "tray": "手冊", "icon": "book", "paper": "#e9dcbc", "head": "#cdbd96", "labelWidth": 44,
+      "fields": [
+        { "id": "h_1", "label": "第1條", "value": "金額同報價單" },
+        { "id": "h_2", "label": "第2條", "value": "藝名要寫對" },
+        { "id": "h_3", "label": "第3條", "value": "日期不可撞期" },
+        { "id": "h_4", "label": "第4條", "value": "賠償上限1倍" }
+      ]
+    }
+  ],
+  "contradictions": [
+    { "key": "fee", "a": "c_f", "b": "q_f", "name": "金額不一致", "fixField": "c_f", "fixValue": "NT$30,000", "fee": 30000,
+      "reply": "啊，打錯了！是三萬沒錯，我馬上改。", "risk": "合約少寫 NT$5,000" },
+    { "key": "name", "a": "c_t", "b": "r_n", "name": "名字寫錯", "fixField": "c_t", "fixValue": "羅傑",
+      "reply": "羅潔……天啊，打錯字了，是羅傑才對！", "risk": "名字錯誤，合約可能無效" },
+    { "key": "date", "a": "c_d", "b": "k_9", "name": "日期撞期", "fixField": "c_d", "fixValue": "8月10日",
+      "reply": "9 號他請假？那改 10 號可以嗎？", "risk": "8/9 羅傑請假，無法直播" }
+  ],
+  "contacts": [
+    { "id": "wang", "name": "王小姐", "caller": true },
+    { "id": "guidong", "name": "鬼東", "status": "在旁邊看" },
+    { "id": "roger", "name": "羅傑", "status": "直播中" }
+  ],
+  "tasks": [
+    { "text": "核對金額", "doneWhen": "found:fee" },
+    { "text": "核對名字與日期", "doneWhen": "found:name&found:date" },
+    { "text": "簽約", "doneWhen": "result==signed" }
+  ],
+  "replySigned": "太好了！合作愉快～",
+  "replyReject": "咦？那我再跟主管討論看看……",
+  "replyHold": "好，那等你們消息～"
+}

@@ -1,0 +1,49 @@
+{
+  "id": "case_l1_meow",
+  "title": "喵喵罐頭口播",
+  "client": { "id": "wang", "name": "王小姐", "company": "喵喵罐頭", "role": "廠商" },
+  "greeting": "您好～我是喵喵罐頭的王小姐！聽說你們是鬼東的工作室？",
+  "patience": 5,
+  "startSlots": ["", "", "", ""],
+  "storage": ["hb"],
+  "documents": [
+    {
+      "id": "hb", "title": "手冊・接待須知", "tray": "手冊", "icon": "book", "paper": "#e9dcbc", "head": "#cdbd96", "labelWidth": 44,
+      "fields": [
+        { "id": "h_1", "label": "第1條", "value": "先問清楚需求" },
+        { "id": "h_2", "label": "第2條", "value": "口說無憑要文件" },
+        { "id": "h_3", "label": "第3條", "value": "不懂就翻手冊" },
+        { "id": "h_4", "label": "第4條", "value": "別急著當場答應" }
+      ]
+    },
+    {
+      "id": "need", "title": "合作需求單", "tray": "需求單", "icon": "request", "paper": "#f1e6cc", "head": "#d8cba8", "labelWidth": 56,
+      "fields": [
+        { "id": "n_b", "label": "品牌", "value": "喵喵罐頭" },
+        { "id": "n_t", "label": "合作對象", "value": "羅傑" },
+        { "id": "n_k", "label": "合作形式", "value": "口播 30 秒" },
+        { "id": "n_d", "label": "希望日期", "value": "8月9日" },
+        { "id": "n_f", "label": "預算", "value": "NT$30,000" }
+      ]
+    }
+  ],
+  "replies": [
+    { "id": "ask", "text": "想合作什麼？", "say": "請問這次想跟我們合作什麼呢？",
+      "response": "我們想請羅傑在直播裡幫貓罐頭口播 30 秒！預算不多，三萬左右。" },
+    { "id": "docs", "text": "請傳資料過來", "say": "方便把需求整理成文件傳過來嗎？",
+      "response": "沒問題！需求單傳過去了～", "requires": "reply:ask", "gives": ["need"] },
+    { "id": "later", "text": "確認後再回覆", "say": "我們確認細節之後，再回覆您。",
+      "response": "好的！那等你們的好消息～", "requires": "open:need&open:hb", "result": "hold" }
+  ],
+  "contacts": [
+    { "id": "wang", "name": "王小姐", "caller": true },
+    { "id": "guidong", "name": "鬼東", "status": "在旁邊看" },
+    { "id": "roger", "name": "羅傑", "status": "直播中" }
+  ],
+  "tasks": [
+    { "text": "詢問合作需求", "doneWhen": "reply:ask" },
+    { "text": "拿到需求文件", "doneWhen": "open:need" },
+    { "text": "回覆客戶", "doneWhen": "result" }
+  ],
+  "replyHold": "好的！那等你們的好消息～"
+}

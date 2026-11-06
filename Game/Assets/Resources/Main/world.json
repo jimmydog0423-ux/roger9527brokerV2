@@ -1,0 +1,1425 @@
+{
+ "categories": [
+  {
+   "id": "飲料",
+   "product": "現場試喝"
+  },
+  {
+   "id": "零食",
+   "product": "開箱試吃"
+  },
+  {
+   "id": "電競",
+   "product": "實機開箱"
+  },
+  {
+   "id": "手遊",
+   "product": "遊戲試玩"
+  },
+  {
+   "id": "3C",
+   "product": "開箱評測"
+  },
+  {
+   "id": "美妝",
+   "product": "試用分享"
+  },
+  {
+   "id": "外送",
+   "product": "外送開箱"
+  },
+  {
+   "id": "寵物",
+   "product": "開箱分享"
+  },
+  {
+   "id": "餐飲",
+   "product": "現場試吃"
+  },
+  {
+   "id": "服飾",
+   "product": "穿搭分享"
+  }
+ ],
+ "brands": [
+  {
+   "name": "星海飲料",
+   "company": "星海飲料公司",
+   "cat": "飲料",
+   "npc": "lin",
+   "act": 1
+  },
+  {
+   "name": "蜜桃汽水",
+   "company": "蜜桃汽水公司",
+   "cat": "飲料",
+   "npc": "",
+   "act": 1
+  },
+  {
+   "name": "糖心奶茶",
+   "company": "糖心國際",
+   "cat": "飲料",
+   "npc": "",
+   "act": 2
+  },
+  {
+   "name": "雪花冰茶",
+   "company": "雪花食品",
+   "cat": "飲料",
+   "npc": "",
+   "act": 3
+  },
+  {
+   "name": "卡啦脆脆",
+   "company": "卡啦食品",
+   "cat": "零食",
+   "npc": "",
+   "act": 1
+  },
+  {
+   "name": "阿嬤肉乾",
+   "company": "阿嬤食品行",
+   "cat": "零食",
+   "npc": "",
+   "act": 1
+  },
+  {
+   "name": "海苔先生",
+   "company": "海苔先生公司",
+   "cat": "零食",
+   "npc": "",
+   "act": 2
+  },
+  {
+   "name": "極光電競",
+   "company": "極光電競",
+   "cat": "電競",
+   "npc": "zhang",
+   "act": 1
+  },
+  {
+   "name": "雷鳴周邊",
+   "company": "雷鳴科技",
+   "cat": "電競",
+   "npc": "",
+   "act": 1
+  },
+  {
+   "name": "鋼鐵滑鼠",
+   "company": "鋼鐵科技",
+   "cat": "電競",
+   "npc": "",
+   "act": 2
+  },
+  {
+   "name": "黑曜電競",
+   "company": "黑曜集團",
+   "cat": "電競",
+   "npc": "",
+   "act": 3
+  },
+  {
+   "name": "龍城傳說",
+   "company": "龍城遊戲",
+   "cat": "手遊",
+   "npc": "",
+   "act": 1
+  },
+  {
+   "name": "喵喵大戰",
+   "company": "喵喵互動",
+   "cat": "手遊",
+   "npc": "",
+   "act": 2
+  },
+  {
+   "name": "星際農場",
+   "company": "星際遊戲",
+   "cat": "手遊",
+   "npc": "",
+   "act": 3
+  },
+  {
+   "name": "鯨魚手機",
+   "company": "鯨魚科技",
+   "cat": "3C",
+   "npc": "",
+   "act": 2
+  },
+  {
+   "name": "光速網路",
+   "company": "光速電信",
+   "cat": "3C",
+   "npc": "",
+   "act": 2
+  },
+  {
+   "name": "方塊筆電",
+   "company": "方塊電腦",
+   "cat": "3C",
+   "npc": "",
+   "act": 3
+  },
+  {
+   "name": "花語美妝",
+   "company": "花語國際",
+   "cat": "美妝",
+   "npc": "",
+   "act": 1
+  },
+  {
+   "name": "晨露保養",
+   "company": "晨露生技",
+   "cat": "美妝",
+   "npc": "",
+   "act": 2
+  },
+  {
+   "name": "飛鴿外送",
+   "company": "飛鴿物流",
+   "cat": "外送",
+   "npc": "",
+   "act": 1
+  },
+  {
+   "name": "跑跑外送",
+   "company": "跑跑科技",
+   "cat": "外送",
+   "npc": "",
+   "act": 3
+  },
+  {
+   "name": "喵喵罐頭",
+   "company": "喵喵罐頭",
+   "cat": "寵物",
+   "npc": "wang",
+   "act": 1
+  },
+  {
+   "name": "汪汪零食",
+   "company": "汪汪寵物",
+   "cat": "寵物",
+   "npc": "",
+   "act": 2
+  },
+  {
+   "name": "周記滷味",
+   "company": "周記滷味",
+   "cat": "餐飲",
+   "npc": "zhou",
+   "act": 1
+  },
+  {
+   "name": "老王麵館",
+   "company": "老王麵館",
+   "cat": "餐飲",
+   "npc": "",
+   "act": 1
+  },
+  {
+   "name": "金湯火鍋",
+   "company": "金湯餐飲",
+   "cat": "餐飲",
+   "npc": "",
+   "act": 3
+  },
+  {
+   "name": "潮流工坊",
+   "company": "潮流工坊",
+   "cat": "服飾",
+   "npc": "",
+   "act": 1
+  },
+  {
+   "name": "街頭狼",
+   "company": "街頭狼服飾",
+   "cat": "服飾",
+   "npc": "",
+   "act": 2
+  },
+  {
+   "name": "極地戶外",
+   "company": "極地戶外",
+   "cat": "服飾",
+   "npc": "",
+   "act": 4
+  }
+ ],
+ "items": [
+  {
+   "id": "capcard",
+   "name": "擷取卡",
+   "cat": "擷取卡",
+   "icon": "pcb",
+   "part": "HDMI孔",
+   "act": 1,
+   "price": 5200,
+   "use": "把遊戲機畫面接進電腦，主機實況必備"
+  },
+  {
+   "id": "mic",
+   "name": "電容麥克風",
+   "cat": "麥克風",
+   "icon": "mic",
+   "part": "收音頭",
+   "act": 1,
+   "price": 8000,
+   "use": "收音乾淨清楚，聊天台最需要"
+  },
+  {
+   "id": "light",
+   "name": "直播燈組",
+   "cat": "燈光",
+   "icon": "lamp",
+   "part": "燈管",
+   "act": 1,
+   "price": 6500,
+   "use": "補光讓臉色好看，開箱台常用"
+  },
+  {
+   "id": "webcam",
+   "name": "網路攝影機",
+   "cat": "攝影機",
+   "icon": "camera",
+   "part": "鏡頭",
+   "act": 1,
+   "price": 4800,
+   "use": "入門鏡頭，新人開台的第一台"
+  },
+  {
+   "id": "chair",
+   "name": "電競椅",
+   "cat": "電競椅",
+   "icon": "chair",
+   "part": "氣壓棒",
+   "act": 1,
+   "price": 9000,
+   "use": "久坐不腰痠，實況主都想要一張"
+  },
+  {
+   "id": "mixer",
+   "name": "混音器",
+   "cat": "混音器",
+   "icon": "pcb",
+   "part": "推桿",
+   "act": 1,
+   "price": 12000,
+   "use": "同時控制麥克風、音樂和遊戲聲"
+  },
+  {
+   "id": "keyboard",
+   "name": "機械鍵盤",
+   "cat": "鍵盤",
+   "icon": "keyboard",
+   "part": "軸體",
+   "act": 1,
+   "price": 3500,
+   "use": "打字有手感，電競台的門面"
+  },
+  {
+   "id": "headset",
+   "name": "監聽耳機",
+   "cat": "耳機",
+   "icon": "headset",
+   "part": "耳罩",
+   "act": 1,
+   "price": 6000,
+   "use": "聽清楚自己的聲音，歌唱台必備"
+  },
+  {
+   "id": "cam4k",
+   "name": "4K攝影機",
+   "cat": "攝影機",
+   "icon": "camera",
+   "part": "感光元件",
+   "act": 2,
+   "price": 48000,
+   "use": "畫質升級，戶外台和開箱台搶手"
+  },
+  {
+   "id": "pc",
+   "name": "直播電腦",
+   "cat": "電腦",
+   "icon": "pc",
+   "part": "主機板",
+   "act": 2,
+   "price": 65000,
+   "use": "一台搞定跑遊戲和推流"
+  },
+  {
+   "id": "gpu",
+   "name": "顯示卡",
+   "cat": "顯示卡",
+   "icon": "pcb",
+   "part": "散熱風扇",
+   "act": 2,
+   "price": 42000,
+   "use": "跑大作不卡頓，遊戲台搶著要"
+  },
+  {
+   "id": "wmic",
+   "name": "無線麥克風組",
+   "cat": "麥克風",
+   "icon": "mic",
+   "part": "接收器",
+   "act": 2,
+   "price": 32000,
+   "use": "多人節目、戶外直播都用得到"
+  },
+  {
+   "id": "switcher",
+   "name": "導播切換台",
+   "cat": "導播機",
+   "icon": "pcb",
+   "part": "按鍵",
+   "act": 2,
+   "price": 58000,
+   "use": "多機位切換，活動直播用"
+  },
+  {
+   "id": "greenscreen",
+   "name": "綠幕組",
+   "cat": "綠幕",
+   "icon": "box",
+   "part": "支架",
+   "act": 2,
+   "price": 18000,
+   "use": "去背換背景，虛擬主播入門"
+  },
+  {
+   "id": "lens",
+   "name": "電影鏡頭組",
+   "cat": "鏡頭",
+   "icon": "camera",
+   "part": "對焦環",
+   "act": 3,
+   "price": 180000,
+   "use": "拍出電影感，品牌大案指定"
+  },
+  {
+   "id": "director",
+   "name": "導播機",
+   "cat": "導播機",
+   "icon": "pc",
+   "part": "主機板",
+   "act": 3,
+   "price": 260000,
+   "use": "專業轉播用，公司等級設備"
+  },
+  {
+   "id": "camkit",
+   "name": "攝影機套組",
+   "cat": "攝影機",
+   "icon": "camera",
+   "part": "感光元件",
+   "act": 3,
+   "price": 320000,
+   "use": "一整套專業拍攝器材"
+  },
+  {
+   "id": "ledwall",
+   "name": "LED背景牆",
+   "cat": "背景牆",
+   "icon": "lamp",
+   "part": "燈板模組",
+   "act": 3,
+   "price": 420000,
+   "use": "舞台感背景，大型活動用"
+  },
+  {
+   "id": "mocap",
+   "name": "動作捕捉組",
+   "cat": "動捕",
+   "icon": "box",
+   "part": "感測器",
+   "act": 3,
+   "price": 380000,
+   "use": "讓虛擬角色跟著你動"
+  },
+  {
+   "id": "obvan",
+   "name": "轉播車",
+   "cat": "轉播車",
+   "icon": "box",
+   "part": "發電機",
+   "act": 4,
+   "price": 2800000,
+   "use": "移動式轉播站，大型賽事用"
+  },
+  {
+   "id": "studiokit",
+   "name": "攝影棚設備",
+   "cat": "攝影棚",
+   "icon": "lamp",
+   "part": "電源",
+   "act": 4,
+   "price": 1600000,
+   "use": "一整間攝影棚的燈和電"
+  },
+  {
+   "id": "virtual",
+   "name": "虛擬攝影棚",
+   "cat": "攝影棚",
+   "icon": "pc",
+   "part": "追蹤器",
+   "act": 4,
+   "price": 2200000,
+   "use": "即時合成虛擬場景"
+  },
+  {
+   "id": "stage",
+   "name": "舞台燈光組",
+   "cat": "燈光",
+   "icon": "lamp",
+   "part": "控台",
+   "act": 4,
+   "price": 1200000,
+   "use": "演唱會等級的燈光"
+  }
+ ],
+ "talents": [
+  {
+   "id": "roger",
+   "name": "羅傑",
+   "genre": "遊戲實況",
+   "portrait": "roger",
+   "style": "嘴快",
+   "fans": 86000,
+   "likes": [
+    "電競",
+    "手遊",
+    "零食"
+   ],
+   "dislikes": [
+    "飲料",
+    "美妝"
+   ]
+  },
+  {
+   "id": "kai",
+   "name": "蛋頭",
+   "genre": "饒舌創作",
+   "portrait": "kai",
+   "style": "節奏即興",
+   "interests": "饒舌、嘻哈創作",
+   "affiliation": "叉滴娛樂",
+   "fans": 15000,
+   "likes": [
+    "3C"
+   ],
+   "dislikes": []
+  },
+  {
+   "id": "kui",
+   "name": "月希",
+   "genre": "遊戲實況",
+   "portrait": "kui",
+   "style": "挑戰攻略",
+   "interests": "魂系動作、手遊試玩",
+   "affiliation": "叉滴娛樂",
+   "fans": 3200,
+   "likes": [
+    "手遊",
+    "電競"
+   ],
+   "dislikes": []
+  },
+  {
+   "id": "mia",
+   "name": "偷米",
+   "genre": "虛擬實況",
+   "portrait": "t_mia",
+   "style": "牌局講解",
+   "interests": "爐石戰記、虛擬直播",
+   "affiliation": "叉滴娛樂",
+   "fans": 22000,
+   "likes": [
+    "電競",
+    "3C"
+   ],
+   "dislikes": []
+  },
+  {
+   "id": "bear",
+   "name": "哈耿",
+   "genre": "遊戲實況",
+   "portrait": "t_bear",
+   "style": "反應綜藝",
+   "interests": "射擊、惡靈古堡",
+   "affiliation": "叉滴娛樂",
+   "fans": 41000,
+   "likes": [
+    "電競",
+    "3C"
+   ],
+   "dislikes": []
+  },
+  {
+   "id": "cat",
+   "name": "薛喜",
+   "genre": "遊戲實況",
+   "portrait": "t_cat",
+   "style": "牌局綜藝",
+   "interests": "爐石戰記、多人遊戲",
+   "affiliation": "叉滴娛樂",
+   "fans": 28000,
+   "likes": [
+    "電競",
+    "3C"
+   ],
+   "dislikes": []
+  },
+  {
+   "id": "zhe",
+   "name": "肯特",
+   "genre": "電競賽評",
+   "portrait": "t_zhe",
+   "style": "戰術解說",
+   "interests": "特戰英豪、FPS賽評",
+   "affiliation": "叉滴娛樂",
+   "fans": 56000,
+   "likes": [
+    "電競",
+    "3C"
+   ],
+   "dislikes": []
+  },
+  {
+   "id": "lily",
+   "name": "Vivi 芝衣",
+   "genre": "遊戲實況",
+   "portrait": "vboss",
+   "style": "組隊聊天",
+   "interests": "特戰英豪、楓之谷",
+   "affiliation": "叉滴娛樂",
+   "fans": 34000,
+   "likes": [
+    "電競",
+    "3C"
+   ],
+   "dislikes": []
+  },
+  {
+   "id": "kk",
+   "name": "NL",
+   "genre": "遊戲實況",
+   "portrait": "t_kk",
+   "style": "綜藝吐槽",
+   "interests": "英雄聯盟、遊戲雜談",
+   "affiliation": "叉滴娛樂",
+   "fans": 19000,
+   "likes": [
+    "電競",
+    "3C"
+   ],
+   "dislikes": []
+  },
+  {
+   "id": "rain",
+   "name": "阿森",
+   "genre": "遊戲實況",
+   "portrait": "t_rain",
+   "style": "組隊實況",
+   "interests": "英雄聯盟、競技場",
+   "affiliation": "叉滴娛樂",
+   "fans": 12000,
+   "likes": [
+    "電競"
+   ],
+   "dislikes": []
+  },
+  {
+   "id": "iron",
+   "name": "虧皮",
+   "genre": "遊戲實況",
+   "portrait": "t_iron",
+   "style": "射擊排位",
+   "interests": "特戰英豪、團隊射擊",
+   "affiliation": "叉滴娛樂",
+   "fans": 25000,
+   "likes": [
+    "電競",
+    "3C"
+   ],
+   "dislikes": []
+  },
+  {
+   "id": "pudding",
+   "name": "EASON",
+   "genre": "遊戲實況",
+   "portrait": "t_pudding",
+   "style": "收藏挑戰",
+   "interests": "寶可夢、NBA 2K",
+   "affiliation": "叉滴娛樂",
+   "fans": 16000,
+   "likes": [
+    "手遊",
+    "電競"
+   ],
+   "dislikes": []
+  },
+  {
+   "id": "jay",
+   "name": "MMD",
+   "genre": "遊戲實況",
+   "portrait": "t_jay",
+   "style": "對線攻略",
+   "interests": "英雄聯盟、楓之谷",
+   "affiliation": "叉滴娛樂",
+   "fans": 47000,
+   "likes": [
+    "電競",
+    "3C"
+   ],
+   "dislikes": []
+  },
+  {
+   "id": "candy",
+   "name": "威傅",
+   "genre": "遊戲實況",
+   "portrait": "t_candy",
+   "style": "牌局復盤",
+   "interests": "爐石戰記、牌組研究",
+   "fans": 30000,
+   "likes": [
+    "電競",
+    "3C"
+   ],
+   "dislikes": []
+  },
+  {
+   "id": "yolk",
+   "name": "超負荷",
+   "genre": "聊天實況",
+   "portrait": "t_yolk",
+   "style": "快嘴吐槽",
+   "interests": "英雄聯盟、聊天室互動",
+   "fans": 9000,
+   "likes": [
+    "電競"
+   ],
+   "dislikes": []
+  },
+  {
+   "id": "yuzu",
+   "name": "花輪",
+   "genre": "遊戲實況",
+   "portrait": "t_yuzu",
+   "style": "戰棋講解",
+   "interests": "聯盟戰棋、陣容研究",
+   "fans": 21000,
+   "likes": [
+    "電競",
+    "3C"
+   ],
+   "dislikes": []
+  }
+ ],
+ "planGroups": [
+  {
+   "name": "節目形式",
+   "options": [
+    {
+     "id": "game",
+     "text": "手遊試玩",
+     "cost": 0,
+     "tags": [
+      "遊戲"
+     ]
+    },
+    {
+     "id": "cook",
+     "text": "料理挑戰",
+     "cost": 2000,
+     "tags": [
+      "料理"
+     ]
+    },
+    {
+     "id": "chat",
+     "text": "開箱聊天",
+     "cost": 0,
+     "tags": [
+      "聊天"
+     ]
+    },
+    {
+     "id": "outdoor",
+     "text": "戶外挑戰",
+     "cost": 3000,
+     "tags": [
+      "戶外"
+     ]
+    },
+    {
+     "id": "sing",
+     "text": "歌唱節目",
+     "cost": 1500,
+     "tags": [
+      "歌唱"
+     ]
+    },
+    {
+     "id": "versus",
+     "text": "電競對戰",
+     "cost": 1000,
+     "tags": [
+      "電競",
+      "遊戲"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "工商環節",
+   "options": [
+    {
+     "id": "read",
+     "text": "口播 30 秒",
+     "cost": 1000,
+     "tags": [
+      "口播"
+     ]
+    },
+    {
+     "id": "show",
+     "text": "實機展示",
+     "cost": 2000,
+     "tags": [
+      "展示"
+     ]
+    },
+    {
+     "id": "lucky",
+     "text": "抽獎活動",
+     "cost": 5000,
+     "tags": [
+      "抽獎",
+      "互動"
+     ]
+    },
+    {
+     "id": "try",
+     "text": "試吃試用",
+     "cost": 1500,
+     "tags": [
+      "試用"
+     ]
+    },
+    {
+     "id": "story",
+     "text": "劇情置入",
+     "cost": 3000,
+     "tags": [
+      "置入"
+     ]
+    },
+    {
+     "id": "qa",
+     "text": "觀眾問答",
+     "cost": 500,
+     "tags": [
+      "互動"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "合作來賓",
+   "options": [
+    {
+     "id": "none",
+     "text": "不找來賓",
+     "cost": 0,
+     "tags": []
+    },
+    {
+     "id": "roger",
+     "text": "羅傑",
+     "cost": 3000,
+     "tags": [
+      "羅傑",
+      "人氣"
+     ]
+    },
+    {
+     "id": "kui",
+     "text": "月希",
+     "cost": 1500,
+     "tags": [
+      "新人"
+     ]
+    },
+    {
+     "id": "chef",
+     "text": "料理網紅",
+     "cost": 2500,
+     "tags": [
+      "料理"
+     ]
+    },
+    {
+     "id": "pro",
+     "text": "電競選手",
+     "cost": 4000,
+     "tags": [
+      "電競",
+      "人氣"
+     ]
+    },
+    {
+     "id": "singer",
+     "text": "歌手",
+     "cost": 3500,
+     "tags": [
+      "歌唱"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "設備場地",
+   "options": [
+    {
+     "id": "own",
+     "text": "自備設備",
+     "cost": 0,
+     "tags": []
+    },
+    {
+     "id": "studio",
+     "text": "租攝影棚",
+     "cost": 6000,
+     "tags": [
+      "棚拍"
+     ]
+    },
+    {
+     "id": "field",
+     "text": "戶外直播組",
+     "cost": 4000,
+     "tags": [
+      "戶外"
+     ]
+    },
+    {
+     "id": "hd",
+     "text": "擷取卡升級",
+     "cost": 1500,
+     "tags": [
+      "畫質"
+     ]
+    },
+    {
+     "id": "vfx",
+     "text": "綠幕特效",
+     "cost": 2500,
+     "tags": [
+      "特效"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "宣傳",
+   "options": [
+    {
+     "id": "nopr",
+     "text": "不另宣傳",
+     "cost": 0,
+     "tags": []
+    },
+    {
+     "id": "shorts",
+     "text": "社群短影音",
+     "cost": 1500,
+     "tags": [
+      "短影音"
+     ]
+    },
+    {
+     "id": "board",
+     "text": "實體看板",
+     "cost": 8000,
+     "tags": [
+      "曝光"
+     ]
+    },
+    {
+     "id": "collab",
+     "text": "聯合直播",
+     "cost": 3000,
+     "tags": [
+      "曝光",
+      "互動"
+     ]
+    }
+   ]
+  }
+ ],
+ "tagTexts": [
+  {
+   "tag": "遊戲",
+   "need": "要有遊戲內容",
+   "avoid": ""
+  },
+  {
+   "tag": "料理",
+   "need": "要有料理內容",
+   "avoid": "不要做料理"
+  },
+  {
+   "tag": "聊天",
+   "need": "要輕鬆聊天",
+   "avoid": ""
+  },
+  {
+   "tag": "戶外",
+   "need": "要在戶外拍",
+   "avoid": "不要去戶外"
+  },
+  {
+   "tag": "歌唱",
+   "need": "要有音樂元素",
+   "avoid": ""
+  },
+  {
+   "tag": "電競",
+   "need": "要有電競元素",
+   "avoid": ""
+  },
+  {
+   "tag": "口播",
+   "need": "要有口播",
+   "avoid": ""
+  },
+  {
+   "tag": "展示",
+   "need": "要展示商品",
+   "avoid": ""
+  },
+  {
+   "tag": "抽獎",
+   "need": "要辦抽獎",
+   "avoid": "不要辦抽獎"
+  },
+  {
+   "tag": "互動",
+   "need": "要有觀眾互動",
+   "avoid": ""
+  },
+  {
+   "tag": "試用",
+   "need": "要讓主持人試用",
+   "avoid": ""
+  },
+  {
+   "tag": "置入",
+   "need": "要劇情置入",
+   "avoid": "不要劇情置入"
+  },
+  {
+   "tag": "羅傑",
+   "need": "要找羅傑",
+   "avoid": "不要找羅傑"
+  },
+  {
+   "tag": "人氣",
+   "need": "要找高人氣來賓",
+   "avoid": ""
+  },
+  {
+   "tag": "新人",
+   "need": "要找新人",
+   "avoid": ""
+  },
+  {
+   "tag": "棚拍",
+   "need": "要在攝影棚",
+   "avoid": "不要進攝影棚"
+  },
+  {
+   "tag": "畫質",
+   "need": "畫質要好",
+   "avoid": ""
+  },
+  {
+   "tag": "特效",
+   "need": "要有特效",
+   "avoid": ""
+  },
+  {
+   "tag": "短影音",
+   "need": "要做短影音",
+   "avoid": ""
+  },
+  {
+   "tag": "曝光",
+   "need": "要加強曝光",
+   "avoid": ""
+  }
+ ],
+ "invest": [
+  {
+   "name": "月希工作室",
+   "kind": "直播工作室",
+   "portrait": "kui"
+  },
+  {
+   "name": "龍蝦電競隊",
+   "kind": "電競戰隊",
+   "portrait": ""
+  },
+  {
+   "name": "街角餐車",
+   "kind": "餐飲",
+   "portrait": ""
+  },
+  {
+   "name": "像素周邊社",
+   "kind": "周邊商品",
+   "portrait": ""
+  },
+  {
+   "name": "深夜製作所",
+   "kind": "內容製作",
+   "portrait": ""
+  },
+  {
+   "name": "星火經紀",
+   "kind": "經紀公司",
+   "portrait": ""
+  },
+  {
+   "name": "節拍音樂坊",
+   "kind": "音樂",
+   "portrait": ""
+  },
+  {
+   "name": "山徑戶外台",
+   "kind": "戶外節目",
+   "portrait": ""
+  },
+  {
+   "name": "雲端剪輯社",
+   "kind": "剪輯工作室",
+   "portrait": ""
+  },
+  {
+   "name": "直播學院",
+   "kind": "教育",
+   "portrait": ""
+  },
+  {
+   "name": "電競咖啡館",
+   "kind": "餐飲",
+   "portrait": ""
+  },
+  {
+   "name": "虛擬偶像社",
+   "kind": "虛擬偶像",
+   "portrait": ""
+  }
+ ],
+ "gray": [
+  {
+   "title": "電競賽事轉播",
+   "product": "賽事轉播",
+   "licensor": "環球賽事",
+   "content": "決賽轉播權",
+   "scope": "網路直播",
+   "realScope": "僅限電視"
+  },
+  {
+   "title": "動畫素材直播",
+   "product": "素材直播",
+   "licensor": "東方動畫",
+   "content": "動畫片段",
+   "scope": "直播使用",
+   "realScope": "僅限宣傳"
+  },
+  {
+   "title": "演唱會同步轉播",
+   "product": "同步轉播",
+   "licensor": "星光娛樂",
+   "content": "演唱會畫面",
+   "scope": "網路直播",
+   "realScope": "僅限現場"
+  },
+  {
+   "title": "電影首映直播",
+   "product": "首映直播",
+   "licensor": "大銀幕影業",
+   "content": "電影片段",
+   "scope": "全片直播",
+   "realScope": "僅限預告"
+  }
+ ],
+ "news": [
+  {
+   "cat": "擷取卡",
+   "up": "新遊戲主機上市，擷取卡缺貨",
+   "down": "擷取卡新款上市，舊款跳水"
+  },
+  {
+   "cat": "麥克風",
+   "up": "ASMR 爆紅，麥克風被搶光",
+   "down": "麥克風大廠促銷，二手價下跌"
+  },
+  {
+   "cat": "燈光",
+   "up": "美妝直播流行，燈光設備漲價",
+   "down": "燈光工廠擴產，價格下跌"
+  },
+  {
+   "cat": "攝影機",
+   "up": "戶外直播熱潮，攝影機搶手",
+   "down": "新攝影機發表，舊款降價"
+  },
+  {
+   "cat": "電競椅",
+   "up": "電競賽季開打，電競椅熱賣",
+   "down": "電競椅品牌清倉"
+  },
+  {
+   "cat": "顯示卡",
+   "up": "挖礦熱潮回來了，顯示卡缺貨",
+   "down": "新顯示卡發表，舊款跳水"
+  },
+  {
+   "cat": "電腦",
+   "up": "記憶體漲價，直播電腦跟著漲",
+   "down": "電腦展折扣，電腦行情下跌"
+  },
+  {
+   "cat": "導播機",
+   "up": "電視台採購，導播機缺貨",
+   "down": "導播機二手貨變多"
+  },
+  {
+   "cat": "攝影棚",
+   "up": "大型節目開拍，攝影棚設備搶手",
+   "down": "攝影棚倒閉潮，設備大量釋出"
+  },
+  {
+   "cat": "轉播車",
+   "up": "國際賽事來台，轉播車一車難求",
+   "down": "轉播車租賃市場過剩"
+  }
+ ],
+ "upgrades": [
+  {
+   "id": "storage1",
+   "name": "庫存擴充 I",
+   "desc": "商品庫存上限 3 件變 6 件",
+   "act": 1,
+   "cost": 60000,
+   "requires": ""
+  },
+  {
+   "id": "inspect",
+   "name": "檢測設備",
+   "desc": "檢測不用錢，報告還會查序號，抓得到贓物",
+   "act": 1,
+   "cost": 120000,
+   "requires": ""
+  },
+  {
+   "id": "intel",
+   "name": "市場情報",
+   "desc": "行情表多一行明日走勢，信箱顯示估計利潤",
+   "act": 1,
+   "cost": 150000,
+   "requires": ""
+  },
+  {
+   "id": "network1",
+   "name": "人脈網路 I",
+   "desc": "每天多 1 件委託",
+   "act": 1,
+   "cost": 250000,
+   "requires": ""
+  },
+  {
+   "id": "scanner",
+   "name": "合約比對軟體",
+   "desc": "合約標題會顯示疑點數量",
+   "act": 2,
+   "cost": 400000,
+   "requires": ""
+  },
+  {
+   "id": "storage2",
+   "name": "庫存擴充 II",
+   "desc": "商品庫存上限變 10 件",
+   "act": 2,
+   "cost": 600000,
+   "requires": "storage1"
+  },
+  {
+   "id": "research",
+   "name": "投資研究部",
+   "desc": "投資案多一份盡職調查報告",
+   "act": 2,
+   "cost": 800000,
+   "requires": ""
+  },
+  {
+   "id": "legal",
+   "name": "法務顧問",
+   "desc": "糾紛時可以請法務出面，壓低和解金",
+   "act": 2,
+   "cost": 1200000,
+   "requires": ""
+  },
+  {
+   "id": "office",
+   "name": "辦公室擴建",
+   "desc": "每天多 1 個通話時段",
+   "act": 2,
+   "cost": 1500000,
+   "requires": ""
+  },
+  {
+   "id": "network2",
+   "name": "人脈網路 II",
+   "desc": "再多 1 件委託，案子金額提高兩成",
+   "act": 3,
+   "cost": 2500000,
+   "requires": "network1"
+  },
+  {
+   "id": "pr",
+   "name": "公關團隊",
+   "desc": "羅傑出包的機率降低，聲譽損失減半",
+   "act": 3,
+   "cost": 3000000,
+   "requires": ""
+  },
+  {
+   "id": "vteam",
+   "name": "V老大的團隊",
+   "desc": "每天可以多委派 2 件",
+   "act": 3,
+   "cost": 4000000,
+   "requires": "vjoined"
+  },
+  {
+   "id": "studio",
+   "name": "自有攝影棚",
+   "desc": "企劃租棚免費，每天還有棚租收入",
+   "act": 3,
+   "cost": 8000000,
+   "requires": ""
+  }
+ ],
+ "sellers": [
+  {
+   "id": "chen",
+   "name": "陳老闆",
+   "company": "陳記二手設備",
+   "role": "賣家"
+  },
+  {
+   "id": "s_hu",
+   "name": "胡老闆",
+   "company": "胡記電腦",
+   "role": "賣家"
+  },
+  {
+   "id": "s_ye",
+   "name": "葉先生",
+   "company": "個人賣家",
+   "role": "賣家"
+  },
+  {
+   "id": "s_luo",
+   "name": "羅小姐",
+   "company": "網拍賣家",
+   "role": "賣家"
+  },
+  {
+   "id": "s_jiang",
+   "name": "江老闆",
+   "company": "江湖器材行",
+   "role": "賣家"
+  },
+  {
+   "id": "s_du",
+   "name": "杜先生",
+   "company": "收攤工作室",
+   "role": "賣家"
+  }
+ ],
+ "buyers": [
+  {
+   "id": "kui",
+   "name": "月希",
+   "company": "遊戲實況主",
+   "role": "買家"
+  },
+  {
+   "id": "b_lan",
+   "name": "藍同學",
+   "company": "大學電競社",
+   "role": "買家"
+  },
+  {
+   "id": "b_he",
+   "name": "何老闆",
+   "company": "網咖老闆",
+   "role": "買家"
+  },
+  {
+   "id": "b_shi",
+   "name": "施小姐",
+   "company": "攝影工作室",
+   "role": "買家"
+  },
+  {
+   "id": "b_ma",
+   "name": "馬先生",
+   "company": "新人實況主",
+   "role": "買家"
+  },
+  {
+   "id": "b_tang",
+   "name": "唐小姐",
+   "company": "婚攝工作室",
+   "role": "買家"
+  },
+  {
+   "id": "b_qiu",
+   "name": "邱經理",
+   "company": "地方電視台",
+   "role": "買家"
+  }
+ ],
+ "surnames": [
+  "李",
+  "黃",
+  "吳",
+  "蔡",
+  "許",
+  "鄭",
+  "謝",
+  "郭",
+  "洪",
+  "曾",
+  "廖",
+  "賴",
+  "徐",
+  "蘇",
+  "葉",
+  "呂"
+ ],
+ "titles": [
+  "經理",
+  "小姐",
+  "老闆",
+  "總監",
+  "先生",
+  "副理"
+ ]
+}

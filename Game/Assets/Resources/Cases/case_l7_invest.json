@@ -1,0 +1,74 @@
+{
+  "id": "case_l7_invest",
+  "title": "月希的工作室投資案",
+  "client": { "id": "kui", "name": "月希", "company": "遊戲實況主", "role": "創業者" },
+  "greeting": "上次的聯名好成功！我想把房間改成小工作室……可以請你們投資我嗎？企劃書傳過去了！",
+  "patience": 5,
+  "startSlots": ["prop", "fin", "", ""],
+  "storage": ["prop", "fin", "report", "hb", "offer"],
+  "documents": [
+    {
+      "id": "prop", "title": "投資企劃書", "tray": "企劃書", "icon": "proposal", "paper": "#d9e6d8", "head": "#b6cdb3", "labelWidth": 56,
+      "fields": [
+        { "id": "p_i", "label": "投資項目", "value": "小型直播工作室" },
+        { "id": "p_m", "label": "需要資金", "value": "NT$100,000" },
+        { "id": "p_s", "label": "我方分潤", "value": "收入 2 成" },
+        { "id": "p_r", "label": "預估月收", "value": "NT$80,000" },
+        { "id": "p_b", "label": "預計回本", "value": "6 個月" }
+      ]
+    },
+    {
+      "id": "fin", "title": "財務試算", "tray": "試算", "icon": "chart", "paper": "#d6e0e6", "head": "#b8c8d4", "labelWidth": 56,
+      "fields": [
+        { "id": "f_1", "label": "上月收入", "value": "NT$18,000" },
+        { "id": "f_2", "label": "上月成本", "value": "NT$6,000" },
+        { "id": "f_3", "label": "粉絲成長", "value": "每月 +15%" },
+        { "id": "f_4", "label": "合理月收", "value": "NT$25,000" }
+      ]
+    },
+    {
+      "id": "report", "title": "公司財務報表", "tray": "財報", "kind": "finance", "icon": "report", "paper": "#f1e6cc", "head": "#d8cba8"
+    },
+    {
+      "id": "hb", "title": "手冊・投資", "tray": "手冊", "icon": "book", "paper": "#e9dcbc", "head": "#cdbd96", "labelWidth": 44,
+      "fields": [
+        { "id": "h_1", "label": "第1條", "value": "數字要有根據" },
+        { "id": "h_2", "label": "第2條", "value": "別用光現金" },
+        { "id": "h_3", "label": "第3條", "value": "看回本時間" },
+        { "id": "h_4", "label": "第4條", "value": "可以說不" }
+      ]
+    },
+    {
+      "id": "offer", "title": "投資單", "tray": "投資單", "kind": "offer", "icon": "receipt", "paper": "#f1e6cc", "head": "#e8c35a"
+    }
+  ],
+  "contradictions": [
+    { "key": "proj", "a": "p_r", "b": "f_4", "name": "預估太樂觀", "fixField": "p_r", "fixValue": "NT$25,000", "shift": 40000,
+      "reply": "八萬是我最理想的狀況啦……照試算的話，大概兩萬五。那投資金額可以再談。" }
+  ],
+  "replies": [
+    { "id": "pass", "text": "這次先不投", "say": "企劃很有心，但這次我們先不投資，下次再談。",
+      "response": "好……我會再努力的！謝謝你們願意看完。", "result": "hold" }
+  ],
+  "offer": {
+    "docId": "offer", "mode": "lower", "label": "投資金額", "apply": "invest", "itemName": "月希工作室（收入 2 成）",
+    "ask": 100000, "start": 100000, "step": 5000, "min": 10000, "max": 150000, "accept": 90000, "walk": 70000,
+    "acceptText": "好！{v}，我一定會讓你們回本的！",
+    "counterText": "{v}……再少設備就買不齊了。",
+    "refuseText": "這、這樣連一台電腦都買不起啦……",
+    "endsCall": true
+  },
+  "contacts": [
+    { "id": "kui", "name": "月希", "caller": true },
+    { "id": "guidong", "name": "鬼東", "status": "在旁邊看" },
+    { "id": "roger", "name": "羅傑", "message": "月希要開工作室？那我可以去蹭台嗎？" }
+  ],
+  "tasks": [
+    { "text": "核對企劃書的數字", "doneWhen": "found:proj" },
+    { "text": "決定投不投、投多少", "doneWhen": "result" },
+    { "text": "看公司財務報表", "doneWhen": "open:report" }
+  ],
+  "replyLeave": "我、我再自己存錢好了……",
+  "replyHold": "好……我會再努力的！",
+  "dealTitle": "投資成立：月希工作室"
+}

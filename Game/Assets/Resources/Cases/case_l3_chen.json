@@ -1,0 +1,84 @@
+{
+  "id": "case_l3_chen",
+  "title": "收購二手擷取卡",
+  "client": { "id": "chen", "name": "陳老闆", "company": "陳記二手設備", "role": "賣家" },
+  "greeting": "少年仔，這張擷取卡近全新的，4,500 讓你，很划算啦！",
+  "patience": 5,
+  "startSlots": ["item", "market", "", ""],
+  "storage": ["item", "market", "offer", "hb"],
+  "documents": [
+    {
+      "id": "item", "title": "商品資料", "tray": "商品", "icon": "pcb", "paper": "#d9e6d8", "head": "#b6cdb3", "labelWidth": 56,
+      "fields": [
+        { "id": "i_n", "label": "品名", "value": "擷取卡CX-4K60" },
+        { "id": "i_s", "label": "狀況", "value": "近全新" },
+        { "id": "i_r", "label": "維修紀錄", "value": "無" },
+        { "id": "i_a", "label": "配件", "value": "齊全" },
+        { "id": "i_p", "label": "賣家開價", "value": "NT$4,500" }
+      ]
+    },
+    {
+      "id": "market", "title": "市場行情", "tray": "行情", "icon": "chart", "paper": "#f1e6cc", "head": "#d8cba8", "labelWidth": 56,
+      "fields": [
+        { "id": "m_1", "label": "近全新", "value": "NT$5,200" },
+        { "id": "m_2", "label": "有刮傷", "value": "NT$3,800" },
+        { "id": "m_3", "label": "修過的", "value": "再少 NT$300" },
+        { "id": "m_4", "label": "故障品", "value": "NT$1,500" }
+      ]
+    },
+    {
+      "id": "inspect", "title": "檢測報告", "tray": "檢測", "icon": "report", "paper": "#e9dcbc", "head": "#cdbd96", "labelWidth": 56,
+      "fields": [
+        { "id": "t_a", "label": "外觀", "value": "外殼刮傷" },
+        { "id": "t_p", "label": "接孔", "value": "HDMI 修過" },
+        { "id": "t_f", "label": "功能", "value": "正常" },
+        { "id": "t_c", "label": "結論", "value": "可用，有瑕疵" }
+      ]
+    },
+    {
+      "id": "offer", "title": "收購單", "tray": "收購單", "kind": "offer", "icon": "receipt", "paper": "#f1e6cc", "head": "#e8c35a"
+    },
+    {
+      "id": "hb", "title": "手冊・交易", "tray": "手冊", "icon": "book", "paper": "#e9dcbc", "head": "#cdbd96", "labelWidth": 44,
+      "fields": [
+        { "id": "h_1", "label": "第1條", "value": "先看行情再出價" },
+        { "id": "h_2", "label": "第2條", "value": "賣家說的要查證" },
+        { "id": "h_3", "label": "第3條", "value": "檢測費算成本" },
+        { "id": "h_4", "label": "第4條", "value": "收購價要留利潤" }
+      ]
+    }
+  ],
+  "contradictions": [
+    { "key": "cond", "a": "i_s", "b": "t_a", "name": "狀況不實", "fixField": "i_s", "fixValue": "有刮傷", "shift": 1000,
+      "reply": "呃……好啦，是有一點刮傷，那算你便宜一點。" },
+    { "key": "repair", "a": "i_r", "b": "t_p", "name": "隱瞞維修", "fixField": "i_r", "fixValue": "HDMI 修過", "shift": 500,
+      "reply": "唉唷，修過一次而已啦……好啦好啦，再算你便宜。" }
+  ],
+  "replies": [
+    { "id": "inspect", "text": "先送檢測", "say": "可以先送檢測嗎？檢測費我們出。",
+      "response": "可以啊，檢測費三百你出。報告傳過去了。", "gives": ["inspect"], "cost": 300 }
+  ],
+  "offer": {
+    "docId": "offer", "mode": "lower", "label": "收購價", "apply": "buy",
+    "itemId": "inv_cx4k", "itemName": "擷取卡 CX-4K60", "itemCondition": "有刮傷、修過",
+    "ask": 4500, "start": 4500, "step": 100, "min": 500, "max": 6000, "accept": 4000, "walk": 3600,
+    "acceptText": "好啦，{v} 成交，算你識貨。",
+    "counterText": "這個價太低了啦，最少 {v}。",
+    "refuseText": "你在開玩笑嗎？這價錢我寧願自己留著用！",
+    "endsCall": true
+  },
+  "contacts": [
+    { "id": "chen", "name": "陳老闆", "caller": true },
+    { "id": "guidong", "name": "鬼東", "status": "在旁邊看" },
+    { "id": "kui", "name": "月希", "status": "想買設備" }
+  ],
+  "tasks": [
+    { "text": "送檢測", "doneWhen": "reply:inspect" },
+    { "text": "找出商品的問題", "doneWhen": "found:cond|found:repair" },
+    { "text": "談好收購價", "doneWhen": "offer" }
+  ],
+  "replyWrong": "蛤？哪裡有問題？",
+  "replyLeave": "不賣了不賣了，你這人太難搞了。",
+  "replyHold": "好吧，你想清楚再打給我。",
+  "dealTitle": "收購完成：擷取卡"
+}

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <!-- 手機：不讓雙指縮放、畫面延伸到瀏海兩側（再用 safe-area 留空） -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <!-- 加到主畫面後，用全螢幕打開 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="水蛇洞經紀人">
+  <meta name="theme-color" content="#19141e">
+  <title>水蛇洞經紀人</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; min-height: 100svh; display: grid; place-items: center; background: #19141e; color: #f4e9da; font: 16px system-ui, sans-serif;
+      -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
+    main { width: min(1280px, calc(100vw - 24px), calc((100svh - 70px) * 16 / 9)); }
+    #game { position: relative; aspect-ratio: 16 / 9; background: #100d14; }
+    canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+    #game:fullscreen { width: 100%; height: 100%; }
+    #status { position: absolute; inset: 0; margin: 0; padding: 16px; display: grid; place-items: center; text-align: center; }
+    #status[hidden] { display: none; }
+    footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 8px; }
+    button { border: 1px solid #94778d; border-radius: 4px; background: #312638; color: inherit; padding: 6px 12px; font: inherit; }
+    button:disabled { opacity: .5; }
+
+    /* 手機、平板：遊戲佔滿整個畫面，不留邊框和下方那一列 */
+    body.touch { position: fixed; inset: 0; overflow: hidden; overscroll-behavior: none; min-height: 0; touch-action: none; }
+    body.touch main { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+    body.touch footer { display: none; }
+
+    /* 手機兩側黑邊上的小按鈕 */
+    #side { position: fixed; display: none; flex-direction: column; gap: 8px; z-index: 5; }
+    #side button { padding: 8px 6px; font-size: 13px; line-height: 1.2; background: rgba(49, 38, 56, .85); }
+    #side.vertical button { writing-mode: vertical-rl; }
+    body.touch #side.show { display: flex; }
+
+    /* 直向提示 */
+    #rotate { position: fixed; inset: 0; z-index: 10; display: none; place-items: center; text-align: center; padding: 24px; background: #19141e; }
+    #rotate.show { display: grid; }
+    #rotate .phone { width: 46px; height: 76px; margin: 0 auto 18px; border: 3px solid #e8893a; border-radius: 8px; animation: turn 2.4s ease-in-out infinite; }
+    @keyframes turn { 0%, 30% { transform: rotate(0); } 60%, 100% { transform: rotate(-90deg); } }
+    #rotate p { margin: 6px 0; line-height: 1.6; }
+    #rotate small { color: #b8a8c8; }
+    #rotate button { margin-top: 16px; }
+
+    /* iPhone 的全螢幕說明 */
+    #tip { position: fixed; inset: 0; z-index: 11; display: none; place-items: center; padding: 24px; background: rgba(16, 13, 20, .92); text-align: center; }
+    #tip.show { display: grid; }
+    #tip div { max-width: 420px; line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <main>
+    <div id="game">
+      <canvas id="unity-canvas" width="{{{ WIDTH }}}" height="{{{ HEIGHT }}}" tabindex="0" aria-label="水蛇洞經紀人遊戲畫面"></canvas>
+      <p id="status" role="status">正在載入水蛇洞經紀人…</p>
+    </div>
+    <footer>
+      <span>水蛇洞經紀人</span>
+      <button id="fullscreen" type="button" disabled>全螢幕</button>
+    </footer>
+  </main>
+
+  <div id="side"><button id="side-full" type="button">全螢幕</button></div>
+
+  <div id="rotate" role="dialog" aria-label="請把手機轉成橫向">
+    <div>
+      <div class="phone"></div>
+      <p>請把手機轉成橫向來玩</p>
+      <p><small>直向畫面太小，字會看不清楚。</small></p>
+      <button id="rotate-skip" type="button">直接玩</button>
+    </div>
+  </div>
+
+  <div id="tip" role="dialog" aria-label="全螢幕說明">
+    <div>
+      <p>iPhone 的 Safari 不能讓網頁全螢幕。</p>
+      <p>可以按下方的「分享」，選「加入主畫面」，<br>之後從主畫面打開，就會是全螢幕。</p>
+      <button id="tip-close" type="button">知道了</button>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("unity-canvas");
+    const status = document.getElementById("status");
+    const fullscreen = document.getElementById("fullscreen");
+    const main = document.querySelector("main");
+    const side = document.getElementById("side");
+    const sideFull = document.getElementById("side-full");
+    const rotate = document.getElementById("rotate");
+    const tip = document.getElementById("tip");
+
+    // 觸控裝置（手機、平板）改用填滿畫面的版面
+    const touch = matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
+    const standalone = matchMedia("(display-mode: standalone), (display-mode: fullscreen)").matches || navigator.standalone === true;
+    const canFullscreen = !!(document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen);
+    let skipRotate = false;
+    if (touch) document.body.classList.add("touch");
+
+    // 依照目前看得到的畫面大小，算出最大的 16:9 遊戲畫面
+    function layout() {
+      if (!touch) return;
+      const vv = window.visualViewport;
+      const vw = vv ? vv.width : innerWidth;
+      const vh = vv ? vv.height : innerHeight;
+      const probe = document.createElement("div");
+      probe.style.cssText = "position:fixed;left:env(safe-area-inset-left);right:env(safe-area-inset-right);top:env(safe-area-inset-top);bottom:env(safe-area-inset-bottom);visibility:hidden";
+      document.body.appendChild(probe);
+      const area = probe.getBoundingClientRect();
+      probe.remove();
+      const aw = Math.min(vw, area.width || vw), ah = Math.min(vh, area.height || vh);
+      const w = Math.floor(Math.min(aw, ah * 16 / 9));
+      main.style.width = w + "px";
+
+      const portrait = vh > vw;
+      rotate.classList.toggle("show", portrait && !skipRotate);
+
+      // 全螢幕按鈕放在黑邊上：左右有黑邊就放左邊（直排），上下有黑邊就放下面
+      const h = w * 9 / 16;
+      const barX = (vw - w) / 2, barY = (vh - h) / 2;
+      const needFull = !standalone && !document.fullscreenElement && !document.webkitFullscreenElement;
+      const vertical = barX >= 40;
+      side.classList.toggle("show", needFull && !portrait && (vertical || barY >= 34));
+      side.classList.toggle("vertical", vertical);
+      if (vertical) {
+        side.style.left = Math.max(4, (area.left || 0) + 4) + "px";
+        side.style.top = "50%";
+        side.style.bottom = "";
+        side.style.transform = "translateY(-50%)";
+      } else {
+        side.style.left = "50%";
+        side.style.top = "";
+        side.style.bottom = Math.max(4, (vh - (area.bottom || vh)) + 4) + "px";
+        side.style.transform = "translateX(-50%)";
+      }
+    }
+
+    function goFullscreen() {
+      const el = document.documentElement;
+      const req = el.requestFullscreen || el.webkitRequestFullscreen;
+      if (!req) {
+        tip.classList.add("show");
+        return;
+      }
+      Promise.resolve(req.call(el)).then(() => {
+        // Android：全螢幕後鎖定橫向
+        if (screen.orientation && screen.orientation.lock) screen.orientation.lock("landscape").catch(() => {});
+      }).catch(() => {});
+    }
+
+    sideFull.onclick = goFullscreen;
+    document.getElementById("rotate-skip").onclick = () => { skipRotate = true; layout(); };
+    document.getElementById("tip-close").onclick = () => tip.classList.remove("show");
+    addEventListener("resize", layout);
+    addEventListener("orientationchange", () => setTimeout(layout, 300));
+    document.addEventListener("fullscreenchange", layout);
+    document.addEventListener("webkitfullscreenchange", layout);
+    if (window.visualViewport) visualViewport.addEventListener("resize", layout);
+    // 手機上長按、雙擊不要選字或放大
+    document.addEventListener("gesturestart", e => e.preventDefault());
+    canvas.addEventListener("contextmenu", e => e.preventDefault());
+    layout();
+
+    const config = {
+#if PROGRESSIVE_ASSET_LOADING
+      primaryDataUrls: {{{ JSON.stringify(PRIMARY_DATA_FILES) }}},
+      secondaryDataUrls: {{{ JSON.stringify(SECONDARY_DATA_FILES) }}},
+#else
+      dataUrl: "Build/{{{ DATA_FILENAME }}}",
+#endif
+      frameworkUrl: "Build/{{{ FRAMEWORK_FILENAME }}}",
+      codeUrl: "Build/{{{ CODE_FILENAME }}}",
+      streamingAssetsUrl: "StreamingAssets",
+      fullscreenElementID: "game",
+      companyName: {{{ JSON.stringify(COMPANY_NAME) }}},
+      productName: {{{ JSON.stringify(PRODUCT_NAME) }}},
+      productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
+      autoSyncPersistentDataPath: true
+    };
+
+    function showLoadError(error) {
+      console.error(error);
+      status.textContent = "遊戲載入失敗。請使用支援 WebGL 2 的瀏覽器重新整理。";
+    }
+
+    const loader = document.createElement("script");
+    loader.src = "Build/{{{ LOADER_FILENAME }}}";
+    loader.onerror = showLoadError;
+    loader.onload = () => {
+      createUnityInstance(canvas, config, progress => {
+        status.textContent = `正在載入水蛇洞經紀人… ${Math.round(progress * 100)}%`;
+      }).then(game => {
+        status.hidden = true;
+        fullscreen.disabled = false;
+        fullscreen.onclick = () => game.SetFullscreen(1);
+        layout();
+      }).catch(showLoadError);
+    };
+    document.body.appendChild(loader);
+  </script>
+</body>
+</html>

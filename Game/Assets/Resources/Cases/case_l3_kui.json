@@ -1,0 +1,58 @@
+{
+  "id": "case_l3_kui",
+  "title": "出售擷取卡",
+  "client": { "id": "kui", "name": "月希", "company": "遊戲實況主", "role": "買家" },
+  "greeting": "你好！我是月希，最近在整理實況設備……聽說你們有擷取卡？我預算不太多……",
+  "patience": 5,
+  "useInventory": true,
+  "startSlots": ["need", "market", "", ""],
+  "storage": ["need", "market", "offer"],
+  "documents": [
+    {
+      "id": "need", "title": "月希的需求", "tray": "需求", "icon": "request", "paper": "#f1e6cc", "head": "#d8cba8", "labelWidth": 56,
+      "fields": [
+        { "id": "n_u", "label": "用途", "value": "開台直播用" },
+        { "id": "n_m", "label": "想要型號", "value": "CX-4K60" },
+        { "id": "n_b", "label": "預算", "value": "沒有說" },
+        { "id": "n_n", "label": "備註", "value": "剛開始直播" }
+      ]
+    },
+    {
+      "id": "market", "title": "市場行情", "tray": "行情", "icon": "chart", "paper": "#f1e6cc", "head": "#d8cba8", "labelWidth": 56,
+      "fields": [
+        { "id": "m_1", "label": "近全新", "value": "NT$5,200" },
+        { "id": "m_2", "label": "有刮傷", "value": "NT$3,800" },
+        { "id": "m_3", "label": "修過的", "value": "再少 NT$300" },
+        { "id": "m_4", "label": "故障品", "value": "NT$1,500" }
+      ]
+    },
+    {
+      "id": "offer", "title": "出售單", "tray": "出售單", "kind": "offer", "icon": "receipt", "paper": "#f1e6cc", "head": "#e8c35a"
+    }
+  ],
+  "replies": [
+    { "id": "honest", "text": "坦白說有刮傷", "say": "先跟妳說，這張卡外殼有刮傷，也修過一次，但功能正常。",
+      "response": "謝謝你老實說！功能正常的話我可以接受，價錢我可以多出一點。", "shift": 300 }
+  ],
+  "offer": {
+    "docId": "offer", "mode": "raise", "label": "售價", "apply": "sell", "itemId": "inv_cx4k",
+    "ask": 3500, "start": 4500, "step": 100, "min": 1000, "max": 8000, "accept": 3900, "walk": 4500,
+    "acceptText": "好！{v}，我買了！謝謝你！",
+    "counterText": "嗚……{v} 是我的極限了。",
+    "refuseText": "太、太貴了吧……我是新人欸……",
+    "endsCall": true
+  },
+  "contacts": [
+    { "id": "kui", "name": "月希", "caller": true },
+    { "id": "guidong", "name": "鬼東", "status": "在旁邊看" },
+    { "id": "chen", "name": "陳老闆", "status": "已成交" }
+  ],
+  "tasks": [
+    { "text": "看庫存成本", "doneWhen": "open:inv_cx4k" },
+    { "text": "決定要不要說實話", "doneWhen": "reply:honest|offer" },
+    { "text": "賣出擷取卡", "doneWhen": "offer" }
+  ],
+  "replyLeave": "我、我再存一下錢好了……",
+  "replyHold": "好，那我等你消息！",
+  "dealTitle": "賣出：擷取卡"
+}

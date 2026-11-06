@@ -1,0 +1,72 @@
+{
+  "id": "case_l2_zhou",
+  "title": "周記滷味開箱",
+  "client": { "id": "zhou", "name": "周老闆", "company": "周記滷味", "role": "廠商" },
+  "greeting": "欸！鬼東說你是新來的？合約傳過去了，看一下，沒問題就簽！",
+  "patience": 3,
+  "baseFee": 20000,
+  "startSlots": ["c", "q", "", ""],
+  "storage": ["c", "q", "r", "hb"],
+  "documents": [
+    {
+      "id": "c", "title": "合作合約", "tray": "合約", "icon": "contract", "paper": "#ecdcc8", "head": "#d9bfa8", "labelWidth": 56, "stamp": true,
+      "fields": [
+        { "id": "c_a", "label": "甲方", "value": "周記滷味" },
+        { "id": "c_b", "label": "乙方", "value": "水蛇洞工作室" },
+        { "id": "c_t", "label": "實況主", "value": "羅傑" },
+        { "id": "c_k", "label": "合作形式", "value": "開箱試吃" },
+        { "id": "c_d", "label": "直播日期", "value": "8月11日" },
+        { "id": "c_f", "label": "合作費用", "value": "NT$20,000" },
+        { "id": "c_p", "label": "違約賠償", "value": "費用 1 倍" }
+      ]
+    },
+    {
+      "id": "q", "title": "報價單", "tray": "報價單", "icon": "quote", "paper": "#d6e0e6", "head": "#b8c8d4", "labelWidth": 56,
+      "fields": [
+        { "id": "q_a", "label": "客戶", "value": "周記滷味" },
+        { "id": "q_t", "label": "實況主", "value": "羅傑" },
+        { "id": "q_i", "label": "項目", "value": "開箱試吃" },
+        { "id": "q_f", "label": "報價金額", "value": "NT$20,000" },
+        { "id": "q_v", "label": "有效期限", "value": "14 天" }
+      ]
+    },
+    {
+      "id": "r", "title": "藝人檔案・羅傑", "tray": "藝人檔", "kind": "talent", "icon": "folder", "paper": "#e6d3a6", "head": "#cdb27a", "portrait": "roger", "labelWidth": 32,
+      "info": [
+        { "id": "r_n", "label": "藝名", "value": "羅傑" },
+        { "id": "r_t", "label": "類型", "value": "實況主" },
+        { "id": "r_o", "label": "所屬", "value": "水蛇洞" },
+        { "id": "r_p", "label": "偏好", "value": "討厭甜飲料" }
+      ],
+      "fields": [
+        { "id": "k_10", "label": "8/10", "value": "喵喵罐頭工商" },
+        { "id": "k_11", "label": "8/11", "value": "空檔" },
+        { "id": "k_12", "label": "8/12", "value": "個人直播" },
+        { "id": "k_13", "label": "8/13", "value": "休假" }
+      ]
+    },
+    {
+      "id": "hb", "title": "手冊・合約規則", "tray": "手冊", "icon": "book", "paper": "#e9dcbc", "head": "#cdbd96", "labelWidth": 44,
+      "fields": [
+        { "id": "h_1", "label": "第1條", "value": "金額同報價單" },
+        { "id": "h_2", "label": "第2條", "value": "藝名要寫對" },
+        { "id": "h_3", "label": "第3條", "value": "日期不可撞期" },
+        { "id": "h_4", "label": "第4條", "value": "賠償上限1倍" }
+      ]
+    }
+  ],
+  "contacts": [
+    { "id": "zhou", "name": "周老闆", "caller": true },
+    { "id": "guidong", "name": "鬼東", "status": "在旁邊看" },
+    { "id": "roger", "name": "羅傑", "status": "直播中" }
+  ],
+  "tasks": [
+    { "text": "檢查合約", "doneWhen": "open:r|tried" },
+    { "text": "決定簽不簽", "doneWhen": "result" }
+  ],
+  "replyWrong": "蛤？這哪裡有問題？你再看清楚一點啦。",
+  "replyLeave": "唉，年輕人疑心病太重了，我改天再打來。",
+  "replySigned": "爽快！滷味我再寄一箱過去給你們！",
+  "replyReject": "啊？不簽喔？那好吧……",
+  "replyHold": "好啦，那你看完再跟我說。"
+}

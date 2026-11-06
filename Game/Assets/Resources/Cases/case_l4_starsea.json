@@ -1,0 +1,106 @@
+{
+  "id": "case_l4_starsea",
+  "title": "星海飲料工商直播",
+  "client": { "id": "lin", "name": "林經理", "company": "星海飲料", "role": "贊助方" },
+  "greeting": "你好，我是星海飲料的林經理。合約跟報價單都傳過去了，麻煩確認一下。",
+  "patience": 6,
+  "baseFee": 300000,
+  "startSlots": ["c", "q", "", ""],
+  "storage": ["c", "q", "r", "hb", "offer", "bc"],
+  "documents": [
+    {
+      "id": "c", "title": "合作合約", "tray": "合約", "icon": "contract", "paper": "#ecdcc8", "head": "#d9bfa8", "labelWidth": 56, "stamp": true,
+      "fields": [
+        { "id": "c_a", "label": "甲方", "value": "星海飲料公司" },
+        { "id": "c_b", "label": "乙方", "value": "水蛇洞工作室" },
+        { "id": "c_t", "label": "實況主", "value": "羅傑" },
+        { "id": "c_d", "label": "直播日期", "value": "8月15日" },
+        { "id": "c_h", "label": "直播時數", "value": "2 小時" },
+        { "id": "c_f", "label": "合作費用", "value": "NT$300,000" },
+        { "id": "c_p", "label": "違約賠償", "value": "費用 2 倍" },
+        { "id": "c_x", "label": "排他條款", "value": "30日不接飲料" }
+      ]
+    },
+    {
+      "id": "q", "title": "報價單", "tray": "報價單", "icon": "quote", "paper": "#d6e0e6", "head": "#b8c8d4", "labelWidth": 56,
+      "fields": [
+        { "id": "q_a", "label": "客戶", "value": "星海飲料公司" },
+        { "id": "q_t", "label": "實況主", "value": "羅傑" },
+        { "id": "q_i", "label": "項目", "value": "工商直播2小時" },
+        { "id": "q_f", "label": "報價金額", "value": "NT$350,000" },
+        { "id": "q_d", "label": "報價日期", "value": "8月3日" },
+        { "id": "q_v", "label": "有效期限", "value": "14 天" }
+      ]
+    },
+    {
+      "id": "r", "title": "藝人檔案・羅傑", "tray": "藝人檔", "kind": "talent", "icon": "folder", "paper": "#e6d3a6", "head": "#cdb27a", "portrait": "roger", "labelWidth": 32,
+      "info": [
+        { "id": "r_n", "label": "藝名", "value": "羅傑" },
+        { "id": "r_t", "label": "類型", "value": "實況主" },
+        { "id": "r_o", "label": "所屬", "value": "水蛇洞" },
+        { "id": "r_p", "label": "偏好", "value": "討厭甜飲料" }
+      ],
+      "fields": [
+        { "id": "k_12", "label": "8/12", "value": "個人直播" },
+        { "id": "k_15", "label": "8/15", "value": "黑洞能量工商" },
+        { "id": "k_18", "label": "8/18", "value": "空檔" },
+        { "id": "k_20", "label": "8/20", "value": "休假" }
+      ]
+    },
+    {
+      "id": "hb", "title": "手冊・合約規則", "tray": "手冊", "icon": "book", "paper": "#e9dcbc", "head": "#cdbd96", "labelWidth": 44,
+      "fields": [
+        { "id": "h_1", "label": "第1條", "value": "金額同報價單" },
+        { "id": "h_2", "label": "第2條", "value": "日期不可撞期" },
+        { "id": "h_3", "label": "第3條", "value": "賠償上限1倍" },
+        { "id": "h_4", "label": "第4條", "value": "排他不含既有約" }
+      ]
+    },
+    {
+      "id": "bc", "title": "名片", "tray": "名片", "icon": "card", "paper": "#f1e6cc", "head": "#d8cba8", "labelWidth": 32,
+      "fields": [
+        { "id": "b_c", "label": "公司", "value": "星海飲料公司" },
+        { "id": "b_n", "label": "姓名", "value": "林經理" },
+        { "id": "b_j", "label": "職稱", "value": "行銷部經理" },
+        { "id": "b_e", "label": "分機", "value": "302" }
+      ]
+    },
+    {
+      "id": "offer", "title": "議價單", "tray": "議價單", "kind": "offer", "icon": "receipt", "paper": "#f1e6cc", "head": "#e8c35a"
+    }
+  ],
+  "contradictions": [
+    { "key": "fee", "a": "c_f", "b": "q_f", "name": "金額不一致", "fixField": "c_f", "fixValue": "NT$350,000", "fee": 350000, "shift": 5000,
+      "reply": "啊，那是舊版合約。以報價單的 35 萬為準，我請法務更正。", "risk": "合約少寫 NT$50,000" },
+    { "key": "date", "a": "c_d", "b": "k_15", "name": "日期撞期", "fixField": "c_d", "fixValue": "8月18日", "shift": 5000,
+      "reply": "8/15 羅傑已經有工商？那改 8 月 18 日可以嗎？", "risk": "8/15 撞期，羅傑可能無法出席" },
+    { "key": "pen", "a": "c_p", "b": "h_3", "name": "賠償過高", "fixField": "c_p", "fixValue": "費用 1 倍", "shift": 5000,
+      "reply": "這是制式條款……好吧，改成 1 倍。", "risk": "違約賠償 2 倍，出事時損失加倍" },
+    { "key": "exc", "a": "c_x", "b": "k_15", "name": "排他衝突", "fixField": "c_x", "fixValue": "直播後才起算", "shift": 5000,
+      "reply": "他已經接了黑洞能量？那排他期改成直播後才起算。", "risk": "排他條款跟黑洞能量工商衝突" }
+  ],
+  "offer": {
+    "docId": "offer", "mode": "raise", "label": "合作費用", "apply": "fee", "feeField": "c_f",
+    "ask": 350000, "start": 350000, "step": 10000, "min": 300000, "max": 500000, "accept": 360000, "walk": 400000,
+    "acceptText": "好吧，{v}，就這樣說定。",
+    "counterText": "{v} 是我們的上限了，再多真的沒辦法。",
+    "refuseText": "這價錢……你們是不是太看得起自己了？"
+  },
+  "contacts": [
+    { "id": "lin", "name": "林經理", "caller": true },
+    { "id": "roger", "name": "羅傑", "message": "星海？喔……隨便啦，有錢就好。" },
+    { "id": "guidong", "name": "鬼東", "status": "在旁邊看" }
+  ],
+  "tasks": [
+    { "text": "核對金額", "doneWhen": "found:fee" },
+    { "text": "談合作費用", "doneWhen": "offer" },
+    { "text": "檢查日期與條款", "doneWhen": "found:date&found:pen&found:exc" },
+    { "text": "回覆星海飲料", "doneWhen": "result" }
+  ],
+  "replyWrong": "呃……這兩個有什麼問題嗎？",
+  "replyLeave": "我看我們再考慮一下好了。",
+  "replySigned": "合作愉快！我們等羅傑的直播。",
+  "replyHold": "好，那等你消息。",
+  "replyReject": "了解，下次有機會再合作。",
+  "signedWarning": "注意：羅傑的檔案寫著「討厭甜飲料」"
+}

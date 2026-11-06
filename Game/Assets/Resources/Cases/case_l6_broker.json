@@ -1,0 +1,128 @@
+{
+  "id": "case_l6_broker",
+  "title": "喵喵罐頭聯名企劃",
+  "client": { "id": "wang", "name": "王小姐", "company": "喵喵罐頭", "role": "廠商" },
+  "greeting": "又是我！我們跟手遊出了聯名罐頭，想找一位實況主試玩……你們能幫忙找人嗎？",
+  "patience": 5,
+  "startSlots": ["req", "", "", ""],
+  "storage": ["req", "kui", "kai", "r", "hb"],
+  "documents": [
+    {
+      "id": "req", "title": "合作需求單", "tray": "需求單", "icon": "request", "paper": "#f1e6cc", "head": "#d8cba8", "labelWidth": 56,
+      "fields": [
+        { "id": "n_k", "label": "合作內容", "value": "手遊聯名試玩" },
+        { "id": "n_w", "label": "想要的人", "value": "會玩遊戲" },
+        { "id": "n_c", "label": "加分條件", "value": "有手遊試玩經驗" },
+        { "id": "n_b", "label": "預算", "value": "NT$10,000" },
+        { "id": "n_x", "label": "備註", "value": "不要羅傑" }
+      ]
+    },
+    {
+      "id": "kui", "title": "藝人檔案・月希", "tray": "月希", "kind": "talent", "icon": "folder", "paper": "#e6d3a6", "head": "#cdb27a", "portrait": "kui", "labelWidth": 32, "recommend": true, "subTitle": "合作資訊",
+      "info": [
+        { "id": "u_n", "label": "藝名", "value": "月希" },
+        { "id": "u_t", "label": "類型", "value": "遊戲實況" },
+        { "id": "u_f", "label": "粉絲", "value": "3,200" },
+        { "id": "u_p", "label": "偏好", "value": "魂系動作、手遊試玩" }
+      ],
+      "fields": [
+        { "id": "u_1", "label": "檔期", "value": "8 月都有空" },
+        { "id": "u_2", "label": "報價", "value": "NT$3,000" },
+        { "id": "u_3", "label": "風格", "value": "挑戰攻略" }
+      ]
+    },
+    {
+      "id": "kai", "title": "藝人檔案・蛋頭", "tray": "蛋頭", "kind": "talent", "icon": "folder", "paper": "#e6d3a6", "head": "#cdb27a", "portrait": "kai", "labelWidth": 32, "recommend": true, "subTitle": "合作資訊",
+      "info": [
+        { "id": "a_n", "label": "藝名", "value": "蛋頭" },
+        { "id": "a_t", "label": "類型", "value": "饒舌創作" },
+        { "id": "a_f", "label": "粉絲", "value": "15,000" },
+        { "id": "a_p", "label": "偏好", "value": "饒舌、嘻哈創作" }
+      ],
+      "fields": [
+        { "id": "a_1", "label": "檔期", "value": "只有週末" },
+        { "id": "a_2", "label": "報價", "value": "NT$8,000" },
+        { "id": "a_3", "label": "風格", "value": "節奏即興" }
+      ]
+    },
+    {
+      "id": "r", "title": "藝人檔案・羅傑", "tray": "羅傑", "kind": "talent", "icon": "folder", "paper": "#e6d3a6", "head": "#cdb27a", "portrait": "roger", "labelWidth": 32, "recommend": true, "subTitle": "合作資訊",
+      "info": [
+        { "id": "r_n", "label": "藝名", "value": "羅傑" },
+        { "id": "r_t", "label": "類型", "value": "遊戲實況" },
+        { "id": "r_f", "label": "粉絲", "value": "86,000" },
+        { "id": "r_p", "label": "偏好", "value": "討厭甜飲料" }
+      ],
+      "fields": [
+        { "id": "r_1", "label": "檔期", "value": "8/22 有空" },
+        { "id": "r_2", "label": "報價", "value": "NT$30,000" },
+        { "id": "r_3", "label": "風格", "value": "嘴快" }
+      ]
+    },
+    {
+      "id": "hb", "title": "手冊・仲介", "tray": "手冊", "icon": "book", "paper": "#e9dcbc", "head": "#cdbd96", "labelWidth": 44,
+      "fields": [
+        { "id": "h_1", "label": "第1條", "value": "照需求單找人" },
+        { "id": "h_2", "label": "第2條", "value": "報價要在預算內" },
+        { "id": "h_3", "label": "第3條", "value": "企劃要對需求" },
+        { "id": "h_4", "label": "第4條", "value": "成本別超預算" }
+      ]
+    },
+    {
+      "id": "plan", "title": "企劃單", "tray": "企劃單", "kind": "plan", "icon": "plan", "paper": "#f1e6cc", "head": "#e8c35a"
+    }
+  ],
+  "recommend": {
+    "correct": "kui",
+    "reward": 5000,
+    "okText": "月希！有手遊試玩經驗，報價也在預算內！那企劃也麻煩你們排一下～",
+    "badText": "嗯……這位好像不太符合我們的需求耶？",
+    "gives": ["plan"]
+  },
+  "plan": {
+    "docId": "plan",
+    "reward": 10000,
+    "okText": "這企劃好棒！就照這樣辦！",
+    "groups": [
+      { "name": "節目形式", "options": [
+        { "id": "game", "text": "手遊試玩", "cost": 0, "tags": ["遊戲"] },
+        { "id": "cook", "text": "料理挑戰", "cost": 2000, "tags": ["料理"] },
+        { "id": "chat", "text": "開箱聊天", "cost": 0, "tags": ["聊天"] }
+      ] },
+      { "name": "工商環節", "options": [
+        { "id": "read", "text": "口播 30 秒", "cost": 1000, "tags": ["口播"] },
+        { "id": "show", "text": "實機展示", "cost": 2000, "tags": ["展示"] },
+        { "id": "lucky", "text": "抽獎活動", "cost": 5000, "tags": ["抽獎"] }
+      ] },
+      { "name": "合作來賓", "options": [
+        { "id": "none", "text": "不找來賓", "cost": 0, "tags": [] },
+        { "id": "roger", "text": "羅傑", "cost": 3000, "tags": ["羅傑"] },
+        { "id": "guest", "text": "叉滴來賓", "cost": 2000, "tags": [] }
+      ] },
+      { "name": "設備", "options": [
+        { "id": "own", "text": "自備設備", "cost": 0, "tags": [] },
+        { "id": "studio", "text": "租攝影棚", "cost": 6000, "tags": [] },
+        { "id": "card", "text": "擷取卡升級", "cost": 1500, "tags": [] }
+      ] }
+    ],
+    "reqs": [
+      { "text": "要有遊戲內容", "tag": "遊戲" },
+      { "text": "要展示聯名商品", "tag": "展示" },
+      { "text": "不要找羅傑", "notag": "羅傑" },
+      { "text": "總成本一萬以內", "budget": 10000 }
+    ]
+  },
+  "contacts": [
+    { "id": "wang", "name": "王小姐", "caller": true },
+    { "id": "kui", "name": "月希", "message": "是手遊試玩嗎？可以先把實機和聯名商品的展示流程排好。" },
+    { "id": "guidong", "name": "鬼東", "status": "在旁邊看" }
+  ],
+  "tasks": [
+    { "text": "看需求單", "doneWhen": "open:req" },
+    { "text": "推薦合適的人", "doneWhen": "recommend" },
+    { "text": "組裝企劃", "doneWhen": "plan" }
+  ],
+  "replyLeave": "我們再找別家問問看好了……",
+  "replyHold": "好，那等你們消息！",
+  "dealTitle": "仲介成功：聯名企劃"
+}
