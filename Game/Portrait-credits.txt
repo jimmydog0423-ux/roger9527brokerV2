@@ -1,0 +1,31 @@
+水蛇洞經紀人 V2 角色立繪來源
+
+V 老大（Vivi 芝衣）
+
+原始照片：Vivi standing, front view 20221008a.jpg
+攝影：Solomon203
+來源：https://commons.wikimedia.org/wiki/File:Vivi_standing,_front_view_20221008a.jpg
+授權：CC BY-SA 4.0
+https://creativecommons.org/licenses/by-sa/4.0/
+
+月希
+原始照片：Tsuki Lin talking on the stage, front view 20240203.jpg
+攝影：Solomon203
+來源：https://commons.wikimedia.org/wiki/File:Tsuki_Lin_talking_on_the_stage,_front_view_20240203.jpg
+授權：CC BY-SA 4.0
+https://creativecommons.org/licenses/by-sa/4.0/
+
+NL
+原始照片：NL standing, front view 20240504a.jpg
+攝影：Solomon203
+來源：https://commons.wikimedia.org/wiki/File:NL_standing,_front_view_20240504a.jpg
+授權：CC BY-SA 4.0
+https://creativecommons.org/licenses/by-sa/4.0/
+
+改作：以上三張照片以 imagegen 改繪為透明背景的像素胸像，移除現場背景與道具，
+並裁切縮放為遊戲頭像。這三位角色的立繪原稿與遊戲頭像依 CC BY-SA 4.0 散布。
+
+蛋頭 BG8LOCC
+人物參考：Backbone 職人系列專訪，2024-06-13。
+https://www.backbone.tw/blogs/recommend/159279
+以專訪照片參考臉部與髮型，重新構圖並繪製像素胸像。

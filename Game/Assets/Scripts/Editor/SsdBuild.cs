@@ -98,7 +98,7 @@ namespace SSD.EditorTools
 
         static void CopyPortraitCredit(string output)
         {
-            const string credit = "Vivi-portrait-LICENSE.txt";
+            const string credit = "Portrait-credits.txt";
             string project = Directory.GetParent(Application.dataPath).FullName;
             File.Copy(Path.Combine(project, credit), Path.Combine(output, credit), overwrite: true);
         }
