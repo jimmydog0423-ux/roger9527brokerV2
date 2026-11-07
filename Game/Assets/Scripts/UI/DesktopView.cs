@@ -128,7 +128,7 @@ namespace SSD
             Px.Fill(top, 488, 6, 70, 6, Pal.PlumLine);
             Px.Fill(top, 488, 6, Mathf.Round(70 * pct), 6, Pal.Orange);
             Px.Label(top, Mathf.FloorToInt(pct * 100) + "%", 561, 2, 32, 14, Pal.Orange);
-            Px.Button(top, "選單", 596, 2, 40, 14, Pal.PlumLine, Pal.Cream, Pal.Ink, () => game.OpenMenu());
+            ConsoleArt.Key(top, "選單", 596, 2, 40, 14, Pal.PlumLine, Pal.Cream, Pal.Ink, () => game.OpenMenu());
         }
 
         // ------------------------------------------------------------------
@@ -284,7 +284,7 @@ namespace SSD
 
         void Header(string text, float y)
         {
-            Px.Fill(content, 1, y, 310, 15, Pal.Ink);
+            ConsoleArt.Header(content, 312, y, 15);
             Px.Label(content, text, 6, y, 300, 14, Pal.Lav);
         }
 
@@ -352,7 +352,7 @@ namespace SSD
             {
                 TalentState t = s.talents[i];
                 float y = 19 + i * 51;
-                RectTransform card = Px.Box(content, "T_" + t.id, 3, y, 306, 48, Pal.Plum, Pal.PlumLine);
+                RectTransform card = ConsoleArt.Panel(content, "T_" + t.id, 3, y, 306, 48, Pal.Plum, Pal.PlumLine);
                 Px.Fill(card, 4, 4, 24, 28, Pal.VideoWall);
                 PortraitArt.Draw(card, t.portrait, 4, 4, 1);
                 Px.Label(card, t.name + "・" + t.genre, 32, 2, 106, 14, Pal.Cream);
@@ -369,9 +369,9 @@ namespace SSD
                 if (!string.IsNullOrEmpty(t.interests)) pref = "興趣 " + t.interests;
                 Px.Label(card, Clip(pref, 194), 32, 31, 196, 14, Pal.PlumLight);
                 TalentState tt = t;
-                Px.Button(card, "放假", 230, 4, 70, 14, Pal.PlumLine, Pal.Cream, Pal.Ink, () => Act(c.Rest(tt)));
+                ConsoleArt.Key(card, "放假", 230, 4, 70, 14, Pal.PlumLine, Pal.Cream, Pal.Ink, () => Act(c.Rest(tt)));
                 bool can = s.day - t.raiseDay >= 7;
-                Px.Button(card, can ? "加薪 " + GameState.Compact(c.RaiseCost(t)) : "加薪冷卻", 230, 20, 70, 14, can ? Pal.TealDark : Pal.PlumLine, Pal.Cream, Pal.Ink, () => Act(c.GiveRaise(tt)));
+                ConsoleArt.Key(card, can ? "加薪 " + GameState.Compact(c.RaiseCost(t)) : "加薪冷卻", 230, 20, 70, 14, can ? Pal.TealDark : Pal.PlumLine, Pal.Cream, Pal.Ink, () => Act(c.GiveRaise(tt)));
                 if (t.cut < 100) Px.Label(card, "分潤 " + t.cut + "%", 232, 33, 70, 14, Pal.Pink);
             }
             if (s.talents.Count == 0) Px.Label(content, "目前沒有藝人", 6, 30, 300, 14, Pal.Lav);
@@ -391,11 +391,11 @@ namespace SSD
             {
                 InvItem it = s.inventory[i];
                 float y = 19 + i * 32;
-                RectTransform card = Px.Box(content, "I_" + it.id, 3, y, 306, 30, Pal.Plum, Pal.PlumLine);
+                RectTransform card = ConsoleArt.Panel(content, "I_" + it.id, 3, y, 306, 30, Pal.Plum, Pal.PlumLine);
                 IconArt.Draw(card, c.ItemIcon(it), 1f, 6, 3, 24);
                 Px.Label(card, it.name + "・" + it.condition, 34, 1, 171, 14, Pal.Cream);
                 long m = c.ItemMarket(it);
-                Px.Label(card, "成本 " + GameState.Short(it.cost) + " → 行情 " + GameState.Short(m), 34, 15, 200, 14, m > it.cost ? Pal.TealLight : Pal.Pink);
+                Px.Label(card, "成本 " + GameState.Short(it.cost) + " → 行情 " + GameState.Short(m), 34, 15, 264, 14, m > it.cost ? Pal.TealLight : Pal.Pink);
                 InvItem ii = it;
                 if (it.rentDays > 0)
                 {
@@ -403,8 +403,8 @@ namespace SSD
                 }
                 else
                 {
-                    Px.Button(card, "出租", 210, 3, 44, 12, Pal.TealDark, Pal.Cream, Pal.Ink, () => Act(c.RentOut(ii)));
-                    Px.Button(card, "回收", 258, 3, 44, 12, Pal.PlumLine, Pal.Cream, Pal.Ink, () => game.Confirm("賣給回收商只拿行情的六成，確定嗎？", () => Act(c.Scrap(ii))));
+                    ConsoleArt.Key(card, "出租", 210, 3, 44, 12, Pal.TealDark, Pal.Cream, Pal.Ink, () => Act(c.RentOut(ii)));
+                    ConsoleArt.Key(card, "回收", 258, 3, 44, 12, Pal.PlumLine, Pal.Cream, Pal.Ink, () => game.Confirm("賣給回收商只拿行情的六成，確定嗎？", () => Act(c.Scrap(ii))));
                     Px.Label(card, "", 210, 15, 92, 14, Pal.Lav);
                 }
             }
@@ -426,7 +426,7 @@ namespace SSD
             {
                 Investment v = list[i];
                 float y = 19 + i * 36;
-                RectTransform card = Px.Box(content, "V_" + i, 3, y, 306, 34, Pal.Plum, Pal.PlumLine);
+                RectTransform card = ConsoleArt.Panel(content, "V_" + i, 3, y, 306, 34, Pal.Plum, Pal.PlumLine);
                 string st = v.status == "active" ? "配息中 " + v.paid + "/" + v.periods + " 期" : v.status == "done" ? "已到期" : v.status == "failed" ? "失敗" : "已出場";
                 Px.Label(card, v.name, 5, 2, 150, 14, Pal.Cream);
                 Px.Label(card, st, 150, 2, 90, 14, v.status == "failed" ? Pal.Pink : (v.status == "active" ? Pal.TealLight : Pal.Lav));
@@ -434,7 +434,7 @@ namespace SSD
                 if (v.status == "active")
                 {
                     Investment vv = v;
-                    Px.Button(card, "出場", 250, 9, 50, 14, Pal.PlumLine, Pal.Cream, Pal.Ink,
+                    ConsoleArt.Key(card, "出場", 250, 9, 50, 14, Pal.PlumLine, Pal.Cream, Pal.Ink,
                         () => game.Confirm("把" + vv.name + "的股份賣掉，可以拿回 " + GameState.Short(c.ExitValue(vv)) + "。確定嗎？", () => Act(c.ExitInvestment(vv))));
                 }
             }
@@ -464,7 +464,7 @@ namespace SSD
                 Px.Label(content, u.name, 6, y, 110, 14, own ? Pal.TealLight : Pal.Cream);
                 Px.Label(content, GameState.Short(u.cost), 116, y, 90, 14, Pal.Lav);
                 if (own) Px.Label(content, "已擁有", 220, y, 86, 14, Pal.TealLight, TextAnchor.UpperRight, false);
-                else if (can) Px.Button(content, "購買", 256, y, 50, 14, Pal.Orange, Pal.Ink, Pal.Ink,
+                else if (can) ConsoleArt.Key(content, "購買", 256, y, 50, 14, Pal.Orange, Pal.Ink, Pal.Ink,
                     () => game.Confirm("花 " + GameState.Short(uu.cost) + " 買「" + uu.name + "」？\n" + uu.desc, () => Act(c.BuyUpgrade(uu))));
                 else Px.Label(content, why, 180, y, 126, 14, Pal.PlumLight, TextAnchor.UpperRight, false);
                 y += 15;
@@ -552,7 +552,7 @@ namespace SSD
             Px.Clear(bottom);
             if (!string.IsNullOrEmpty(toast))
             {
-                RectTransform box = Px.Box(bottom, "Toast", 324, 320, 196, 36, Pal.Ink, Pal.Yellow);
+                RectTransform box = ConsoleArt.Panel(bottom, "Toast", 324, 320, 196, 36, Pal.Ink, Pal.Yellow);
                 Px.MakeClickable(box, () => { toast = null; RefreshBottom(); });
                 Px.Label(box, toast, 4, 2, 188, 32, Pal.Cream, TextAnchor.UpperLeft, true);
             }
@@ -563,7 +563,7 @@ namespace SSD
                 Px.Label(bottom, hint, 326, 322, 194, 14, Pal.Lav);
                 Px.Label(bottom, "目標：現金三千萬", 326, 338, 194, 14, Pal.PlumLight);
             }
-            Px.Button(bottom, "結束營業", 524, 320, 112, 36, Pal.Red, Pal.Cream, Pal.Ink, () => game.RequestEndDay());
+            ConsoleArt.Key(bottom, "結束營業", 524, 320, 112, 36, Pal.Red, Pal.Cream, Pal.Ink, () => game.RequestEndDay());
         }
 
         // ------------------------------------------------------------------
@@ -581,8 +581,8 @@ namespace SSD
             float h = 30 + lines.Count * 15 + 44;
             float y0 = Mathf.Floor((360 - h) * 0.5f);
             Px.Fill(modal, 103, y0 + 3, 440, h, Pal.Ink);
-            RectTransform p = Px.Box(modal, "Report", 100, y0, 440, h, Pal.Plum, Pal.Orange);
-            Px.Fill(p, 1, 1, 438, 16, Pal.Ink);
+            RectTransform p = ConsoleArt.Panel(modal, "Report", 100, y0, 440, h, Pal.Plum, Pal.Orange);
+            ConsoleArt.Header(p, 440);
             Px.Label(p, "第 " + rep.day + " 天結算・" + Calendar.Short(rep.day), 8, 2, 300, 14, Pal.Orange);
             Px.Label(p, "今日利潤 " + GameState.Money(rep.profit), 230, 2, 202, 14, rep.profit >= 0 ? Pal.TealLight : Pal.Pink, TextAnchor.UpperRight, false);
             for (int i = 0; i < lines.Count; i++)
@@ -592,7 +592,7 @@ namespace SSD
                 Px.Label(p, Clip(l, 420), 10, 22 + i * 15, 424, 14, col);
             }
             Px.Label(p, "下班時現金 " + GameState.Money(rep.cash), 10, h - 38, 300, 14, Pal.Orange);
-            Px.Button(p, rep.ending ? "……" : "下一天", 330, h - 30, 100, 22, Pal.Orange, Pal.Ink, Pal.Ink, () => { Px.Clear(modal); next(); });
+            ConsoleArt.Key(p, rep.ending ? "……" : "下一天", 330, h - 30, 100, 22, Pal.Orange, Pal.Ink, Pal.Ink, () => { Px.Clear(modal); next(); });
         }
     }
 }

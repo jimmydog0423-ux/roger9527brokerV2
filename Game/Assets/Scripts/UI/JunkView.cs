@@ -68,24 +68,16 @@ namespace SSD
         void DrawBackground()
         {
             Px.Clear(bg);
-            Image sky = Px.Fill(bg, 0, 19, 640, 341, Pal.Hex("#14121f"));
-            sky.raycastTarget = true;
-            Px.Fill(bg, 540, 44, 14, 14, Pal.Cream);
-            Px.Fill(bg, 545, 44, 9, 9, Pal.Hex("#14121f"));
-            // 鐵絲網圍籬
-            Px.Fill(bg, 0, 54, 640, 2, Pal.Hex("#5a5868"));
-            for (int x = 0; x < 640; x += 6) Px.Fill(bg, x, 56, 1, 16, Pal.Hex("#3a3846"));
-            for (int x = 0; x < 640; x += 64) Px.Fill(bg, x, 50, 3, 24, Pal.Hex("#6a6878"));
-            // 地面
-            Px.Fill(bg, 0, 72, 640, 164, Pal.Hex("#2a241e"));
-            for (int i = 0; i < 40; i++) Px.Fill(bg, (i * 53) % 636, 80 + (i * 37) % 150, 3, 2, Pal.Hex("#3a3228"));
-            Px.Fill(bg, 0, ResultY - 2, 640, 126, Pal.Hex("#14121f"));
+            Image ground = Px.Fill(bg, 0, 0, 640, 360, Pal.Night);
+            ground.raycastTarget = true;
+            NightArt.Paint(ground, "junk");
+            Px.Fill(bg, 0, 0, 640, 19, Pal.Ink);
         }
 
         void DrawHeader()
         {
             Px.Clear(header);
-            RectTransform h = Px.Box(header, "Head", 4, 21, 632, 18, Pal.Plum, Pal.PlumLight);
+            RectTransform h = ConsoleArt.Panel(header, "Head", 4, 21, 632, 18, Pal.Plum, Pal.PlumLight);
             Px.Label(h, "垃圾場", 6, 2, 60, 14, Pal.Orange);
             string ev = C.EventText("junk");
             Px.Label(h, string.IsNullOrEmpty(ev) ? "點一堆就開始挖" : ev, 64, 2, 250, 14, string.IsNullOrEmpty(ev) ? Pal.Lav : Pal.Yellow);
@@ -93,7 +85,7 @@ namespace SSD
             int max = C.JunkDigsMax;
             for (int i = 0; i < max; i++) Px.Fill(h, 366 + i * 10, 5, 7, 8, i < S.junkDigs ? Pal.Orange : Pal.PlumLine);
             Px.Label(h, "庫存 " + S.inventory.Count + "/" + C.InventoryCap, 430, 2, 80, 14, Pal.Lav);
-            Px.Button(h, "離開", 580, 2, 48, 14, Pal.Red, Pal.Cream, Pal.Ink, () =>
+            ConsoleArt.Key(h, "離開", 580, 2, 48, 14, Pal.Red, Pal.Cream, Pal.Ink, () =>
             {
                 Hide();
                 if (onLeave != null) onLeave();
@@ -159,7 +151,7 @@ namespace SSD
         void DrawResult()
         {
             Px.Clear(result);
-            RectTransform p = Px.Box(result, "Result", 4, ResultY, 632, 120, Pal.Plum, Pal.PlumLight);
+            RectTransform p = ConsoleArt.Panel(result, "Result", 4, ResultY, 632, 120, Pal.Plum, Pal.PlumLight);
             if (last != null && last.kind == "item" && last.item != null)
             {
                 RectTransform icon = Px.Box(p, "Icon", 8, 8, 48, 48, Pal.Night, last.lost ? Pal.PlumLine : Pal.Orange);

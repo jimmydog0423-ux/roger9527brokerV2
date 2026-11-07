@@ -10,6 +10,11 @@ namespace SSD
         static readonly Sprite Chassis = Resources.Load<Sprite>("Computer/broker-console-v2");
         static readonly Sprite Bezel = Resources.Load<Sprite>("Computer/console-panel-v2");
         static readonly Sprite Well = Resources.Load<Sprite>("Computer/console-slot-v2");
+        static readonly Sprite PaperFibre = PixelSprites.FromRows(new[]
+        {
+            "............", "......#.....", "............", ".#..........",
+            "............", ".........##.", "............", "....#......."
+        }, c => c == '#' ? Pal.White : Pal.Clear, TextureWrapMode.Repeat);
 
         public static bool ApplyChassis(Image image)
         {
@@ -63,6 +68,25 @@ namespace SSD
             return image;
         }
 
+        public static void Header(Transform parent, float width, float y = 1, float height = 16)
+        {
+            Px.Fill(parent, 3, y, width - 6, height, Pal.Alpha(Pal.Ink, 230));
+            Px.Fill(parent, 3, y + height - 1, width - 6, 1, Pal.PlumLight);
+            Px.Fill(parent, 3, y + 2, 2, height - 5, Pal.Orange);
+        }
+
+        public static void Paper(Transform parent, float w, float h, Color32 paper, Color32 head, float headerHeight)
+        {
+            Px.Fill(parent, 0, 0, w, h, paper);
+            Px.Tiled(parent, 1, 1, w - 2, h - 2, PaperFibre, Pal.Alpha(Pal.PaperInk, 21));
+            Px.Fill(parent, 1, 1, w - 2, headerHeight, head);
+            Px.Fill(parent, 2, 1, w - 4, 1, Pal.Alpha(Pal.White, 126));
+            Px.Fill(parent, 1, headerHeight + 1, w - 2, 1, Pal.Alpha(Pal.PaperInk, 158));
+            Px.Fill(parent, 2, headerHeight + 2, 1, h - headerHeight - 4, Pal.Alpha(Pal.PaperInk, 45));
+            Px.Fill(parent, 1, h - 3, w - 2, 2, Pal.Alpha(Pal.PaperInk, 38));
+            Px.Frame(parent, 0, 0, w, h, Pal.Ink);
+        }
+
         static void ApplySlice(Image image, Sprite sprite)
         {
             image.sprite = sprite;
@@ -75,13 +99,13 @@ namespace SSD
             Color32 fill, Color32 ink, Color32 border, Action action, string icon = null)
         {
             RectTransform key = Px.Button(parent, text, x, y, w, h, fill, ink, border, action);
+            Text label = key.GetComponentInChildren<Text>();
             Px.Fill(key, 1, 1, w - 2, 1, Pal.Alpha(Pal.Cream, 78));
             Px.Fill(key, 1, h - 2, w - 2, 1, Pal.Alpha(Pal.Ink, 134));
             if (icon != null)
             {
                 int textWidth = Px.TextWidth(text);
                 float left = Mathf.Max(2, Mathf.Floor((w - textWidth - 9) * 0.5f));
-                Text label = key.GetComponentInChildren<Text>();
                 label.alignment = TextAnchor.UpperLeft;
                 Px.Move(label.rectTransform, left + 9, Mathf.Floor((h - Px.LineHeight) * 0.5f));
                 label.rectTransform.sizeDelta = new Vector2(w - left - 10, Px.LineHeight);
@@ -89,6 +113,7 @@ namespace SSD
                 Px.Fill(key, left - 1, iconY - 1, 9, 9, Pal.Night);
                 Icon(key, icon, left, iconY);
             }
+            label.transform.SetAsLastSibling();
             return key;
         }
     }

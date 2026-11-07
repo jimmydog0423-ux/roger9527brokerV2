@@ -110,27 +110,17 @@ namespace SSD
         void DrawBackground()
         {
             Px.Clear(bg);
-            Image wall = Px.Fill(bg, 0, 19, 640, 341, Pal.Hex(Flea ? "#1d1626" : "#262c44"));
+            Image wall = Px.Fill(bg, 0, 0, 640, 360, Flea ? Pal.PlumDeep : Pal.Night);
             wall.raycastTarget = true;
-            if (Flea)
-            {
-                // 夜市的帆布棚和燈泡
-                for (int x = 0; x < 640; x += 40) Px.Fill(bg, x, 38, 20, 4, Pal.Hex("#a8352d"));
-                for (int x = 12; x < 640; x += 46) Px.Fill(bg, x, 44, 3, 3, Pal.Yellow);
-            }
-            // 兩層貨架的木板
-            for (int r = 0; r < 2; r++) Px.Fill(bg, 0, ShelfY + r * 96 + CardH + 1, 640, 3, Pal.Hex(Flea ? "#5a4632" : "#8a6844"));
-            // 桌子
-            Px.Fill(bg, 0, TableY, 640, 124, Pal.Hex("#1a1626"));
-            Px.Fill(bg, 4, TableY, TableW, 8, Pal.Hex(Flea ? "#7a5a3a" : "#a07a52"));
-            Px.Fill(bg, 4, TableY + 8, TableW, 112, Pal.Hex(Flea ? "#4a3626" : "#5e4630"));
-            Px.Fill(bg, 4, TableY + 8, TableW, 2, Pal.Hex("#2a1e14"));
+            NightArt.Paint(wall, Flea ? "flea" : "market");
+            Px.Fill(bg, 0, 0, 640, 19, Pal.Ink);
+            Px.Fill(bg, 0, TableY, 640, 2, Pal.Alpha(Pal.Orange, 128));
         }
 
         void DrawHeader()
         {
             Px.Clear(header);
-            RectTransform h = Px.Box(header, "Head", 4, 21, 632, 18, Pal.Plum, Pal.PlumLight);
+            RectTransform h = ConsoleArt.Panel(header, "Head", 4, 21, 632, 18, Pal.Plum, Pal.PlumLight);
             NightPlace p = Career.Place(place);
             Px.Label(h, p != null ? p.name : place, 6, 2, 100, 14, Pal.Orange);
             string ev = C.EventText(place);
@@ -142,7 +132,7 @@ namespace SSD
             if (total > PerPage)
             {
                 int pages = (total + PerPage - 1) / PerPage;
-                Px.Button(h, "下一頁 " + (page + 1) + "/" + pages, x - 76, 2, 72, 14, Pal.PlumLine, Pal.Cream, Pal.Ink, () =>
+                ConsoleArt.Key(h, "下一頁 " + (page + 1) + "/" + pages, x - 76, 2, 72, 14, Pal.PlumLine, Pal.Cream, Pal.Ink, () =>
                 {
                     page = (page + 1) % pages;
                     Refresh();
@@ -150,10 +140,10 @@ namespace SSD
             }
             if (!Flea)
             {
-                Px.Button(h, "買東西", x, 2, 60, 14, sellTab ? Pal.PlumLine : Pal.Orange, sellTab ? Pal.Cream : Pal.Ink, Pal.Ink, () => SetTab(false));
-                Px.Button(h, "賣東西", x + 64, 2, 60, 14, sellTab ? Pal.Orange : Pal.PlumLine, sellTab ? Pal.Ink : Pal.Cream, Pal.Ink, () => SetTab(true));
+                ConsoleArt.Key(h, "買東西", x, 2, 60, 14, sellTab ? Pal.PlumLine : Pal.Orange, sellTab ? Pal.Cream : Pal.Ink, Pal.Ink, () => SetTab(false));
+                ConsoleArt.Key(h, "賣東西", x + 64, 2, 60, 14, sellTab ? Pal.Orange : Pal.PlumLine, sellTab ? Pal.Ink : Pal.Cream, Pal.Ink, () => SetTab(true));
             }
-            Px.Button(h, "離開", 580, 2, 48, 14, Pal.Red, Pal.Cream, Pal.Ink, Leave);
+            ConsoleArt.Key(h, "離開", 580, 2, 48, 14, Pal.Red, Pal.Cream, Pal.Ink, Leave);
         }
 
         void SetTab(bool sell)
@@ -235,8 +225,9 @@ namespace SSD
         /// <summary>商品卡片：圖示、名稱、狀況、價錢、用途。</summary>
         RectTransform Card(Transform parent, float x, float y, Entry e, bool dim)
         {
-            RectTransform card = Px.Box(parent, "Card", x, y, CardW, CardH, dim ? Pal.PlumDeep : Pal.Plum, dim ? Pal.PlumLine : Pal.PlumLight);
+            RectTransform card = ConsoleArt.Panel(parent, "Card", x, y, CardW, CardH, dim ? Pal.PlumDeep : Pal.Plum, dim ? Pal.PlumLine : Pal.PlumLight);
             card.GetComponent<Image>().raycastTarget = true;
+            if (dim) Px.Fill(card, 2, 2, CardW - 4, CardH - 4, Pal.Alpha(Pal.Ink, 126));
             float a = dim ? 0.35f : 1f;
             RectTransform icon = Px.Rect(card, "Icon", 1, 1, 48, 48);
             IconArt.Draw(icon, Icon(e), a, y: 0);
@@ -374,6 +365,7 @@ namespace SSD
             }
             else
             {
+                Px.Fill(table, 12, TableY + 16, CardW, CardH, Pal.Alpha(Pal.Night, 222));
                 Px.DashedRect(table, 12, TableY + 16, CardW, CardH, Pal.Hex("#c9a774"));
                 Px.Label(table, "把商品拖到桌上", 12, TableY + 46, CardW, 14, Pal.Hex("#c9a774"), TextAnchor.UpperCenter, false);
                 Px.Label(table, "（或點一下）", 12, TableY + 62, CardW, 14, Pal.Hex("#c9a774"), TextAnchor.UpperCenter, false);
@@ -392,7 +384,7 @@ namespace SSD
         void DrawDeal()
         {
             Px.Clear(deal);
-            RectTransform p = Px.Box(deal, "Deal", DealX, TableY, 210, 120, Pal.Plum, Pal.PlumLight);
+            RectTransform p = ConsoleArt.Panel(deal, "Deal", DealX, TableY, 210, 120, Pal.Plum, Pal.PlumLight);
             if (onTable == null)
             {
                 Px.Label(p, Flea ? "殺價小技巧" : "怎麼買", 6, 4, 196, 14, Pal.Orange);
@@ -415,13 +407,13 @@ namespace SSD
             Px.Label(p, sp.use, 6, 20, 198, 28, Pal.Cream, TextAnchor.UpperLeft, true);
             Px.Label(p, "價格 " + GameState.Money(C.SupplyPrice(sp)), 6, 52, 196, 14, Pal.Yellow);
             Px.Label(p, "電子街不議價", 6, 68, 196, 14, Pal.PlumLight);
-            Px.Button(p, "購買", 6, 96, 120, 18, Pal.Orange, Pal.Ink, Pal.Ink, () =>
+            ConsoleArt.Key(p, "購買", 6, 96, 120, 18, Pal.Orange, Pal.Ink, Pal.Ink, () =>
             {
                 string res = C.BuySupply(sp);
                 Changed();
                 ClearTable(res);
             });
-            Px.Button(p, "放回", 130, 96, 74, 18, Pal.PlumLine, Pal.Cream, Pal.Ink, () => ClearTable("放回貨架了。"));
+            ConsoleArt.Key(p, "放回", 130, 96, 74, 18, Pal.PlumLine, Pal.Cream, Pal.Ink, () => ClearTable("放回貨架了。"));
         }
 
         void DealBuy(RectTransform p, InvItem it)
@@ -433,8 +425,8 @@ namespace SSD
             if (price < it.cost) Px.Label(p, "原價 " + GameState.Money(it.cost), 6, 52, 196, 14, Pal.Lav);
             else Px.Label(p, "轉賣行情 " + GameState.Money(C.MarketOf(it)), 6, 52, 196, 14, Pal.Lav);
             Px.Label(p, "電子街不議價", 6, 68, 196, 14, Pal.PlumLight);
-            Px.Button(p, "結帳", 6, 96, 120, 18, Pal.Orange, Pal.Ink, Pal.Ink, () => Buy(it));
-            Px.Button(p, "放回", 130, 96, 74, 18, Pal.PlumLine, Pal.Cream, Pal.Ink, () => ClearTable("放回貨架了。"));
+            ConsoleArt.Key(p, "結帳", 6, 96, 120, 18, Pal.Orange, Pal.Ink, Pal.Ink, () => Buy(it));
+            ConsoleArt.Key(p, "放回", 130, 96, 74, 18, Pal.PlumLine, Pal.Cream, Pal.Ink, () => ClearTable("放回貨架了。"));
         }
 
         void Buy(InvItem it)
@@ -461,13 +453,13 @@ namespace SSD
             long profit = price - it.cost;
             Px.Label(p, "成本 " + GameState.Short(it.cost) + "・利潤 " + GameState.Short(profit), 6, 52, 196, 14, profit >= 0 ? Pal.TealLight : Pal.Pink);
             Px.Label(p, C.NightWeekday == 4 ? "週五收購祭，多給 1 成" : "店家會照真正的狀況估價", 6, 68, 196, 14, C.NightWeekday == 4 ? Pal.Yellow : Pal.PlumLight);
-            Px.Button(p, "賣出", 6, 96, 120, 18, Pal.Orange, Pal.Ink, Pal.Ink, () =>
+            ConsoleArt.Key(p, "賣出", 6, 96, 120, 18, Pal.Orange, Pal.Ink, Pal.Ink, () =>
             {
                 string res = C.ShopSellNow(it);
                 Changed();
                 ClearTable(res);
             });
-            Px.Button(p, "放回", 130, 96, 74, 18, Pal.PlumLine, Pal.Cream, Pal.Ink, () => ClearTable("先不賣了。"));
+            ConsoleArt.Key(p, "放回", 130, 96, 74, 18, Pal.PlumLine, Pal.Cream, Pal.Ink, () => ClearTable("先不賣了。"));
         }
 
         void DealFlea(RectTransform p, InvItem it)
@@ -494,7 +486,7 @@ namespace SSD
             {
                 long v = System.Math.Max(CaseGen.Step(it.cost), CaseGen.Nice(it.cost * (1 + steps[i])));
                 string label = i == 0 ? "照價" : "-" + System.Math.Round(-steps[i] * 100) + "%";
-                RectTransform b = Px.Button(p, label, 6 + i * 50, 76, 48, 20, i == 0 ? Pal.PlumLight : Pal.PlumLine, Pal.Cream, Pal.Ink, () => Offer(it, v));
+                RectTransform b = ConsoleArt.Key(p, label, 6 + i * 50, 76, 48, 20, i == 0 ? Pal.PlumLight : Pal.PlumLine, Pal.Cream, Pal.Ink, () => Offer(it, v));
                 Hover h = b.gameObject.AddComponent<Hover>();
                 h.onHover = on =>
                 {
@@ -523,13 +515,13 @@ namespace SSD
             }
 
             bool looked = d != null && d.looked;
-            Px.Button(p, looked ? "檢查過了" : "仔細檢查", 6, 98, 120, 18, looked ? Pal.PlumDeep : Pal.TealDark, looked ? Pal.PlumLight : Pal.Cream, Pal.Ink, () =>
+            ConsoleArt.Key(p, looked ? "檢查過了" : "仔細檢查", 6, 98, 120, 18, looked ? Pal.PlumDeep : Pal.TealDark, looked ? Pal.PlumLight : Pal.Cream, Pal.Ink, () =>
             {
                 message = C.FleaLook(it);
                 Changed();
                 Refresh();
             });
-            Px.Button(p, "放回", 130, 98, 74, 18, Pal.PlumLine, Pal.Cream, Pal.Ink, () => ClearTable("把東西放回攤位上。"));
+            ConsoleArt.Key(p, "放回", 130, 98, 74, 18, Pal.PlumLine, Pal.Cream, Pal.Ink, () => ClearTable("把東西放回攤位上。"));
         }
 
         void Offer(InvItem it, long v)

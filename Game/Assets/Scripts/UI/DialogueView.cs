@@ -77,16 +77,22 @@ namespace SSD
             c.onClick = OnClick;
             blocker.gameObject.SetActive(false);
 
-            bigPortraitBox = Px.Box(rt, "BigPortrait", 30, 138, 100, 116, Pal.VideoWall, Pal.Ink);
+            bigPortraitBox = ConsoleArt.Panel(rt, "BigPortrait", 30, 138, 100, 116, Pal.VideoWall, Pal.Ink);
             bigPortrait = PortraitArt.Draw(bigPortraitBox, "guidong", 2, 2, 4);
+            ConsoleArt.FrameCamera(bigPortraitBox, 0, 0, 100, 116);
             bigPortraitBox.gameObject.SetActive(false);
 
-            box = Px.Box(rt, "Box", 8, 290, 624, 66, Pal.Plum, Pal.PlumLight);
-            portraitBox = Px.Box(box, "PortraitBox", 6, 5, 50, 58, Pal.VideoWall, Pal.Ink);
+            box = ConsoleArt.Panel(rt, "Box", 8, 290, 624, 66, Pal.Plum, Pal.PlumLight);
+            portraitBox = ConsoleArt.Panel(box, "PortraitBox", 6, 5, 50, 58, Pal.VideoWall, Pal.Ink);
             portrait = PortraitArt.Draw(portraitBox, "guidong", 1, 1, 2);
+            ConsoleArt.FrameCamera(portraitBox, 0, 0, 50, 58);
             nameBg = Px.Fill(box, 62, 4, 80, 14, Pal.Orange);
             nameText = Px.Label(box, "", 62, 4, 80, 14, Pal.Ink, TextAnchor.UpperCenter, false);
             nameBox = (RectTransform)nameBg.transform;
+            RectTransform badgeShine = Px.Fill(nameBox, 0, 0, 80, 1, Pal.Alpha(Pal.Cream, 155)).rectTransform;
+            badgeShine.anchorMax = Vector2.one;
+            badgeShine.offsetMin = new Vector2(1, -1);
+            badgeShine.offsetMax = new Vector2(-1, 0);
             body = Px.Label(box, "", 62, 20, 556, 42, Pal.Cream, TextAnchor.UpperLeft, true);
             more = Px.Label(box, "點一下繼續", 540, 50, 80, 14, Pal.Lav, TextAnchor.UpperRight, false);
             box.gameObject.SetActive(false);
@@ -95,10 +101,14 @@ namespace SSD
             cardBg = card.gameObject.AddComponent<Image>();
             cardBg.color = Pal.Hex("#0d0b14");
             cardBg.raycastTarget = false;
+            RectTransform plate = ConsoleArt.Panel(card, "ChapterPlate", 32, 119, 576, 100, Pal.PlumDeep, Pal.PlumLight);
+            Px.Fill(plate, 264, 50, 48, 1, Pal.Orange);
+            Px.Fill(plate, 283, 52, 10, 1, Pal.TealLight);
             cardTitle = Px.Label(card, "", 0, 136, 640, 28, Pal.Cream, TextAnchor.UpperCenter, false);
             cardTitle.fontSize = 24;
             cardSub = Px.Label(card, "", 40, 176, 560, 28, Pal.Lav, TextAnchor.UpperCenter, true);
-            cardMore = Px.Label(card, "點一下繼續", 0, 316, 640, 14, Pal.PlumLight, TextAnchor.UpperCenter, false);
+            RectTransform prompt = ConsoleArt.Panel(card, "ContinuePlate", 270, 311, 100, 23, Pal.PlumDeep, Pal.PlumLight);
+            cardMore = Px.Label(prompt, "點一下繼續", 0, 5, 100, 14, Pal.Lav, TextAnchor.UpperCenter, false);
             card.gameObject.SetActive(false);
         }
 
@@ -108,7 +118,12 @@ namespace SSD
         {
             storyMode = !string.IsNullOrEmpty(bg) && bg != "none";
             storyBg.gameObject.SetActive(storyMode);
-            if (bg == "black") storyBg.color = Pal.Hex("#0d0b14");
+            storyBg.sprite = null;
+            if (bg == "black")
+            {
+                storyBg.color = Pal.Hex("#0d0b14");
+                if (NightArt.Paint(storyBg, "story")) storyBg.color = Pal.Hex("#c6bad4");
+            }
             else if (bg == "office") storyBg.color = Pal.Alpha(Pal.Ink, 120);
         }
 

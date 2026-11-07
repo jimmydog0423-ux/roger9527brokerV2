@@ -384,17 +384,12 @@ namespace SSD
             string docId = d.id;
             RectTransform doc = Px.Rect(slotsLayer, "Doc_" + d.id, SlotX[slot], SlotY, SlotW, h);
             Px.Fill(doc, 2, 2, SlotW, h, Pal.Ink);
-            Px.Fill(doc, 0, 0, SlotW, h, paper);
-            Px.Frame(doc, 0, 0, SlotW, h, Pal.Ink);
-            Px.Fill(doc, 1, 1, SlotW - 2, 14, head);
-            Px.Fill(doc, 1, 1, SlotW - 2, 1, Pal.Alpha(Pal.White, 68));
-            Px.Fill(doc, 1, 15, SlotW - 2, 1, Pal.Ink);
-            Px.Fill(doc, 1, h - 2, SlotW - 2, 1, Pal.Alpha(Pal.PaperInk, 46));
+            ConsoleArt.Paper(doc, SlotW, h, paper, head, 14);
             // 有字放不下的文件，標題旁邊多一個「詳細」，打開可以看完整內容
             bool detail = NeedsDetail(d);
             Px.Label(doc, d.title, 5, 1, detail ? 82 : 112, 14, Pal.PaperInk);
-            if (detail) Px.Button(doc, "詳細", 88, 1, 31, 14, Pal.Orange, Pal.Ink, Pal.Ink, () => { detailDoc = docId; RefreshDetail(); });
-            Px.Button(doc, "收回", 122, 1, 31, 14, paper, Pal.PaperInk, Pal.Ink, () => s.Close(docId));
+            if (detail) ConsoleArt.Key(doc, "詳細", 88, 1, 31, 14, Pal.Orange, Pal.Ink, Pal.Ink, () => { detailDoc = docId; RefreshDetail(); });
+            ConsoleArt.Key(doc, "收回", 122, 1, 31, 14, paper, Pal.PaperInk, Pal.Ink, () => s.Close(docId));
             docRects[d.id] = doc;
             return doc;
         }
@@ -444,8 +439,8 @@ namespace SSD
                 if (s.CanAct)
                 {
                     bool can = s.CanSign;
-                    Px.Button(doc, s.data.stampOk, 46, y, 62, 18, can ? paper : Pal.Hex("#cfc6b4"), can ? Pal.TealDark : Pal.PaperLabel, can ? Pal.TealDark : Pal.PaperLabel, () => s.Finish("signed"));
-                    Px.Button(doc, s.data.stampNo, 112, y, 38, 18, paper, Pal.Red, Pal.Red, () => s.Finish("reject"));
+                    ConsoleArt.Key(doc, s.data.stampOk, 46, y, 62, 18, can ? paper : Pal.Hex("#cfc6b4"), can ? Pal.TealDark : Pal.PaperLabel, can ? Pal.TealDark : Pal.PaperLabel, () => s.Finish("signed"));
+                    ConsoleArt.Key(doc, s.data.stampNo, 112, y, 38, 18, paper, Pal.Red, Pal.Red, () => s.Finish("reject"));
                 }
                 else
                 {
@@ -468,7 +463,7 @@ namespace SSD
                 }
                 else if (s.CanAct)
                 {
-                    Px.Button(doc, "推薦給客戶", 4, y, 147, 18, Pal.Orange, Pal.Ink, Pal.Ink, () => s.Recommend(docId));
+                    ConsoleArt.Key(doc, "推薦給客戶", 4, y, 147, 18, Pal.Orange, Pal.Ink, Pal.Ink, () => s.Recommend(docId));
                 }
                 stampRect = Px.Rect(doc, "StampArea", 2, y - 1, 151, 20);
             }
@@ -477,8 +472,11 @@ namespace SSD
         void Stamp(RectTransform doc, string t, Color32 c, float y, Color32 paper)
         {
             float w = Px.TextWidth(t) + 12;
-            Px.Box(doc, "Stamp", 150 - w, y, w, 18, paper, c);
-            Px.Label(doc, t, 150 - w, y + 2, w, 14, c, TextAnchor.UpperCenter, false);
+            RectTransform seal = Px.Box(doc, "Stamp", 150 - w, y, w, 18, paper, c);
+            Px.Frame(seal, 2, 2, w - 4, 14, Pal.Alpha(c, 105));
+            Px.Fill(seal, 0, 0, 3, 3, c);
+            Px.Fill(seal, w - 3, 15, 3, 3, c);
+            Px.Label(seal, t, 0, 2, w, 14, c, TextAnchor.UpperCenter, false);
         }
 
         void Row(RectTransform doc, FieldData f, float x, float y, float w, float lw, bool clickable)
@@ -528,6 +526,9 @@ namespace SSD
             InfoRow(doc, "offer_ask", "對方開價", GameState.Money(s.offerAsk), 31, 56);
 
             RectTransform vbox = Px.Box(doc, "Value", 4, 49, 147, 18, Pal.Cream, Pal.Ink);
+            Px.Fill(vbox, 1, 1, 145, 1, Pal.White);
+            Px.Fill(vbox, 2, 2, 3, 14, s.offerDone ? Pal.Teal : Pal.Orange);
+            Px.Fill(vbox, 142, 2, 3, 14, s.offerDone ? Pal.Teal : Pal.Orange);
             Text vtext = Px.Label(vbox, s.offerDone ? "成交 " + GameState.Money(s.offerFinal) : "選一個出價", 0, 2, 147, 14,
                 s.offerDone ? Pal.TealDark : Pal.PaperLabel, TextAnchor.UpperCenter, false);
             fieldRects["offer_value"] = vbox;
@@ -547,7 +548,7 @@ namespace SSD
                 for (int i = 0; i < CaseSession.OfferOptionCount; i++)
                 {
                     int k = i;
-                    RectTransform b = Px.Button(doc, s.OfferOptionLabel(i), 4 + i * 37, 88, 35, 24,
+                    RectTransform b = ConsoleArt.Key(doc, s.OfferOptionLabel(i), 4 + i * 37, 88, 35, 24,
                         i == 0 ? Pal.PlumLight : Pal.PlumLine, Pal.Cream, Pal.Ink, () => s.OfferPick(k));
                     Hover h = b.gameObject.AddComponent<Hover>();
                     h.onHover = on =>
@@ -622,7 +623,7 @@ namespace SSD
             float y = rowsEnd + 3;
             if (p == null) return;
             if (s.planDone) Stamp(doc, "企劃通過", Pal.TealDark, y, paper);
-            else if (s.CanAct) Px.Button(doc, "開始組裝企劃", 4, y, 147, 18, Pal.Orange, Pal.Ink, Pal.Ink, () => s.PlanOpen());
+            else if (s.CanAct) ConsoleArt.Key(doc, "開始組裝企劃", 4, y, 147, 18, Pal.Orange, Pal.Ink, Pal.Ink, () => s.PlanOpen());
             stampRect = Px.Rect(doc, "PlanArea", 2, y - 1, 151, 20);
         }
 
@@ -697,10 +698,10 @@ namespace SSD
             }
             else py = SlotY + SlotH - 8f;
             float px = Mathf.Clamp(mx - 53f, 4f, 636f - 106f);
-            RectTransform pill = Px.Box(linkLayer, "Ask", px, py, 106, 24, Pal.Ink, Pal.Orange);
+            RectTransform pill = ConsoleArt.Panel(linkLayer, "Ask", px, py, 106, 24, Pal.Ink, Pal.Orange);
             pill.GetComponent<Image>().raycastTarget = true;
-            Px.Button(pill, "提出質疑", 3, 4, 62, 16, Pal.Orange, Pal.Ink, Pal.Orange, () => s.Challenge());
-            Px.Button(pill, "取消", 68, 4, 35, 16, Pal.PlumLine, Pal.Cream, Pal.PlumLine, () => s.ClearSel());
+            ConsoleArt.Key(pill, "提出質疑", 3, 4, 62, 16, Pal.Orange, Pal.Ink, Pal.Orange, () => s.Challenge());
+            ConsoleArt.Key(pill, "取消", 68, 4, 35, 16, Pal.PlumLine, Pal.Cream, Pal.PlumLine, () => s.ClearSel());
             fieldRects["link_pill"] = pill;
         }
 
@@ -831,7 +832,7 @@ namespace SSD
             Color32 c = k == "bad" ? Pal.Pink : (k == "good" ? Pal.TealLight : (k == "warn" || k == "msg" ? Pal.Yellow : Pal.Lav));
             string text = s.toast.who + "：" + s.toast.text;
             float w = Mathf.Min(624, Px.TextWidth(text) + 16);
-            RectTransform box = Px.Box(toastLayer, "Toast", Mathf.Round((640 - w) * 0.5f), 284, w, 16, Pal.Ink, c);
+            RectTransform box = ConsoleArt.Panel(toastLayer, "Toast", Mathf.Round((640 - w) * 0.5f), 284, w, 16, Pal.Ink, c);
             Px.MakeClickable(box, () => s.CloseToast());
             string hex = ColorUtility.ToHtmlStringRGB(c);
             Px.Label(box, "<color=#" + hex + ">" + s.toast.who + "：</color>" + s.toast.text, 8, 1, w - 12, 14, Pal.Cream);
@@ -848,10 +849,10 @@ namespace SSD
             scrim.raycastTarget = true;
             Px.Fill(planLayer, 63, 33, 520, 300, Pal.Ink);
             RectTransform panel = ConsoleArt.Panel(planLayer, "PlanPanel", 60, 30, 520, 300, Pal.Plum, Pal.Orange);
-            Px.Fill(panel, 1, 1, 518, 16, Pal.Ink);
+            ConsoleArt.Header(panel, 520);
             DocumentData pd = s.Doc(p.docId);
             Px.Label(panel, "企劃組裝：" + (pd != null ? pd.title : ""), 8, 2, 300, 14, Pal.Orange);
-            Px.Button(panel, "關閉", 474, 2, 40, 14, Pal.PlumLine, Pal.Cream, Pal.Ink, () => s.PlanClose());
+            ConsoleArt.Key(panel, "關閉", 474, 2, 40, 14, Pal.PlumLine, Pal.Cream, Pal.Ink, () => s.PlanClose());
 
             float y = 24;
             for (int g = 0; g < p.groups.Length; g++)
@@ -888,7 +889,7 @@ namespace SSD
                 Px.Label(panel, "企劃費", 362, 244, 50, 14, Pal.Lav);
                 Px.Label(panel, GameState.Money(s.PlanRewardNow()), 410, 244, 104, 14, Pal.TealLight);
             }
-            Px.Button(panel, "送出企劃", 362, 266, 150, 22, Pal.Orange, Pal.Ink, Pal.Ink, () => s.PlanSubmit());
+            ConsoleArt.Key(panel, "送出企劃", 362, 266, 150, 22, Pal.Orange, Pal.Ink, Pal.Ink, () => s.PlanSubmit());
             fieldRects["plan_panel"] = panel;
         }
 
@@ -950,7 +951,7 @@ namespace SSD
             Px.Fill(detailLayer, x0 + 3, y0 + 3, W, h, Pal.Ink);
             RectTransform p = Px.Box(detailLayer, "DetailPanel", x0, y0, W, h, paper, Pal.Ink);
             p.GetComponent<Image>().raycastTarget = true;
-            Px.Fill(p, 1, 1, W - 2, 16, Pal.Hex(d.head));
+            ConsoleArt.Paper(p, W, h, paper, Pal.Hex(d.head), 16);
             Px.Label(p, d.title, 8, 2, W - 70, 14, Pal.PaperInk);
             float y = 22;
             for (int i = 0; i < rows.Count && y + hs[i] <= h - 28; i++)
@@ -961,7 +962,7 @@ namespace SSD
                 Px.Tiled(p, 8, y + hs[i] - 2, W - 16, 1, PixelSprites.DotH, Pal.PaperDot);
                 y += hs[i];
             }
-            Px.Button(p, "關閉", W - 68, h - 24, 60, 18, Pal.Orange, Pal.Ink, Pal.Ink, () => { detailDoc = null; RefreshDetail(); });
+            ConsoleArt.Key(p, "關閉", W - 68, h - 24, 60, 18, Pal.Orange, Pal.Ink, Pal.Ink, () => { detailDoc = null; RefreshDetail(); });
         }
 
         // ---------- 工商派人 ----------
@@ -990,7 +991,7 @@ namespace SSD
             }
             float by = rowsEnd + 3;
             if (s.CanAct)
-                Px.Button(doc, a.open ? (who == null ? "選擇藝人" : "改派別人") : "提議換人", 4, by, 147, 18, Pal.Orange, Pal.Ink, Pal.Ink, () => s.RosterOpen());
+                ConsoleArt.Key(doc, a.open ? (who == null ? "選擇藝人" : "改派別人") : "提議換人", 4, by, 147, 18, Pal.Orange, Pal.Ink, Pal.Ink, () => s.RosterOpen());
             fieldRects["roster_doc"] = doc;
         }
 
@@ -1008,10 +1009,10 @@ namespace SSD
             Image scrim = Px.Fill(rosterLayer, 0, 0, 640, 360, Pal.Alpha(Pal.Ink, 170));
             scrim.raycastTarget = true;
             Px.Fill(rosterLayer, 43, 23, 560, 318, Pal.Ink);
-            RectTransform panel = Px.Box(rosterLayer, "RosterPanel", 40, 20, 560, 318, Pal.Plum, Pal.Orange);
-            Px.Fill(panel, 1, 1, 558, 16, Pal.Ink);
+            RectTransform panel = ConsoleArt.Panel(rosterLayer, "RosterPanel", 40, 20, 560, 318, Pal.Plum, Pal.Orange);
+            ConsoleArt.Header(panel, 560);
             Px.Label(panel, a.open ? "選擇要派去的藝人" : "提議換人（對方指定" + a.wantedName + "）", 8, 2, 400, 14, Pal.Orange);
-            Px.Button(panel, "關閉", 514, 2, 40, 14, Pal.PlumLine, Pal.Cream, Pal.Ink, () => s.RosterClose());
+            ConsoleArt.Key(panel, "關閉", 514, 2, 40, 14, Pal.PlumLine, Pal.Cream, Pal.Ink, () => s.RosterClose());
             string need = a.open
                 ? "產品類別 " + a.category + "・希望類型 " + a.genre + "・粉絲至少 " + CaseGen.FansText(a.minFans) + "・直播 " + Calendar.Short(a.day)
                 : "產品類別 " + a.category + "・直播 " + Calendar.Short(a.day) + "・粉絲比原本少，費用會照比例變少";
@@ -1021,7 +1022,8 @@ namespace SSD
                 RosterEntry e = a.roster[i];
                 float y = 38 + i * 55;
                 bool on = e.id == s.assigned || (!a.open && s.assigned == null && e.id == a.wanted);
-                RectTransform card = Px.Box(panel, "R_" + e.id, 6, y, 548, 52, on ? Pal.PlumDeep : Pal.PlumLine, on ? Pal.TealLight : Pal.PlumLight);
+                RectTransform card = ConsoleArt.Panel(panel, "R_" + e.id, 6, y, 548, 52, on ? Pal.PlumDeep : Pal.PlumLine, Pal.PlumLight);
+                if (on) Px.Frame(card, 1, 1, 546, 50, Pal.TealLight);
                 Px.Fill(card, 4, 4, 24, 28, Pal.VideoWall);
                 PortraitArt.Draw(card, e.portrait, 4, 4, 1);
                 Px.Label(card, e.name + "・" + e.genre + "・粉絲 " + CaseGen.FansText(e.fans), 34, 2, 300, 14, Pal.Cream);
@@ -1034,7 +1036,7 @@ namespace SSD
                 string btn = on ? "目前人選" : (a.open ? "派他去" : (e.id == a.wanted ? "換回原本的" : "提議換成他"));
                 string id = e.id;
                 if (on) Px.Label(card, btn, 440, 34, 100, 14, Pal.TealLight, TextAnchor.UpperRight, false);
-                else Px.Button(card, btn, 440, 33, 100, 16, Pal.Orange, Pal.Ink, Pal.Ink, () => s.Assign(id));
+                else ConsoleArt.Key(card, btn, 440, 33, 100, 16, Pal.Orange, Pal.Ink, Pal.Ink, () => s.Assign(id));
             }
             fieldRects["roster_panel"] = panel;
         }
@@ -1118,10 +1120,11 @@ namespace SSD
             float h = 8 + 14 + 6 + lines.Count * 14 + 10 + 20 + 10;
             float y0 = Mathf.Floor((360 - h) * 0.5f);
             Px.Fill(overlayLayer, 143, y0 + 3, 360, h, Pal.Ink);
-            RectTransform panel = Px.Box(overlayLayer, "Result", 140, y0, 360, h, Pal.Plum, Pal.Orange);
+            RectTransform panel = ConsoleArt.Panel(overlayLayer, "Result", 140, y0, 360, h, Pal.Plum, Pal.Orange);
+            ConsoleArt.Header(panel, 360, 5, 18);
             Px.Label(panel, title, 12, 8, 336, 14, Pal.Orange);
             for (int i = 0; i < lines.Count; i++) Px.Label(panel, lines[i], 12, 28 + i * 14, 336, 14, Pal.Cream);
-            Px.Button(panel, button, 12, h - 30, 72, 20, Pal.Orange, Pal.Ink, Pal.Ink, act);
+            ConsoleArt.Key(panel, button, 12, h - 30, 72, 20, Pal.Orange, Pal.Ink, Pal.Ink, act);
             fieldRects["overlay_button"] = Px.Rect(panel, "BtnArea", 12, h - 30, 72, 20);
         }
 
