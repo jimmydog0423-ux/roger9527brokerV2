@@ -8,7 +8,7 @@
   "storage": ["item", "market", "offer", "hb"],
   "documents": [
     {
-      "id": "item", "title": "商品資料", "tray": "商品", "icon": "pcb", "paper": "#d9e6d8", "head": "#b6cdb3", "labelWidth": 56,
+      "id": "item", "title": "商品資料", "tray": "商品", "icon": "capcard", "paper": "#d9e6d8", "head": "#b6cdb3", "labelWidth": 56,
       "fields": [
         { "id": "i_n", "label": "品名", "value": "擷取卡CX-4K60" },
         { "id": "i_s", "label": "狀況", "value": "近全新" },

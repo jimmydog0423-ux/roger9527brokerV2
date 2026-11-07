@@ -392,13 +392,14 @@ namespace SSD
                 InvItem it = s.inventory[i];
                 float y = 19 + i * 32;
                 RectTransform card = Px.Box(content, "I_" + it.id, 3, y, 306, 30, Pal.Plum, Pal.PlumLine);
-                Px.Label(card, it.name + "・" + it.condition, 5, 1, 170, 14, Pal.Cream);
+                IconArt.Draw(card, c.ItemIcon(it), 1f, 6, 3, 24);
+                Px.Label(card, it.name + "・" + it.condition, 34, 1, 171, 14, Pal.Cream);
                 long m = c.ItemMarket(it);
-                Px.Label(card, "成本 " + GameState.Short(it.cost) + " → 行情 " + GameState.Short(m), 5, 15, 200, 14, m > it.cost ? Pal.TealLight : Pal.Pink);
+                Px.Label(card, "成本 " + GameState.Short(it.cost) + " → 行情 " + GameState.Short(m), 34, 15, 200, 14, m > it.cost ? Pal.TealLight : Pal.Pink);
                 InvItem ii = it;
                 if (it.rentDays > 0)
                 {
-                    Px.Label(card, "出租中 " + it.rentDays + " 天", 206, 8, 96, 14, Pal.Yellow, TextAnchor.UpperRight, false);
+                    Px.Label(card, "出租中 " + it.rentDays + " 天", 206, 1, 96, 14, Pal.Yellow, TextAnchor.UpperRight, false);
                 }
                 else
                 {

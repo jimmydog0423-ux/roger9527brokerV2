@@ -42,7 +42,7 @@ namespace SSD
 
         static readonly Dictionary<string, string[]> Rows = new Dictionary<string, string[]>
         {
-            // 文件、紀錄和案件中的商品。
+            // 文件與案件紀錄。
             { "contract", new[] {
                 "..kkkkkkk...", ".kcccccckk..", ".kcoocccck..", ".kcppppcck..",
                 ".kccccccck..", ".kcppppcck..", ".kcccccrrk..", ".kcpppcrak..",
@@ -112,51 +112,6 @@ namespace SSD
                 "............", "..kkkkkkkk..", ".kttttttttk.", ".ktltttltkk.",
                 ".kttttttttk.", ".kttccccttk.", ".kttcTacttk.", ".kttccccttk.",
                 ".kttttttttk.", ".kpttoottpk.", "..kkkkkkkk..", "............"
-            } },
-            { "pcb", new[] {
-                "............", ".kkkkkkkkkk.", "kTTtttTttTak", "ktTtkkktTtak",
-                "ktttkpktttak", "kTttkkkttTak", "kttTttTtttak", "kTTttttTttak",
-                ".kaaaaaaaak.", "..kkkkkkkk..", "............", "............"
-            } },
-            { "box", new[] {
-                "............", ".....kkk....", "...kkhookk..", ".kkhaaahhkk.",
-                "khaaaaoaaaak", "koooooaoooak", "koaappoaaaak", "koaaoaoaaaak",
-                ".koaaaaaaak.", "..koaaaaak..", "....kkkkk...", "............"
-            } },
-            { "mic", new[] {
-                "....kkkk....", "...kllllk...", "...klpplk...", ".k.kllllk.k.",
-                ".k.klpplk.k.", ".k..kkkk..k.", "..k......k..", "...kkkkkk...",
-                ".....kk.....", ".....kk.....", "...kppppk...", "..kkkkkkkk.."
-            } },
-            { "camera", new[] {
-                "............", "..kkkk......", ".kllllk.....", "kkkkkkkk..kk",
-                "kppppppkkkpk", "kptttppkpppk", "kptTtppkpppk", "kptttppkkkpk",
-                "kppporpk..kk", ".kkkkkkk....", "............", "............"
-            } },
-            { "lamp", new[] {
-                "............", "...kkkkkk...", ".kkhaaohhk..", "khaaaaooook.",
-                ".kkhccckkk..", "...kkkk.k...", ".......kk...", "......kk....",
-                ".....kk.....", "....kk......", "..kppppkk...", "..kkkkkkk..."
-            } },
-            { "chair", new[] {
-                "...kkkkkk...", "..krrrorrk..", "..krrrorrk..", "..krrpprrk..",
-                "..krrpprrk..", ".kkkkkkkkkk.", ".krrroorrrk.", "..kkkkkkkk..",
-                ".....kk.....", ".....kk.....", "...kkkkkk...", "..kk....kk.."
-            } },
-            { "keyboard", new[] {
-                "............", "............", "............", ".kkkkkkkkkk.",
-                "kllplplplllk", "kplplplplppk", "kllplplplllk", "kpphllllhppk",
-                "kppppppptopk", ".kkkkkkkkkk.", "............", "............"
-            } },
-            { "headset", new[] {
-                "...kkkkkk...", "..klllllpk..", ".kllkkkkppk.", "kllk....kppk",
-                "kppk....kppk", "kakk....kkak", "kaaak..kaaak", "koook..koook",
-                ".kkk....kkk.", "...kk..kk...", "....kttk....", ".....kk....."
-            } },
-            { "pc", new[] {
-                "............", ".kkkkkkkkkk.", "kllppppppppk", "kpkkkkkkkkpk",
-                "kpktTTtttkpk", "kpkttttttkpk", "kpktTTtttkpk", "kpkkkkkkkkpk",
-                ".kkkkkkkkkk.", ".....kk.....", "...kppppk...", "...kkkkkk..."
             } },
 
             // 終端機控制鍵、狀態和桌面捷徑。

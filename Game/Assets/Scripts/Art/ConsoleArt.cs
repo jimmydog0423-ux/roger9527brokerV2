@@ -51,7 +51,8 @@ namespace SSD
 
         public static void DrawDocumentIcon(Transform parent, string id, float alpha)
         {
-            Icon(parent, string.IsNullOrEmpty(id) ? "report" : id, 12, 6, 24, alpha);
+            if (!IconArt.TryDraw(parent, id, alpha, 8, 1, 32))
+                Icon(parent, string.IsNullOrEmpty(id) ? "report" : id, 12, 6, 24, alpha);
         }
 
         public static Image Icon(Transform parent, string id, float x, float y, int size = 7, float alpha = 1f)

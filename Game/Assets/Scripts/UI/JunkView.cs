@@ -23,8 +23,7 @@ namespace SSD
         Career C { get { return game.Career; } }
         GameState S { get { return game.State; } }
 
-        static readonly string[] MoundColor = { "#4a5060", "#7a5a3a", "#4a4a36" };
-        static readonly string[] MoundTop = { "#626a7e", "#9a7a52", "#64644a" };
+        static readonly string[] MoundIcons = { "junk-electronic", "junk-carton", "junk-mixed" };
 
         public static JunkView Build(RectTransform parent, GameRoot game, System.Action onChanged)
         {
@@ -120,7 +119,7 @@ namespace SSD
                 Image hit = pile.gameObject.AddComponent<Image>();
                 hit.color = Pal.Clear;
                 hit.raycastTarget = true;
-                DrawMound(pile, w, kind, dug);
+                IconArt.Draw(pile, dug ? "junk-dug" : MoundIcons[kind], 1f, Mathf.Floor((w - 48) * 0.5f), 8, 48);
                 if (lamp && !dug && C.JunkHasItem(i))
                 {
                     // 頭燈照到的反光
@@ -131,41 +130,6 @@ namespace SSD
                 Px.Label(pile, dug ? "挖過了" : Career.JunkKindName[kind], 0, 58, w, 14, dug ? Pal.PlumLight : Pal.Lav, TextAnchor.UpperCenter, false);
                 int idx = i;
                 Px.MakeClickable(pile, () => Dig(idx));
-            }
-        }
-
-        /// <summary>用色塊疊出一堆廢棄物。挖過的堆會變矮、變暗。</summary>
-        void DrawMound(RectTransform pile, float w, int kind, bool dug)
-        {
-            Color32 body = Pal.Hex(dug ? "#2e2a26" : MoundColor[kind]);
-            Color32 top = Pal.Hex(dug ? "#3a3530" : MoundTop[kind]);
-            int layers = dug ? 2 : 5;
-            for (int l = 0; l < layers; l++)
-            {
-                float lw = w - 8 - l * (w - 24) / 5f;
-                float ly = 52 - l * 8;
-                Px.Fill(pile, Mathf.Floor((w - lw) * 0.5f), ly, Mathf.Round(lw), 8, l == layers - 1 ? top : body);
-            }
-            if (dug) return;
-            float cx = Mathf.Floor(w * 0.5f);
-            switch (kind)
-            {
-                case 0:   // 電器堆：舊電視和電線
-                    Px.Fill(pile, cx - 18, 18, 16, 12, Pal.Hex("#2a2833"));
-                    Px.Fill(pile, cx - 16, 20, 12, 8, Pal.Hex("#4a6b8a"));
-                    Px.Fill(pile, cx + 4, 26, 14, 2, Pal.Hex("#1a1a1a"));
-                    Px.Fill(pile, cx + 16, 22, 2, 6, Pal.Hex("#1a1a1a"));
-                    break;
-                case 1:   // 紙箱堆
-                    Px.Fill(pile, cx - 14, 16, 14, 12, Pal.Hex("#c9a774"));
-                    Px.Fill(pile, cx - 14, 21, 14, 2, Pal.Hex("#8a6844"));
-                    Px.Fill(pile, cx + 2, 22, 12, 10, Pal.Hex("#b08a5a"));
-                    break;
-                default:  // 雜物堆：輪胎和木板
-                    Px.Fill(pile, cx - 16, 20, 12, 12, Pal.Hex("#1a1a1a"));
-                    Px.Fill(pile, cx - 13, 23, 6, 6, Pal.Hex("#3a3632"));
-                    Px.Fill(pile, cx + 0, 24, 18, 3, Pal.Hex("#8a6844"));
-                    break;
             }
         }
 
@@ -199,8 +163,7 @@ namespace SSD
             if (last != null && last.kind == "item" && last.item != null)
             {
                 RectTransform icon = Px.Box(p, "Icon", 8, 8, 48, 48, Pal.Night, last.lost ? Pal.PlumLine : Pal.Orange);
-                ItemDef def = game.Career.w.Item(CaseGen.ItemIdOf(game.Career.w, last.item));
-                IconArt.Draw(icon, def != null ? def.icon : "box", last.lost ? 0.35f : 1f);
+                IconArt.Draw(icon, C.ItemIcon(last.item), last.lost ? 0.35f : 1f, 8, 8);
                 Px.Label(p, last.item.name + "・" + last.item.condition, 64, 8, 300, 14, Pal.Orange);
                 Px.Label(p, message, 64, 26, 560, 42, Pal.Yellow, TextAnchor.UpperLeft, true);
             }

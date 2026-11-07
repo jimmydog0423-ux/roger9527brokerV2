@@ -97,6 +97,7 @@ namespace SSD
 
         public string ItemIcon(InvItem it)
         {
+            if (it.id == "inv_cx4k" || it.name == "擷取卡 CX-4K60") return "capcard";
             ItemDef def = w.Item(CaseGen.ItemIdOf(w, it));
             return def != null ? def.icon : "box";
         }

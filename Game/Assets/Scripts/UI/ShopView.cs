@@ -239,7 +239,7 @@ namespace SSD
             card.GetComponent<Image>().raycastTarget = true;
             float a = dim ? 0.35f : 1f;
             RectTransform icon = Px.Rect(card, "Icon", 1, 1, 48, 48);
-            IconArt.Draw(icon, Icon(e), a);
+            IconArt.Draw(icon, Icon(e), a, y: 0);
             Color32 cream = dim ? Pal.PlumLight : Pal.Cream;
 
             if (e.supply != null)
