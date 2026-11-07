@@ -59,3 +59,6 @@ https://www.carry.live/artists.php
 
 V2 其餘原創 NPC：25 位品牌窗口、11 位二手交易對象、11 位創業者、5 位中間人、4 位版權方。
 依各自的身分設計服裝與配色，每位角色皆有獨立的臉型和五官設定。使用 imagegen 繪製透明底像素胸像，原稿置於 Art/people/npc。
+
+像素立繪重繪：鬼東、羅傑、王小姐。
+鬼東與羅傑以原有真人參考照保留五官特徵，王小姐沿用遊戲角色設定。使用 imagegen 製作粗像素色塊，原稿置於 Art/people/portraits-sharp。

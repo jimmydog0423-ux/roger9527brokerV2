@@ -74,8 +74,14 @@ namespace SSD
 
             if (sprite != null)
             {
-                Px.Label(rt, "手冊", 93, 253, 30, 8, Pal.PaperInk, TextAnchor.MiddleCenter, false).fontSize = 8;
-                Px.Label(rt, "待辦", 561, 282, 29, 10, Pal.Hex("#c6a79e"), TextAnchor.MiddleCenter, false).fontSize = 9;
+                // 紙標沿書封往左斜，文字使用遊戲的原生像素字級。
+                Color32 paper = Pal.Hex("#d3a078");
+                Px.Fill(rt, 81, 250, 58, 4, paper);
+                Px.Fill(rt, 79, 254, 58, 5, paper);
+                Px.Fill(rt, 77, 259, 58, 5, paper);
+                Px.Fill(rt, 77, 264, 58, 1, Pal.Hex("#875846"));
+                Px.Label(rt, "工作手冊", 79, 250, 58, 14, Pal.PaperInk, TextAnchor.MiddleCenter, false);
+                Px.Label(rt, "待辦", 559, 279, 30, 14, Pal.Cream, TextAnchor.MiddleCenter, false);
             }
 
             BuildMonitor();
