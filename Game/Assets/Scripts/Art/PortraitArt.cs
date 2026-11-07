@@ -21,6 +21,12 @@ namespace SSD
             if (cache.TryGetValue(who, out s) && s != null) return s;
             s = Resources.Load<Sprite>("Portraits/" + who);
             if (s == null) s = Build(who);
+            else if (who == "roger" && s.rect.width == 1293 && s.rect.height == 1216)
+            {
+                // 保留原圖的像素，沿用胸像取景。Unity 的裁切座標從左下角起算。
+                s = Sprite.Create(s.texture, new Rect(262, 315, 768, 896),
+                    new Vector2(0.5f, 0.5f), s.pixelsPerUnit, 0, SpriteMeshType.FullRect);
+            }
             cache[who] = s;
             return s;
         }
@@ -31,6 +37,7 @@ namespace SSD
             RectTransform rt = Px.Rect(parent, "Portrait_" + who, x, y, W * scale, H * scale);
             UnityEngine.UI.Image img = rt.gameObject.AddComponent<UnityEngine.UI.Image>();
             img.sprite = Get(who);
+            img.preserveAspect = true;
             img.raycastTarget = false;
             return img;
         }
