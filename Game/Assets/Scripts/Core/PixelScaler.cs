@@ -6,9 +6,8 @@ namespace SSD
 {
     /// <summary>
     /// 讓 640x360 的畫面以整數倍放大，並對齊螢幕像素，避免像素被拉歪。
-    /// 整數倍會浪費太多空間（例如視窗只比兩倍小一點）時，改用剛好塞滿的比例。
+    /// 空間可容納兩倍畫面時優先用整數倍率。較小的視窗維持可讀的畫面大小。
     /// 視窗模式下玩家拉成別的比例，放開後會自動調回 16:9。
-    /// 手機上螢幕小，一律盡量放大（除非剛好接近整數倍）。
     /// </summary>
     [RequireComponent(typeof(CanvasScaler))]
     public class PixelScaler : MonoBehaviour
@@ -77,13 +76,7 @@ namespace SSD
             lastH = Screen.height;
             lastInteger = integerScaling;
             float fit = Mathf.Min(lastW / (float)Width, lastH / (float)Height);
-            float s = fit;
-            if (integerScaling && fit >= 1f)
-            {
-                float k = Mathf.Floor(fit);
-                float need = Application.isMobilePlatform ? 0.97f : 0.8f;
-                s = k / fit >= need ? k : fit;
-            }
+            float s = integerScaling && fit >= 2f ? Mathf.Floor(fit) : fit;
             if (s <= 0f) s = 1f;
             scaler.scaleFactor = s;
             // 手指點下去稍微晃一下，不要被當成拖曳（大約 6 個遊戲像素）

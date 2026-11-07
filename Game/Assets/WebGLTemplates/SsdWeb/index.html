@@ -18,7 +18,7 @@
       -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
     main { width: min(1280px, calc(100vw - 24px), calc((100svh - 70px) * 16 / 9)); }
     #game { position: relative; aspect-ratio: 16 / 9; background: #100d14; }
-    canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+    canvas { position: absolute; display: block; width: 100%; height: 100%; touch-action: none; image-rendering: pixelated; }
     #game:fullscreen { width: 100%; height: 100%; }
     #status { position: absolute; inset: 0; margin: 0; padding: 16px; display: grid; place-items: center; text-align: center; }
     #status[hidden] { display: none; }
@@ -88,6 +88,7 @@
     const status = document.getElementById("status");
     const fullscreen = document.getElementById("fullscreen");
     const main = document.querySelector("main");
+    const stage = document.getElementById("game");
     const side = document.getElementById("side");
     const sideFull = document.getElementById("side-full");
     const rotate = document.getElementById("rotate");
@@ -100,9 +101,26 @@
     let skipRotate = false;
     if (touch) document.body.classList.add("touch");
 
+    // 讓畫布四邊對齊螢幕像素，由 Unity 同步實際繪製尺寸。
+    function alignCanvas() {
+      const rect = stage.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const left = Math.ceil(rect.left * dpr);
+      const top = Math.ceil(rect.top * dpr);
+      const width = Math.max(1, Math.floor(rect.right * dpr) - left);
+      const height = Math.max(1, Math.floor(rect.bottom * dpr) - top);
+      canvas.style.left = left / dpr - rect.left + "px";
+      canvas.style.top = top / dpr - rect.top + "px";
+      canvas.style.width = width / dpr + "px";
+      canvas.style.height = height / dpr + "px";
+    }
+
     // 依照目前看得到的畫面大小，算出最大的 16:9 遊戲畫面
     function layout() {
-      if (!touch) return;
+      if (!touch) {
+        alignCanvas();
+        return;
+      }
       const vv = window.visualViewport;
       const vw = vv ? vv.width : innerWidth;
       const vh = vv ? vv.height : innerHeight;
@@ -114,6 +132,7 @@
       const aw = Math.min(vw, area.width || vw), ah = Math.min(vh, area.height || vh);
       const w = Math.floor(Math.min(aw, ah * 16 / 9));
       main.style.width = w + "px";
+      alignCanvas();
 
       const portrait = vh > vw;
       rotate.classList.toggle("show", portrait && !skipRotate);

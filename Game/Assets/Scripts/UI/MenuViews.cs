@@ -82,7 +82,7 @@ namespace SSD
                 int v = i;
                 Choice(p, 100 + i * 48, 76, names[i], Settings.TextSpeed == i, () => { Settings.TextSpeed = v; ShowSettings(back); }, 44);
             }
-            Px.Label(p, "整數倍：像素最清楚。盡量放大：畫面較大，字會稍糊。畫面一律維持 16:9。", 12, 104, 280, 28, Pal.Lav, TextAnchor.UpperLeft, true);
+            Px.Label(p, "整數倍優先保留方正像素，太小時會放大。\n盡量放大會用滿可用畫面。", 12, 104, 280, 28, Pal.Lav, TextAnchor.UpperLeft, true);
             Px.Button(p, "返回", 110, 136, 80, 18, Pal.Orange, Pal.Ink, Pal.Ink, () => { if (onBack != null) onBack(); else Close(); });
         }
 
