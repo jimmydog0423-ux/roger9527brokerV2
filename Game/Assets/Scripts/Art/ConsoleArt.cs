@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +10,6 @@ namespace SSD
         static readonly Sprite Chassis = Resources.Load<Sprite>("Computer/broker-console-v2");
         static readonly Sprite Bezel = Resources.Load<Sprite>("Computer/console-panel-v2");
         static readonly Sprite Well = Resources.Load<Sprite>("Computer/console-slot-v2");
-        static readonly Dictionary<string, Sprite> Documents = new Dictionary<string, Sprite>();
 
         public static bool ApplyChassis(Image image)
         {
@@ -53,22 +51,15 @@ namespace SSD
 
         public static void DrawDocumentIcon(Transform parent, string id, float alpha)
         {
-            // 需求單和報價單都用帶夾板的表單，名稱仍由案件資料顯示。
-            string spriteId = id == "request" ? "quote" : id;
-            if (!string.IsNullOrEmpty(spriteId))
-            {
-                if (!Documents.TryGetValue(spriteId, out Sprite sprite))
-                {
-                    sprite = Resources.Load<Sprite>("Computer/Documents/" + spriteId);
-                    Documents.Add(spriteId, sprite);
-                }
-                if (sprite != null)
-                {
-                    Px.Fill(parent, 4, 2, 40, 31, Pal.Alpha(Pal.White, (byte)Mathf.RoundToInt(alpha * 255f))).sprite = sprite;
-                    return;
-                }
-            }
-            IconArt.Draw(parent, id, alpha);
+            Icon(parent, string.IsNullOrEmpty(id) ? "report" : id, 12, 6, 24, alpha);
+        }
+
+        public static Image Icon(Transform parent, string id, float x, float y, int size = 7, float alpha = 1f)
+        {
+            Image image = Px.Fill(parent, x, y, size, size, Pal.Alpha(Pal.White, (byte)Mathf.RoundToInt(Mathf.Clamp01(alpha) * 255f)));
+            image.name = "Icon_" + id;
+            image.sprite = ConsoleIcons.Get(id);
+            return image;
         }
 
         static void ApplySlice(Image image, Sprite sprite)
@@ -80,11 +71,23 @@ namespace SSD
         }
 
         public static RectTransform Key(Transform parent, string text, float x, float y, float w, float h,
-            Color32 fill, Color32 ink, Color32 border, Action action)
+            Color32 fill, Color32 ink, Color32 border, Action action, string icon = null)
         {
             RectTransform key = Px.Button(parent, text, x, y, w, h, fill, ink, border, action);
             Px.Fill(key, 1, 1, w - 2, 1, Pal.Alpha(Pal.Cream, 78));
             Px.Fill(key, 1, h - 2, w - 2, 1, Pal.Alpha(Pal.Ink, 134));
+            if (icon != null)
+            {
+                int textWidth = Px.TextWidth(text);
+                float left = Mathf.Max(2, Mathf.Floor((w - textWidth - 9) * 0.5f));
+                Text label = key.GetComponentInChildren<Text>();
+                label.alignment = TextAnchor.UpperLeft;
+                Px.Move(label.rectTransform, left + 9, Mathf.Floor((h - Px.LineHeight) * 0.5f));
+                label.rectTransform.sizeDelta = new Vector2(w - left - 10, Px.LineHeight);
+                float iconY = Mathf.Floor((h - 7) * 0.5f);
+                Px.Fill(key, left - 1, iconY - 1, 9, 9, Pal.Night);
+                Icon(key, icon, left, iconY);
+            }
             return key;
         }
     }

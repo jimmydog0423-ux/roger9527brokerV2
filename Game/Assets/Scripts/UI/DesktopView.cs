@@ -12,6 +12,7 @@ namespace SSD
     public class DesktopView : MonoBehaviour
     {
         static readonly string[] Tabs = { "行程", "藝人", "庫存", "投資", "公司", "帳本", "手冊" };
+        static readonly string[] TabIcons = { "day", "talent", "inventory", "invest", "company", "ledger", "workbook" };
 
         RectTransform rt;
         GameRoot game;
@@ -191,13 +192,14 @@ namespace SSD
             Px.Clear(inboxLayer);
             GameState s = S;
             Career c = C;
-            Px.Label(inboxLayer, "委託信箱", 10, 23, 80, 14, Pal.Lav);
+            ConsoleArt.Icon(inboxLayer, "inbox", 10, 26);
+            Px.Label(inboxLayer, "委託信箱", 20, 23, 80, 14, Pal.Lav);
             string slots = "通話時段";
             Px.Label(inboxLayer, slots, 150, 23, 56, 14, Pal.Lav);
             for (int i = 0; i < c.SlotsMax; i++)
             {
                 bool on = i < s.slots;
-                Px.Fill(inboxLayer, 208 + i * 9, 27, 7, 7, on ? Pal.Orange : Pal.PlumLine);
+                ConsoleArt.Icon(inboxLayer, on ? "target" : "idle", 208 + i * 9, 27);
             }
             if (c.DelegatesMax > 0) Px.Label(inboxLayer, "委派 " + s.delegates + "/" + c.DelegatesMax, 256, 23, 60, 14, Pal.TealLight);
 
@@ -216,7 +218,8 @@ namespace SSD
             GameState s = S;
             Career c = C;
             Color32 border = op.urgent ? Pal.Red : (op.lead ? Pal.TealLight : (op.held ? Pal.Yellow : Pal.PlumLine));
-            RectTransform card = Px.Box(inboxLayer, "Op_" + op.uid, x, y, 312, 47, Pal.Plum, border);
+            RectTransform card = ConsoleArt.Panel(inboxLayer, "Op_" + op.uid, x, y, 312, 47, Pal.Plum, border);
+            if (op.urgent || op.lead || op.held) Px.Frame(card, 1, 1, 310, 45, border);
             Px.Fill(card, 4, 4, 24, 28, Pal.VideoWall);
             PortraitArt.Draw(card, op.npc, 4, 4, 1);
 
@@ -238,13 +241,13 @@ namespace SSD
             bool canCall = c.CanCall(op, out why);
             string whyCall = why;
             ConsoleArt.Key(card, "撥打", 262, 30, 44, 14, canCall ? Pal.Orange : Pal.PlumLine, canCall ? Pal.Ink : Pal.Lav, Pal.Ink,
-                () => { if (canCall) game.CallOpportunity(op); else Toast(whyCall); });
+                () => { if (canCall) game.CallOpportunity(op); else Toast(whyCall); }, "answer");
             if (s.Has("vjoined"))
             {
                 bool canDel = c.CanDelegate(op, out why);
                 string whyDel = why;
                 ConsoleArt.Key(card, "委派", 214, 30, 44, 14, canDel ? Pal.TealDark : Pal.PlumLine, Pal.Cream, Pal.Ink,
-                    () => { if (canDel) game.DelegateOpportunity(op); else Toast(whyDel); });
+                    () => { if (canDel) game.DelegateOpportunity(op); else Toast(whyDel); }, "delegate");
             }
         }
 
@@ -260,7 +263,7 @@ namespace SSD
                 int k = i;
                 bool on = tab == i;
                 ConsoleArt.Key(tabLayer, Tabs[i], 324 + i * 44.6f, 22, 43, 16, on ? Pal.Orange : Pal.Plum, on ? Pal.Ink : Pal.Cream, on ? Pal.Ink : Pal.PlumLine,
-                    () => { tab = k; RefreshTabs(); RefreshContent(); });
+                    () => { tab = k; RefreshTabs(); RefreshContent(); }, TabIcons[i]);
             }
         }
 

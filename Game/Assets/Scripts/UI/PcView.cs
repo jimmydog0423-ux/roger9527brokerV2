@@ -112,15 +112,15 @@ namespace SSD
             // 2 視訊
             RectTransform vw = ConsoleArt.Panel(rt, "Video", 112, 4, 316, 124, Pal.Ink, Pal.PlumLight);
             Px.Fill(vw, 4, 2, 308, 14, Pal.Alpha(Pal.Ink, 200));
-            callDot = Px.Fill(vw, 5, 6, 5, 5, Pal.TealLight);
+            callDot = ConsoleArt.Icon(vw, "live", 5, 5);
             callTitle = Px.Label(vw, "", 14, 1, 250, 14, Pal.Cream);
-            Px.Frame(vw, 283, 5, 6, 6, Pal.Lav);
-            Px.Frame(vw, 293, 5, 6, 6, Pal.Lav);
-            Px.Fill(vw, 303, 5, 6, 6, Pal.Lav);
+            ConsoleArt.Icon(vw, "signal", 282, 4);
+            ConsoleArt.Icon(vw, "window", 292, 4);
+            ConsoleArt.Icon(vw, "close", 302, 4);
 
             RectTransform feed = Px.Rect(vw, "Feed", 1, 16, 314, 86);
             Image fbg = feed.gameObject.AddComponent<Image>();
-            fbg.color = Pal.Hex("#2c3537");
+            fbg.color = Pal.PlumDeep;
             fbg.raycastTarget = false;
             feed.gameObject.AddComponent<RectMask2D>();
             Sprite videoArt = Resources.Load<Sprite>("Computer/video-room-v2");
@@ -139,7 +139,7 @@ namespace SSD
             RectTransform bb = Px.Box(feed, "Bubble", 108, 4, 202, 62, Pal.Cream, Pal.Ink);
             Px.Fill(feed, 102, 31, 7, 8, Pal.Ink);
             Px.Fill(feed, 103, 32, 7, 6, Pal.Cream);
-            nameTagBg = Px.Fill(bb, 4, 2, 112, 14, Pal.Hex("#713d39"));
+            nameTagBg = Px.Fill(bb, 4, 2, 112, 14, Pal.PlumLight);
             nameTag = Px.Label(bb, "", 4, 2, 112, 14, Pal.Cream, TextAnchor.UpperCenter, false);
             bubble = Px.Label(bb, "", 4, 17, 194, 42, Pal.PaperInk, TextAnchor.UpperLeft, true);
             replyRect = Px.Rect(feed, "Replies", 4, 68, 306, 16);
@@ -157,9 +157,11 @@ namespace SSD
 
             // 3 日期與資金
             RectTransform dp = ConsoleArt.Panel(rt, "Day", 432, 4, 204, 56, Pal.Plum, Pal.PlumLight);
-            dayText = Px.Label(dp, "", 6, 2, 120, 14, Pal.Cream);
+            ConsoleArt.Icon(dp, "day", 6, 5);
+            dayText = Px.Label(dp, "", 16, 2, 120, 14, Pal.Cream);
             recvText = Px.Label(dp, "", 80, 2, 118, 14, Pal.TealLight, TextAnchor.UpperRight, false);
-            cashText = Px.Label(dp, "", 6, 16, 190, 14, Pal.Cream);
+            ConsoleArt.Icon(dp, "money", 6, 19);
+            cashText = Px.Label(dp, "", 16, 16, 180, 14, Pal.Cream);
             ConsoleArt.Key(dp, "選單", 6, 36, 40, 16, Pal.PlumLine, Pal.Cream, Pal.Ink, () => game.OpenMenu());
             ConsoleArt.Key(dp, "結束營業", 138, 36, 60, 16, Pal.Red, Pal.Cream, Pal.Ink, () => game.RequestEndDay());
 
@@ -175,7 +177,8 @@ namespace SSD
 
             // 6 資料倉庫
             RectTransform si = ConsoleArt.Panel(rt, "StorageInfo", 4, 308, 96, 48, Pal.Plum, Pal.PlumLight);
-            Px.Label(si, "資料倉庫", 5, 1, 88, 14, Pal.Cream);
+            ConsoleArt.Icon(si, "store", 6, 4);
+            Px.Label(si, "資料倉庫", 16, 1, 77, 14, Pal.Cream);
             capText = Px.Label(si, "", 5, 15, 88, 14, Pal.Lav);
             ConsoleArt.Key(si, "擴充倉庫", 5, 31, 60, 14, Pal.PlumLine, Pal.Cream, Pal.Ink,
                 () => { if (s != null) s.Notify("提示", "這裡放的是這通電話收到的資料。公司的商品庫存在電腦桌面的「庫存」", "info"); });
@@ -247,7 +250,7 @@ namespace SSD
             bool live = s.result == null;
             string role = string.IsNullOrEmpty(cl.role) ? "" : "（" + cl.role + "）";
             callTitle.text = live ? "視訊通話・" + cl.company + role : "通話結束・" + cl.company;
-            callDot.color = live ? Pal.TealLight : Pal.Lav;
+            callDot.sprite = ConsoleIcons.Get(live ? "live" : "idle");
             bubble.text = s.bubble;
 
             Px.Clear(replyLayer);
@@ -264,6 +267,9 @@ namespace SSD
             Px.Clear(toolbar);
             ConsoleArt.Key(toolbar, "麥克風", 5, 3, 44, 15, s.mic ? Pal.PlumLine : Pal.Red, Pal.Cream, Pal.Ink, () => s.ToggleMic());
             ConsoleArt.Key(toolbar, "鏡頭", 53, 3, 32, 15, s.cam ? Pal.PlumLine : Pal.Red, Pal.Cream, Pal.Ink, () => s.ToggleCam());
+            ConsoleArt.Icon(toolbar, s.mic ? "micOn" : "micOff", 129, 7);
+            ConsoleArt.Icon(toolbar, s.cam ? "cameraOn" : "cameraOff", 141, 7);
+            if (!live) ConsoleArt.Icon(toolbar, "hang", 153, 7);
 
             int maxP = Mathf.Max(1, s.data.patience);
             int lit = Mathf.CeilToInt(5f * s.patience / maxP);
@@ -284,7 +290,7 @@ namespace SSD
             string obj = game.Objective;
             if (!string.IsNullOrEmpty(obj))
             {
-                Px.Fill(tasks, 6, 21, 6, 6, Pal.Orange);
+                ConsoleArt.Icon(tasks, "target", 6, 20);
                 Px.Label(tasks, obj, 16, 17, 182, 44, Pal.Orange, TextAnchor.UpperLeft, true);
                 return;
             }
@@ -295,8 +301,7 @@ namespace SSD
             {
                 float y = 17 + i * gap;
                 bool done = s.Check(list[i].doneWhen);
-                Px.Frame(tasks, 6, y + 3, 8, 8, Pal.Lav);
-                if (done) Px.Fill(tasks, 7, y + 4, 6, 6, Pal.TealLight);
+                ConsoleArt.Icon(tasks, done ? "check" : "pending", 6, y + 3);
                 Px.Label(tasks, done ? list[i].text : TaskText(list[i]), 19, y, 180, 14, done ? Pal.Lav : Pal.Cream);
                 if (done) Px.Fill(tasks, 19, y + 7, Px.TextWidth(list[i].text), 1, Pal.Lav);
             }
@@ -362,6 +367,7 @@ namespace SSD
                 if (id == null)
                 {
                     if (!hasWell) Px.DashedRect(slotsLayer, SlotX[i], SlotY, SlotW, SlotH, Pal.PlumLight);
+                    ConsoleArt.Icon(slotsLayer, "inbox", SlotX[i] + 70, SlotY + 48, 14, 0.75f);
                     Px.Label(slotsLayer, "拖曳或點選", SlotX[i], SlotY + 68, SlotW, 14, Pal.Lav, TextAnchor.UpperCenter, false);
                     Px.Label(slotsLayer, "下方資料", SlotX[i], SlotY + 82, SlotW, 14, Pal.Lav, TextAnchor.UpperCenter, false);
                     continue;
@@ -493,7 +499,7 @@ namespace SSD
             Px.Label(row, f.label, 2, 0, lw, 14, si >= 0 ? Pal.Ink : Pal.PaperLabel);
             Color32 vc = si >= 0 ? Pal.Ink : (isFixed ? Pal.TealDark : Pal.PaperInk);
             Px.Label(row, s.ValueOf(f), 2 + lw, 0, w - 4 - lw, 14, vc);
-            if (isFixed && si < 0) Px.Fill(row, w - 8, 5, 5, 5, Pal.TealDark);
+            if (isFixed && si < 0) ConsoleArt.Icon(row, "check", w - 9, 4);
             if (si >= 0)
             {
                 Px.Fill(row, w - 12, 1, 11, 13, Pal.Ink);
@@ -758,16 +764,12 @@ namespace SSD
                 {
                     if (!ConsoleArt.DrawWell(hotbarLayer, x, 308, 48, 48))
                         Px.DashedRect(hotbarLayer, x, 308, 48, 48, Pal.PlumLight);
-                    Px.Fill(hotbarLayer, x + 17, 308 + 23, 14, 2, Pal.PlumLight);
-                    Px.Fill(hotbarLayer, x + 23, 308 + 17, 2, 14, Pal.PlumLight);
+                    ConsoleArt.Icon(hotbarLayer, "add", x + 17, 325, 14, 0.75f);
                 }
                 else
                 {
                     ConsoleArt.Panel(hotbarLayer, "Locked", x, 308, 48, 48, Pal.TrayBg, Pal.Plum);
-                    Px.Fill(hotbarLayer, x + 18, 308 + 12, 12, 2, Pal.PlumLight);
-                    Px.Fill(hotbarLayer, x + 18, 308 + 12, 2, 10, Pal.PlumLight);
-                    Px.Fill(hotbarLayer, x + 28, 308 + 12, 2, 10, Pal.PlumLight);
-                    Px.Fill(hotbarLayer, x + 15, 308 + 21, 18, 14, Pal.PlumLight);
+                    ConsoleArt.Icon(hotbarLayer, "lock", x + 17, 325, 14, 0.75f);
                 }
             }
         }
@@ -845,7 +847,7 @@ namespace SSD
             Image scrim = Px.Fill(planLayer, 0, 0, 640, 360, Pal.Alpha(Pal.Ink, 170));
             scrim.raycastTarget = true;
             Px.Fill(planLayer, 63, 33, 520, 300, Pal.Ink);
-            RectTransform panel = Px.Box(planLayer, "PlanPanel", 60, 30, 520, 300, Pal.Plum, Pal.Orange);
+            RectTransform panel = ConsoleArt.Panel(planLayer, "PlanPanel", 60, 30, 520, 300, Pal.Plum, Pal.Orange);
             Px.Fill(panel, 1, 1, 518, 16, Pal.Ink);
             DocumentData pd = s.Doc(p.docId);
             Px.Label(panel, "企劃組裝：" + (pd != null ? pd.title : ""), 8, 2, 300, 14, Pal.Orange);
@@ -875,7 +877,7 @@ namespace SSD
             foreach (PlanReq r in p.reqs)
             {
                 bool ok = s.PlanReqOk(r) && s.PlanComplete();
-                Px.Fill(panel, 362, ry + 3, 8, 8, ok ? Pal.TealLight : Pal.PlumLine);
+                ConsoleArt.Icon(panel, ok ? "check" : "pending", 362, ry + 3);
                 Px.Label(panel, r.text, 374, ry, 140, 28, ok ? Pal.Cream : Pal.Lav, TextAnchor.UpperLeft, true);
                 ry += 30;
             }

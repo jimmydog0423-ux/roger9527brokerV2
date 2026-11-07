@@ -134,8 +134,13 @@ namespace SSD
             }
             RectTransform contents = screen.rectTransform;
             Px.Fill(contents, 0, 0, ScreenWidth, 6, Pal.Ink);
-            Px.Fill(contents, 2, 2, 2, 2, Pal.Orange);
-            for (int i = 0; i < 3; i++) ConsoleArt.Panel(contents, "Icon", 8, 14 + i * 24, 16, 16, Pal.PlumLine, Pal.PlumLight);
+            ConsoleArt.Icon(contents, "signal", 2, 0);
+            string[] shortcuts = { "inbox", "workbook", "day" };
+            for (int i = 0; i < shortcuts.Length; i++)
+            {
+                RectTransform shortcut = ConsoleArt.Panel(contents, "Icon", 8, 14 + i * 24, 16, 16, Pal.PlumLine, Pal.PlumLight);
+                ConsoleArt.Icon(shortcut, shortcuts[i], 4, 4);
+            }
             idleText = Px.Label(contents, "目前沒有來電", 30, 60, 210, 14, Pal.Lav, TextAnchor.UpperCenter, false);
 
             popup = ConsoleArt.Panel(contents, "Popup", PopupBounds.x, PopupBounds.y, PopupBounds.width, PopupBounds.height, Pal.Plum, Pal.PlumLight);
@@ -159,20 +164,21 @@ namespace SSD
             if (c == Call.Active) { head = "通話中"; headColor = Pal.TealLight; }
             else if (c == Call.Ended) { head = "通話結束"; headColor = Pal.Lav; }
             else if (c == Call.Missed) { head = "未接來電"; headColor = Pal.Lav; }
-            Px.Label(popupBody, head, 6, 3, 100, 14, headColor);
+            ConsoleArt.Icon(popupBody, c == Call.Ringing ? "answer" : c == Call.Active ? "live" : c == Call.Missed ? "decline" : "idle", 6, 6);
+            Px.Label(popupBody, head, 17, 3, 100, 14, headColor);
             Px.Fill(popupBody, 3, 19, 26, 30, Pal.VideoWall);
             PortraitArt.Draw(popupBody, d.client.id, 4, 21, 1);
             Px.Label(popupBody, d.client.name, 35, 20, 110, 14, Pal.Cream);
             Px.Label(popupBody, d.client.company, 35, 34, 110, 14, Pal.Lav);
             if (c == Call.Ringing)
             {
-                ConsoleArt.Key(popupBody, "接聽", 4, 58, 66, 20, Pal.Teal, Pal.Ink, Pal.Ink, () => game.Answer());
-                ConsoleArt.Key(popupBody, "拒接", 76, 58, 66, 20, Pal.Red, Pal.Cream, Pal.Ink, () => game.Decline());
+                ConsoleArt.Key(popupBody, "接聽", 4, 58, 66, 20, Pal.Teal, Pal.Ink, Pal.Ink, () => game.Answer(), "answer");
+                ConsoleArt.Key(popupBody, "拒接", 76, 58, 66, 20, Pal.Red, Pal.Cream, Pal.Ink, () => game.Decline(), "decline");
             }
             else
             {
                 string label = c == Call.Missed ? "回撥" : "回到電腦";
-                ConsoleArt.Key(popupBody, label, 4, 58, 138, 20, Pal.Teal, Pal.Ink, Pal.Ink, () => game.Answer());
+                ConsoleArt.Key(popupBody, label, 4, 58, 138, 20, Pal.Teal, Pal.Ink, Pal.Ink, () => game.Answer(), c == Call.Missed ? "sync" : "window");
             }
         }
 

@@ -24,6 +24,20 @@ namespace SSD
             return Sprite.Create(t, new Rect(0, 0, t.width, t.height), new Vector2(0.5f, 0.5f), 100f, 0, SpriteMeshType.FullRect, border);
         }
 
+        internal static Sprite FromRows(string[] rows, System.Func<char, Color32> color)
+        {
+            int w = rows[0].Length;
+            int h = rows.Length;
+            Texture2D tex = Tex(w, h, TextureWrapMode.Clamp);
+            Color32[] pixels = new Color32[w * h];
+            for (int y = 0; y < h; y++)
+                for (int x = 0; x < w; x++)
+                    pixels[(h - 1 - y) * w + x] = color(rows[y][x]);
+            tex.SetPixels32(pixels);
+            tex.Apply(false, true);
+            return Make(tex, Vector4.zero);
+        }
+
         /// <summary>白色邊框（中間透明），用 Sliced 模式拉伸，靠 Image.color 上色。</summary>
         public static Sprite Frame(int thick)
         {
