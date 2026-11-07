@@ -60,6 +60,7 @@ namespace SSD
             {
                 room.sprite = sprite;
                 room.color = Color.white;
+                OfficeRain.Build(rt);
             }
 
             Px.Fill(rt, 0, 0, PixelScaler.Width, 14, Pal.Ink);
@@ -73,9 +74,8 @@ namespace SSD
 
             if (sprite != null)
             {
-                RectTransform label = Px.Box(rt, "HandbookLabel", 80, 250, 60, 16, Pal.Hex("#c99766"), Pal.Hex("#775246"));
-                Px.Label(label, "工作手冊", 0, 1, 60, 14, Pal.PaperInk, TextAnchor.MiddleCenter, false).fontSize = 11;
-                Px.Label(rt, "待辦", 521, 281, 38, 12, Pal.Cream, TextAnchor.MiddleCenter, false).fontSize = 10;
+                Px.Label(rt, "手冊", 93, 253, 30, 8, Pal.PaperInk, TextAnchor.MiddleCenter, false).fontSize = 8;
+                Px.Label(rt, "待辦", 561, 282, 29, 10, Pal.Hex("#c6a79e"), TextAnchor.MiddleCenter, false).fontSize = 9;
             }
 
             BuildMonitor();
