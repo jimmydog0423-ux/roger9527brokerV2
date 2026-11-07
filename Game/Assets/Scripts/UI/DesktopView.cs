@@ -73,18 +73,24 @@ namespace SSD
         {
             Image bg = Px.Fill(rt, 0, 0, 640, 360, Pal.Night);
             bg.raycastTarget = true;
-            Px.Tiled(rt, 0, 18, 640, 342, PixelSprites.Grid16, Pal.DeskGrid);
+            Sprite wallpaper = Resources.Load<Sprite>("Computer/desktop-wallpaper-v2");
+            if (wallpaper != null)
+            {
+                bg.sprite = wallpaper;
+                bg.color = Pal.White;
+            }
+            else Px.Tiled(rt, 0, 18, 640, 342, PixelSprites.Grid16, Pal.DeskGrid);
+            Color32 panel = wallpaper != null ? Pal.Alpha(Pal.PlumDeep, 218) : Pal.PlumDeep;
             Px.Fill(rt, 0, 0, 640, 18, Pal.Ink);
             Px.Fill(rt, 0, 18, 640, 1, Pal.PlumLine);
             top = Px.Rect(rt, "Top", 0, 0, 640, 18);
 
-            RectTransform ib = Px.Box(rt, "Inbox", 4, 22, 316, 334, Pal.PlumDeep, Pal.PlumLine);
+            RectTransform ib = Px.Box(rt, "Inbox", 4, 22, 316, 334, panel, Pal.PlumLine);
             Px.Fill(ib, 1, 1, 314, 16, Pal.Ink);
-            Px.Fill(ib, 1, 1, 2, 16, Pal.TealDark);
             inboxLayer = Px.Rect(rt, "InboxList", 0, 0, 640, 360);
 
             tabLayer = Px.Rect(rt, "Tabs", 0, 0, 640, 360);
-            RectTransform cb = Px.Box(rt, "Content", 324, 40, 312, 276, Pal.PlumDeep, Pal.PlumLine);
+            RectTransform cb = Px.Box(rt, "Content", 324, 40, 312, 276, panel, Pal.PlumLine);
             content = Px.Rect(cb, "Inner", 0, 0, 312, 276);
             bottom = Px.Rect(rt, "Bottom", 0, 0, 640, 360);
             modal = Px.Rect(rt, "Modal", 0, 0, 640, 360);
@@ -185,7 +191,7 @@ namespace SSD
             Px.Clear(inboxLayer);
             GameState s = S;
             Career c = C;
-            Px.Label(inboxLayer, "委託信箱", 10, 23, 80, 14, Pal.Cream);
+            Px.Label(inboxLayer, "委託信箱", 10, 23, 80, 14, Pal.Lav);
             string slots = "通話時段";
             Px.Label(inboxLayer, slots, 150, 23, 56, 14, Pal.Lav);
             for (int i = 0; i < c.SlotsMax; i++)
@@ -198,9 +204,8 @@ namespace SSD
             List<Opportunity> list = c.VisibleInbox();
             if (list.Count == 0)
             {
-                RectTransform empty = Px.Box(inboxLayer, "EmptyInbox", 20, 143, 284, 65, Pal.TrayBg, Pal.PlumLine);
-                Px.Label(empty, "今天沒有新的委託了", 0, 14, 284, 14, Pal.Cream, TextAnchor.UpperCenter, false);
-                Px.Label(empty, "可整理庫存、升級公司或結束營業", 0, 37, 284, 14, Pal.Lav, TextAnchor.UpperCenter, false);
+                Px.Label(inboxLayer, "今天沒有新的委託了。", 4, 160, 316, 14, Pal.Lav, TextAnchor.UpperCenter, false);
+                Px.Label(inboxLayer, "可以整理庫存、升級公司，或是結束營業。", 4, 176, 316, 14, Pal.PlumLight, TextAnchor.UpperCenter, false);
                 return;
             }
             for (int i = 0; i < list.Count && i < 6; i++) InboxRow(list[i], 6, 42 + i * 49);
@@ -219,17 +224,15 @@ namespace SSD
             float tw = Px.TextWidth(tag) + 6;
             Px.Fill(card, 32, 3, tw, 14, TypeColor(op.type));
             Px.Label(card, tag, 32, 3, tw, 14, Pal.Ink, TextAnchor.UpperCenter, false);
+            Px.Label(card, op.title, 36 + tw, 3, 150, 14, Pal.Cream);
             bool cost = op.est < 0 || op.type == "buy" || op.type == "invest";
-            string value = ValueText(op);
-            float valueWidth = Mathf.Clamp(Px.TextWidth(value), 78, 126);
-            Px.Label(card, op.title, 36 + tw, 3, 302 - valueWidth - (36 + tw), 14, Pal.Cream);
-            Px.Label(card, value, 306 - valueWidth, 3, valueWidth, 14, op.urgent ? Pal.Pink : (cost ? Pal.Lav : Pal.Orange), TextAnchor.UpperRight, false);
+            Px.Label(card, ValueText(op), 180, 3, 126, 14, op.urgent ? Pal.Pink : (cost ? Pal.Lav : Pal.Orange), TextAnchor.UpperRight, false);
             Px.Label(card, op.summary, 32, 17, 176, 14, Pal.Lav);
             int left = op.expires - s.day;
             string due = op.urgent ? (left <= 0 ? "今天截止" : "剩 " + (left + 1) + " 天") : (left <= 0 ? "今天到期" : "明天到期");
             if (op.lead && !op.urgent) due = "人脈・" + due;
-            Px.Label(card, due, 210, 17, 96, 14, op.urgent ? Pal.Pink : Pal.Lav, TextAnchor.UpperRight, false);
-            Px.Label(card, op.npcName + "・" + op.company, 32, 31, 170, 14, Pal.Lav);
+            Px.Label(card, due, 210, 17, 96, 14, op.urgent ? Pal.Pink : Pal.PlumLight, TextAnchor.UpperRight, false);
+            Px.Label(card, op.npcName + "・" + op.company, 32, 31, 170, 14, Pal.PlumLight);
 
             string why;
             bool canCall = c.CanCall(op, out why);
@@ -256,8 +259,7 @@ namespace SSD
             {
                 int k = i;
                 bool on = tab == i;
-                int x = 324 + Mathf.RoundToInt(i * (312f / Tabs.Length));
-                Px.Button(tabLayer, Tabs[i], x, 22, 43, 16, on ? Pal.Orange : Pal.Plum, on ? Pal.Ink : Pal.Cream, on ? Pal.Yellow : Pal.PlumLine,
+                Px.Button(tabLayer, Tabs[i], 324 + i * 44.6f, 22, 43, 16, on ? Pal.Orange : Pal.Plum, on ? Pal.Ink : Pal.Cream, on ? Pal.Ink : Pal.PlumLine,
                     () => { tab = k; RefreshTabs(); RefreshContent(); });
             }
         }

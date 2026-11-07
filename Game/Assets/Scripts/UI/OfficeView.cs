@@ -23,10 +23,11 @@ namespace SSD
 
         RectTransform rt;
         GameRoot game;
-        Text hudDay, hudCash, hudObjective, monitorStatus;
+        Text hudDay, hudCash, hudObjective;
         Image popupFrame, led;
-        RectTransform popup, monitorIdle, handbookTag, trayTag;
+        RectTransform popup, handbookTag, trayTag;
         Transform popupBody;
+        Text idleText;
         Call call = Call.None;
         float blinkTimer;
         bool blinkOn;
@@ -125,20 +126,17 @@ namespace SSD
 
             Image screen = Px.Fill(rt, ScreenBounds.x, ScreenBounds.y, ScreenBounds.width, ScreenBounds.height, Pal.Night);
             screen.name = "Screen";
+            Sprite wallpaper = Resources.Load<Sprite>("Computer/desktop-wallpaper-v2");
+            if (wallpaper != null)
+            {
+                screen.sprite = wallpaper;
+                screen.color = Pal.White;
+            }
             RectTransform contents = screen.rectTransform;
-            Px.Tiled(contents, 0, 16, ScreenWidth, 101, PixelSprites.Grid16, Pal.DeskGrid);
-            Px.Fill(contents, 0, 0, ScreenWidth, 16, Pal.Ink);
-            Px.Fill(contents, 6, 6, 4, 4, Pal.TealLight);
-            Px.Label(contents, "經紀工作台", 15, 1, 97, 14, Pal.Cream);
-            monitorStatus = Px.Label(contents, "", 117, 1, 115, 14, Pal.TealLight, TextAnchor.UpperRight, false);
-            Px.Fill(contents, 0, 116, ScreenWidth, 19, Pal.Ink);
-            Px.Fill(contents, 0, 116, ScreenWidth, 1, Pal.PlumLine);
-            Px.Label(contents, "通訊中心", 8, 118, 86, 14, Pal.Lav);
-
-            monitorIdle = Px.Box(contents, "Idle", 29, 34, 182, 66, Pal.PlumDeep, Pal.PlumLight);
-            Px.Fill(monitorIdle, 1, 1, 180, 3, Pal.TealDark);
-            Px.Label(monitorIdle, "等待來電", 0, 14, 182, 14, Pal.Cream, TextAnchor.UpperCenter, false);
-            Px.Label(monitorIdle, "有新來電時會在此顯示", 0, 38, 182, 14, Pal.Lav, TextAnchor.UpperCenter, false);
+            Px.Fill(contents, 0, 0, ScreenWidth, 6, Pal.Ink);
+            Px.Fill(contents, 2, 2, 2, 2, Pal.Orange);
+            for (int i = 0; i < 3; i++) Px.Box(contents, "Icon", 8, 14 + i * 24, 16, 16, Pal.PlumLine, Pal.PlumLight);
+            idleText = Px.Label(contents, "目前沒有來電", 30, 60, 210, 14, Pal.Lav, TextAnchor.UpperCenter, false);
 
             popup = Px.Rect(contents, "Popup", PopupBounds.x, PopupBounds.y, PopupBounds.width, PopupBounds.height);
             Image pbg = popup.gameObject.AddComponent<Image>();
@@ -154,35 +152,21 @@ namespace SSD
             Px.Clear(popupBody);
             bool show = c != Call.None && d != null;
             popup.gameObject.SetActive(show);
-            monitorIdle.gameObject.SetActive(!show);
+            idleText.gameObject.SetActive(!show);
+            popupFrame.color = Pal.PlumLight;
             led.color = Pal.Hex("#2a2833");
-            blinkTimer = 0f;
-            blinkOn = false;
-
-            string head = "連線待機";
-            Color32 headColor = Pal.TealLight;
-            if (show)
-            {
-                switch (c)
-                {
-                    case Call.Ringing: head = "視訊來電"; headColor = Pal.Orange; break;
-                    case Call.Active: head = "通話中"; break;
-                    case Call.Ended: head = "通話結束"; headColor = Pal.Lav; break;
-                    case Call.Missed: head = "未接來電"; headColor = Pal.Yellow; break;
-                }
-            }
-            monitorStatus.text = head;
-            monitorStatus.color = headColor;
-            popupFrame.color = headColor;
             if (!show) return;
 
-            Px.Fill(popupBody, 2, 2, 146, 17, Pal.Ink);
-            Px.Fill(popupBody, 8, 8, 4, 4, headColor);
-            Px.Label(popupBody, head, 16, 3, 126, 14, headColor);
-            Px.Box(popupBody, "CallerPhoto", 7, 22, 28, 32, Pal.VideoWall, Pal.PlumLight);
-            PortraitArt.Draw(popupBody, d.client.id, 9, 24, 1);
-            Px.Label(popupBody, d.client.name, 42, 23, 100, 14, Pal.Cream);
-            Px.Label(popupBody, d.client.company, 42, 38, 100, 14, Pal.Lav);
+            Color32 headColor = Pal.Orange;
+            string head = "視訊來電";
+            if (c == Call.Active) { head = "通話中"; headColor = Pal.TealLight; }
+            else if (c == Call.Ended) { head = "通話結束"; headColor = Pal.Lav; }
+            else if (c == Call.Missed) { head = "未接來電"; headColor = Pal.Lav; }
+            Px.Label(popupBody, head, 6, 3, 100, 14, headColor);
+            Px.Fill(popupBody, 3, 19, 26, 30, Pal.VideoWall);
+            PortraitArt.Draw(popupBody, d.client.id, 4, 21, 1);
+            Px.Label(popupBody, d.client.name, 35, 20, 110, 14, Pal.Cream);
+            Px.Label(popupBody, d.client.company, 35, 34, 110, 14, Pal.Lav);
             if (c == Call.Ringing)
             {
                 Px.Button(popupBody, "接聽", 4, 58, 66, 20, Pal.Teal, Pal.Ink, Pal.Ink, () => game.Answer());
@@ -231,7 +215,7 @@ namespace SSD
             if (blinkTimer < 0.4f) return;
             blinkTimer = 0f;
             blinkOn = !blinkOn;
-            popupFrame.color = blinkOn ? Pal.Yellow : Pal.Orange;
+            popupFrame.color = blinkOn ? Pal.Orange : Pal.PlumLight;
             led.color = blinkOn ? Pal.Orange : Pal.Hex("#2a2833");
         }
     }
