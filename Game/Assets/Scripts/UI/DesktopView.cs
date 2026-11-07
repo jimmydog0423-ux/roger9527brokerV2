@@ -85,12 +85,12 @@ namespace SSD
             Px.Fill(rt, 0, 18, 640, 1, Pal.PlumLine);
             top = Px.Rect(rt, "Top", 0, 0, 640, 18);
 
-            RectTransform ib = Px.Box(rt, "Inbox", 4, 22, 316, 334, panel, Pal.PlumLine);
-            Px.Fill(ib, 1, 1, 314, 16, Pal.Ink);
+            RectTransform ib = ConsoleArt.Panel(rt, "Inbox", 4, 22, 316, 334, panel, Pal.PlumLine);
+            Px.Fill(ib, 4, 2, 308, 15, Pal.Alpha(Pal.Ink, 215));
             inboxLayer = Px.Rect(rt, "InboxList", 0, 0, 640, 360);
 
             tabLayer = Px.Rect(rt, "Tabs", 0, 0, 640, 360);
-            RectTransform cb = Px.Box(rt, "Content", 324, 40, 312, 276, panel, Pal.PlumLine);
+            RectTransform cb = ConsoleArt.Panel(rt, "Content", 324, 40, 312, 276, panel, Pal.PlumLine);
             content = Px.Rect(cb, "Inner", 0, 0, 312, 276);
             bottom = Px.Rect(rt, "Bottom", 0, 0, 640, 360);
             modal = Px.Rect(rt, "Modal", 0, 0, 640, 360);
@@ -237,13 +237,13 @@ namespace SSD
             string why;
             bool canCall = c.CanCall(op, out why);
             string whyCall = why;
-            Px.Button(card, "撥打", 262, 30, 44, 14, canCall ? Pal.Orange : Pal.PlumLine, canCall ? Pal.Ink : Pal.Lav, Pal.Ink,
+            ConsoleArt.Key(card, "撥打", 262, 30, 44, 14, canCall ? Pal.Orange : Pal.PlumLine, canCall ? Pal.Ink : Pal.Lav, Pal.Ink,
                 () => { if (canCall) game.CallOpportunity(op); else Toast(whyCall); });
             if (s.Has("vjoined"))
             {
                 bool canDel = c.CanDelegate(op, out why);
                 string whyDel = why;
-                Px.Button(card, "委派", 214, 30, 44, 14, canDel ? Pal.TealDark : Pal.PlumLine, Pal.Cream, Pal.Ink,
+                ConsoleArt.Key(card, "委派", 214, 30, 44, 14, canDel ? Pal.TealDark : Pal.PlumLine, Pal.Cream, Pal.Ink,
                     () => { if (canDel) game.DelegateOpportunity(op); else Toast(whyDel); });
             }
         }
@@ -259,7 +259,7 @@ namespace SSD
             {
                 int k = i;
                 bool on = tab == i;
-                Px.Button(tabLayer, Tabs[i], 324 + i * 44.6f, 22, 43, 16, on ? Pal.Orange : Pal.Plum, on ? Pal.Ink : Pal.Cream, on ? Pal.Ink : Pal.PlumLine,
+                ConsoleArt.Key(tabLayer, Tabs[i], 324 + i * 44.6f, 22, 43, 16, on ? Pal.Orange : Pal.Plum, on ? Pal.Ink : Pal.Cream, on ? Pal.Ink : Pal.PlumLine,
                     () => { tab = k; RefreshTabs(); RefreshContent(); });
             }
         }

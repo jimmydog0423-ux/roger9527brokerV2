@@ -135,13 +135,10 @@ namespace SSD
             RectTransform contents = screen.rectTransform;
             Px.Fill(contents, 0, 0, ScreenWidth, 6, Pal.Ink);
             Px.Fill(contents, 2, 2, 2, 2, Pal.Orange);
-            for (int i = 0; i < 3; i++) Px.Box(contents, "Icon", 8, 14 + i * 24, 16, 16, Pal.PlumLine, Pal.PlumLight);
+            for (int i = 0; i < 3; i++) ConsoleArt.Panel(contents, "Icon", 8, 14 + i * 24, 16, 16, Pal.PlumLine, Pal.PlumLight);
             idleText = Px.Label(contents, "目前沒有來電", 30, 60, 210, 14, Pal.Lav, TextAnchor.UpperCenter, false);
 
-            popup = Px.Rect(contents, "Popup", PopupBounds.x, PopupBounds.y, PopupBounds.width, PopupBounds.height);
-            Image pbg = popup.gameObject.AddComponent<Image>();
-            pbg.color = Pal.Plum;
-            pbg.raycastTarget = false;
+            popup = ConsoleArt.Panel(contents, "Popup", PopupBounds.x, PopupBounds.y, PopupBounds.width, PopupBounds.height, Pal.Plum, Pal.PlumLight);
             popupFrame = Px.Frame(popup, 0, 0, PopupBounds.width, PopupBounds.height, Pal.PlumLight, 2);
             popupBody = Px.Rect(popup, "Body", 0, 0, PopupBounds.width, PopupBounds.height);
         }
@@ -169,13 +166,13 @@ namespace SSD
             Px.Label(popupBody, d.client.company, 35, 34, 110, 14, Pal.Lav);
             if (c == Call.Ringing)
             {
-                Px.Button(popupBody, "接聽", 4, 58, 66, 20, Pal.Teal, Pal.Ink, Pal.Ink, () => game.Answer());
-                Px.Button(popupBody, "拒接", 76, 58, 66, 20, Pal.Red, Pal.Cream, Pal.Ink, () => game.Decline());
+                ConsoleArt.Key(popupBody, "接聽", 4, 58, 66, 20, Pal.Teal, Pal.Ink, Pal.Ink, () => game.Answer());
+                ConsoleArt.Key(popupBody, "拒接", 76, 58, 66, 20, Pal.Red, Pal.Cream, Pal.Ink, () => game.Decline());
             }
             else
             {
                 string label = c == Call.Missed ? "回撥" : "回到電腦";
-                Px.Button(popupBody, label, 4, 58, 138, 20, Pal.Teal, Pal.Ink, Pal.Ink, () => game.Answer());
+                ConsoleArt.Key(popupBody, label, 4, 58, 138, 20, Pal.Teal, Pal.Ink, Pal.Ink, () => game.Answer());
             }
         }
 

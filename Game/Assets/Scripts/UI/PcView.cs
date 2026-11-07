@@ -88,27 +88,30 @@ namespace SSD
         {
             Image bg = Px.Fill(rt, 0, 0, 640, 360, Pal.Night);
             bg.raycastTarget = true;
-            Image workSurface = Px.Fill(rt, 0, 132, 640, 172, Pal.PlumDeep);
-            Sprite deskArt = Resources.Load<Sprite>("Computer/document-desk-v2");
-            if (deskArt != null)
+            if (!ConsoleArt.ApplyChassis(bg))
             {
-                workSurface.sprite = deskArt;
-                workSurface.color = Pal.White;
+                Image workSurface = Px.Fill(rt, 0, 132, 640, 172, Pal.PlumDeep);
+                Sprite deskArt = Resources.Load<Sprite>("Computer/document-desk-v2");
+                if (deskArt != null)
+                {
+                    workSurface.sprite = deskArt;
+                    workSurface.color = Pal.White;
+                }
+                else Px.Tiled(rt, 0, 133, 640, 171, PixelSprites.Grid16, Pal.DeskGrid);
+                Px.Fill(rt, 0, 132, 640, 1, Pal.PlumLine);
+                Px.Fill(rt, 0, 304, 640, 56, Pal.Ink);
+                Px.Fill(rt, 0, 304, 640, 1, Pal.PlumLine);
             }
-            else Px.Tiled(rt, 0, 133, 640, 171, PixelSprites.Grid16, Pal.DeskGrid);
-            Px.Fill(rt, 0, 132, 640, 1, Pal.PlumLine);
-            Px.Fill(rt, 0, 304, 640, 56, Pal.Ink);
-            Px.Fill(rt, 0, 304, 640, 1, Pal.PlumLine);
 
             // 1 聯絡人
-            RectTransform cp = Px.Box(rt, "Contacts", 4, 4, 104, 124, Pal.PlumDeep, Pal.PlumLine);
-            Px.Fill(cp, 1, 1, 102, 14, Pal.Ink);
-            Px.Label(cp, "聯絡人", 5, 1, 90, 14, Pal.Lav);
+            RectTransform cp = ConsoleArt.Panel(rt, "Contacts", 4, 4, 104, 124, Pal.PlumDeep, Pal.PlumLine);
+            Px.Fill(cp, 4, 2, 96, 14, Pal.Alpha(Pal.Ink, 215));
+            Px.Label(cp, "聯絡人", 5, 1, 90, 14, Pal.Cream);
             contacts = Px.Rect(cp, "List", 0, 0, 104, 124);
 
             // 2 視訊
-            RectTransform vw = Px.Box(rt, "Video", 112, 4, 316, 124, Pal.Ink, Pal.PlumLight);
-            Px.Fill(vw, 1, 1, 314, 15, Pal.Plum);
+            RectTransform vw = ConsoleArt.Panel(rt, "Video", 112, 4, 316, 124, Pal.Ink, Pal.PlumLight);
+            Px.Fill(vw, 4, 2, 308, 14, Pal.Alpha(Pal.Ink, 200));
             callDot = Px.Fill(vw, 5, 6, 5, 5, Pal.TealLight);
             callTitle = Px.Label(vw, "", 14, 1, 250, 14, Pal.Cream);
             Px.Frame(vw, 283, 5, 6, 6, Pal.Lav);
@@ -117,7 +120,7 @@ namespace SSD
 
             RectTransform feed = Px.Rect(vw, "Feed", 1, 16, 314, 86);
             Image fbg = feed.gameObject.AddComponent<Image>();
-            fbg.color = Pal.VideoWall;
+            fbg.color = Pal.Hex("#2c3537");
             fbg.raycastTarget = false;
             feed.gameObject.AddComponent<RectMask2D>();
             Sprite videoArt = Resources.Load<Sprite>("Computer/video-room-v2");
@@ -131,19 +134,20 @@ namespace SSD
                 Px.Fill(feed, 94, 40, 18, 14, Pal.Teal);
             }
             portrait = PortraitArt.Draw(feed, "lin", 21, 2, 3);
+            ConsoleArt.FrameCamera(feed, 0, 0, 108, 86);
 
             RectTransform bb = Px.Box(feed, "Bubble", 108, 4, 202, 62, Pal.Cream, Pal.Ink);
             Px.Fill(feed, 102, 31, 7, 8, Pal.Ink);
             Px.Fill(feed, 103, 32, 7, 6, Pal.Cream);
-            nameTagBg = Px.Fill(bb, 4, 2, 112, 14, Pal.PlumLight);
+            nameTagBg = Px.Fill(bb, 4, 2, 112, 14, Pal.Hex("#713d39"));
             nameTag = Px.Label(bb, "", 4, 2, 112, 14, Pal.Cream, TextAnchor.UpperCenter, false);
             bubble = Px.Label(bb, "", 4, 17, 194, 42, Pal.PaperInk, TextAnchor.UpperLeft, true);
             replyRect = Px.Rect(feed, "Replies", 4, 68, 306, 16);
             replyLayer = replyRect;
 
-            Px.Fill(vw, 1, 102, 314, 21, Pal.Plum);
+            Px.Fill(vw, 4, 102, 308, 19, Pal.Alpha(Pal.Ink, 200));
             toolbar = Px.Rect(vw, "Toolbar", 0, 102, 316, 21);
-            Px.Button(vw, "掛斷", 89, 105, 32, 15, Pal.Red, Pal.Cream, Pal.Ink, () => { if (s != null) s.Finish("hold"); });
+            ConsoleArt.Key(vw, "掛斷", 89, 105, 32, 15, Pal.Red, Pal.Cream, Pal.Ink, () => { if (s != null) s.Finish("hold"); });
             Px.Label(vw, "客戶耐心", 214, 105, 56, 14, Pal.Lav);
             for (int i = 0; i < 5; i++)
             {
@@ -152,17 +156,17 @@ namespace SSD
             }
 
             // 3 日期與資金
-            RectTransform dp = Px.Box(rt, "Day", 432, 4, 204, 56, Pal.Plum, Pal.PlumLight);
+            RectTransform dp = ConsoleArt.Panel(rt, "Day", 432, 4, 204, 56, Pal.Plum, Pal.PlumLight);
             dayText = Px.Label(dp, "", 6, 2, 120, 14, Pal.Cream);
             recvText = Px.Label(dp, "", 80, 2, 118, 14, Pal.TealLight, TextAnchor.UpperRight, false);
             cashText = Px.Label(dp, "", 6, 16, 190, 14, Pal.Cream);
-            Px.Button(dp, "選單", 6, 36, 40, 16, Pal.PlumLine, Pal.Cream, Pal.Ink, () => game.OpenMenu());
-            Px.Button(dp, "結束營業", 138, 36, 60, 16, Pal.Red, Pal.Cream, Pal.Ink, () => game.RequestEndDay());
+            ConsoleArt.Key(dp, "選單", 6, 36, 40, 16, Pal.PlumLine, Pal.Cream, Pal.Ink, () => game.OpenMenu());
+            ConsoleArt.Key(dp, "結束營業", 138, 36, 60, 16, Pal.Red, Pal.Cream, Pal.Ink, () => game.RequestEndDay());
 
             // 4 目前任務
-            RectTransform tp = Px.Box(rt, "Tasks", 432, 64, 204, 67, Pal.Plum, Pal.PlumLight);
-            Px.Fill(tp, 1, 1, 202, 14, Pal.Ink);
-            Px.Label(tp, "目前任務", 5, 1, 120, 14, Pal.Lav);
+            RectTransform tp = ConsoleArt.Panel(rt, "Tasks", 432, 64, 204, 67, Pal.Plum, Pal.PlumLight);
+            Px.Fill(tp, 4, 2, 196, 14, Pal.Alpha(Pal.Ink, 215));
+            Px.Label(tp, "目前任務", 5, 1, 120, 14, Pal.Cream);
             tasks = Px.Rect(tp, "List", 0, 0, 204, 67);
 
             // 5 檢視區、連線
@@ -170,10 +174,10 @@ namespace SSD
             linkLayer = Px.Rect(rt, "Link", 0, 0, 640, 360);
 
             // 6 資料倉庫
-            RectTransform si = Px.Box(rt, "StorageInfo", 4, 308, 96, 48, Pal.Plum, Pal.PlumLight);
+            RectTransform si = ConsoleArt.Panel(rt, "StorageInfo", 4, 308, 96, 48, Pal.Plum, Pal.PlumLight);
             Px.Label(si, "資料倉庫", 5, 1, 88, 14, Pal.Cream);
             capText = Px.Label(si, "", 5, 15, 88, 14, Pal.Lav);
-            Px.Button(si, "擴充倉庫", 5, 31, 60, 14, Pal.PlumLine, Pal.Cream, Pal.Ink,
+            ConsoleArt.Key(si, "擴充倉庫", 5, 31, 60, 14, Pal.PlumLine, Pal.Cream, Pal.Ink,
                 () => { if (s != null) s.Notify("提示", "這裡放的是這通電話收到的資料。公司的商品庫存在電腦桌面的「庫存」", "info"); });
             hotbarLayer = Px.Rect(rt, "Hotbar", 0, 0, 640, 360);
 
@@ -226,7 +230,8 @@ namespace SSD
                 string kind;
                 string status = s.ContactStatus(c, out kind);
                 Color32 sc = kind == "talk" ? Pal.TealLight : (kind == "unread" ? Pal.Yellow : Pal.Lav);
-                RectTransform card = Px.Box(contacts, "Card_" + c.id, 4, 18 + i * 35, 96, 32, Pal.Plum, c.caller ? Pal.Orange : Pal.PlumLine);
+                RectTransform card = ConsoleArt.Panel(contacts, "Card_" + c.id, 4, 18 + i * 35, 96, 32, Pal.Plum, Pal.PlumLine);
+                if (c.caller) Px.Frame(card, 1, 1, 94, 30, Pal.Orange);
                 string id = c.id;
                 Px.MakeClickable(card, () => s.ContactClicked(id));
                 Px.Fill(card, 3, 2, 24, 28, Pal.VideoWall);
@@ -252,13 +257,13 @@ namespace SSD
                 float w = Px.TextWidth(r.text) + 12;
                 if (x + w > 306) break;
                 string id = r.id;
-                Px.Button(replyLayer, r.text, x, 0, w, 16, Pal.Orange, Pal.Ink, Pal.Ink, () => s.Reply(id));
+                ConsoleArt.Key(replyLayer, r.text, x, 0, w, 16, Pal.Orange, Pal.Ink, Pal.Ink, () => s.Reply(id));
                 x += w + 4;
             }
 
             Px.Clear(toolbar);
-            Px.Button(toolbar, "麥克風", 5, 3, 44, 15, s.mic ? Pal.PlumLine : Pal.Red, Pal.Cream, Pal.Ink, () => s.ToggleMic());
-            Px.Button(toolbar, "鏡頭", 53, 3, 32, 15, s.cam ? Pal.PlumLine : Pal.Red, Pal.Cream, Pal.Ink, () => s.ToggleCam());
+            ConsoleArt.Key(toolbar, "麥克風", 5, 3, 44, 15, s.mic ? Pal.PlumLine : Pal.Red, Pal.Cream, Pal.Ink, () => s.ToggleMic());
+            ConsoleArt.Key(toolbar, "鏡頭", 53, 3, 32, 15, s.cam ? Pal.PlumLine : Pal.Red, Pal.Cream, Pal.Ink, () => s.ToggleCam());
 
             int maxP = Mathf.Max(1, s.data.patience);
             int lit = Mathf.CeilToInt(5f * s.patience / maxP);
@@ -353,9 +358,10 @@ namespace SSD
             for (int i = 0; i < CaseSession.SlotCount; i++)
             {
                 string id = s.slots[i];
+                bool hasWell = ConsoleArt.DrawWell(slotsLayer, SlotX[i], SlotY, SlotW, SlotH);
                 if (id == null)
                 {
-                    Px.DashedRect(slotsLayer, SlotX[i], SlotY, SlotW, SlotH, Pal.PlumLight);
+                    if (!hasWell) Px.DashedRect(slotsLayer, SlotX[i], SlotY, SlotW, SlotH, Pal.PlumLight);
                     Px.Label(slotsLayer, "拖曳或點選", SlotX[i], SlotY + 68, SlotW, 14, Pal.Lav, TextAnchor.UpperCenter, false);
                     Px.Label(slotsLayer, "下方資料", SlotX[i], SlotY + 82, SlotW, 14, Pal.Lav, TextAnchor.UpperCenter, false);
                     continue;
@@ -375,7 +381,9 @@ namespace SSD
             Px.Fill(doc, 0, 0, SlotW, h, paper);
             Px.Frame(doc, 0, 0, SlotW, h, Pal.Ink);
             Px.Fill(doc, 1, 1, SlotW - 2, 14, head);
+            Px.Fill(doc, 1, 1, SlotW - 2, 1, Pal.Alpha(Pal.White, 68));
             Px.Fill(doc, 1, 15, SlotW - 2, 1, Pal.Ink);
+            Px.Fill(doc, 1, h - 2, SlotW - 2, 1, Pal.Alpha(Pal.PaperInk, 46));
             // 有字放不下的文件，標題旁邊多一個「詳細」，打開可以看完整內容
             bool detail = NeedsDetail(d);
             Px.Label(doc, d.title, 5, 1, detail ? 82 : 112, 14, Pal.PaperInk);
@@ -733,9 +741,10 @@ namespace SSD
                     Image bg = slot.gameObject.AddComponent<Image>();
                     bg.color = Pal.Night;
                     bg.raycastTarget = true;
+                    bool hasWell = ConsoleArt.ApplyWell(bg);
                     if (inUse) Px.DashedRect(slot, 0, 0, 48, 48, Pal.Orange);
-                    else Px.Frame(slot, 0, 0, 48, 48, Pal.PlumLine);
-                    IconArt.Draw(slot, doc.icon, inUse ? 0.35f : 1f);
+                    else if (!hasWell) Px.Frame(slot, 0, 0, 48, 48, Pal.PlumLine);
+                    ConsoleArt.DrawDocumentIcon(slot, doc.icon, inUse ? 0.35f : 1f);
                     Px.Label(slot, doc.tray, 0, 33, 48, 14, inUse ? Pal.Orange : Pal.Cream, TextAnchor.UpperCenter, false);
                     DragSource ds = slot.gameObject.AddComponent<DragSource>();
                     // 點一下放進檢視區；已經在檢視區的，再點一下就收回
@@ -747,13 +756,14 @@ namespace SSD
                 }
                 else if (i < d.storageUnlocked)
                 {
-                    Px.DashedRect(hotbarLayer, x, 308, 48, 48, Pal.PlumLight);
+                    if (!ConsoleArt.DrawWell(hotbarLayer, x, 308, 48, 48))
+                        Px.DashedRect(hotbarLayer, x, 308, 48, 48, Pal.PlumLight);
                     Px.Fill(hotbarLayer, x + 17, 308 + 23, 14, 2, Pal.PlumLight);
                     Px.Fill(hotbarLayer, x + 23, 308 + 17, 2, 14, Pal.PlumLight);
                 }
                 else
                 {
-                    Px.Box(hotbarLayer, "Locked", x, 308, 48, 48, Pal.TrayBg, Pal.Plum);
+                    ConsoleArt.Panel(hotbarLayer, "Locked", x, 308, 48, 48, Pal.TrayBg, Pal.Plum);
                     Px.Fill(hotbarLayer, x + 18, 308 + 12, 12, 2, Pal.PlumLight);
                     Px.Fill(hotbarLayer, x + 18, 308 + 12, 2, 10, Pal.PlumLight);
                     Px.Fill(hotbarLayer, x + 28, 308 + 12, 2, 10, Pal.PlumLight);
@@ -778,7 +788,7 @@ namespace SSD
             Px.Clear(ghost);
             Px.Fill(ghost, 0, 0, 48, 48, Pal.Night);
             Px.Frame(ghost, 0, 0, 48, 48, Pal.Orange);
-            IconArt.Draw(ghost, doc.icon, 1f);
+            ConsoleArt.DrawDocumentIcon(ghost, doc.icon, 1f);
             Px.Label(ghost, doc.tray, 0, 33, 48, 14, Pal.Cream, TextAnchor.UpperCenter, false);
             ghost.gameObject.SetActive(true);
             dropHi.SetAsLastSibling();
