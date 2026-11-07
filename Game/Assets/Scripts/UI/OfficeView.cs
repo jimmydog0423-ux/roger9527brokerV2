@@ -13,6 +13,7 @@ namespace SSD
 
         const int ScreenWidth = 240;
         const int ScreenHeight = 135;
+        const int DeskTagY = 208;
         public const float ZoomMax = PixelScaler.Width / (float)ScreenWidth;
         static readonly Rect MonitorBounds = new Rect(192, 44, 256, 151);
         static readonly Rect ScreenBounds = new Rect(200, 52, ScreenWidth, ScreenHeight);
@@ -24,7 +25,7 @@ namespace SSD
         GameRoot game;
         Text hudDay, hudCash, hudObjective;
         Image popupFrame, led;
-        RectTransform popup;
+        RectTransform popup, handbookTag, trayTag;
         Transform popupBody;
         Text idleText;
         Call call = Call.None;
@@ -74,18 +75,35 @@ namespace SSD
 
             if (sprite != null)
             {
-                // 紙標沿書封往左斜，文字使用遊戲的原生像素字級。
-                Color32 paper = Pal.Hex("#d3a078");
-                Px.Fill(rt, 81, 250, 58, 4, paper);
-                Px.Fill(rt, 79, 254, 58, 5, paper);
-                Px.Fill(rt, 77, 259, 58, 5, paper);
-                Px.Fill(rt, 77, 264, 58, 1, Pal.Hex("#875846"));
-                Px.Label(rt, "工作手冊", 79, 250, 58, 14, Pal.PaperInk, TextAnchor.MiddleCenter, false);
-                Px.Label(rt, "待辦", 559, 279, 30, 14, Pal.Cream, TextAnchor.MiddleCenter, false);
+                handbookTag = BuildDeskTag("工作手冊", 101, Pal.Yellow);
+                trayTag = BuildDeskTag("待辦", 531, Pal.TealLight);
             }
 
             BuildMonitor();
             SetCall(Call.None, null);
+        }
+
+        RectTransform BuildDeskTag(string text, int centerX, Color32 accent)
+        {
+            int width = Px.TextWidth(text) + 18;
+            RectTransform tag = Px.Rect(rt, "DeskTag_" + text, centerX - width / 2, DeskTagY, width, 22);
+            Px.Fill(tag, 2, 2, width, 18, Pal.Alpha(Pal.Ink, 170));
+            Px.Box(tag, "Plate", 0, 0, width, 18, Pal.PlumDeep, accent);
+            Px.Label(tag, text, 0, 2, width, 14, Pal.Cream, TextAnchor.MiddleCenter, false);
+            Px.Fill(tag, width / 2 - 3, 18, 7, 1, accent);
+            Px.Fill(tag, width / 2 - 2, 19, 5, 1, accent);
+            Px.Fill(tag, width / 2 - 1, 20, 3, 1, accent);
+            Px.Fill(tag, width / 2, 21, 1, 1, accent);
+            return tag;
+        }
+
+        static void FloatDeskTag(RectTransform tag, float phase)
+        {
+            if (tag == null) return;
+            // 以整個邏輯像素移動，讓標牌和文字保持銳利。
+            float y = -DeskTagY + Mathf.Round(Mathf.Sin(phase) * 3f);
+            Vector2 position = tag.anchoredPosition;
+            if (position.y != y) tag.anchoredPosition = new Vector2(position.x, y);
         }
 
         void BuildMonitor()
@@ -182,6 +200,10 @@ namespace SSD
 
         void Update()
         {
+            float phase = Time.unscaledTime * (2f * Mathf.PI / 2.8f);
+            FloatDeskTag(handbookTag, phase);
+            FloatDeskTag(trayTag, phase + 0.85f);
+
             if (call != Call.Ringing) return;
             blinkTimer += Time.unscaledDeltaTime;
             if (blinkTimer < 0.4f) return;
