@@ -22,6 +22,7 @@ namespace SSD
         static readonly Vector2 ZoomCenter = ScreenBounds.position * (ZoomMax / (ZoomMax - 1f));
 
         RectTransform rt;
+        SceneMotion roomMotion;
         GameRoot game;
         Text hudDay, hudCash, hudObjective;
         Image popupFrame, led;
@@ -61,7 +62,7 @@ namespace SSD
             {
                 room.sprite = sprite;
                 room.color = Color.white;
-                OfficeRain.Build(rt);
+                roomMotion = SceneMotion.Attach(room, "office");
             }
 
             Px.Fill(rt, 0, 0, PixelScaler.Width, 14, Pal.Ink);
@@ -131,6 +132,7 @@ namespace SSD
             {
                 screen.sprite = wallpaper;
                 screen.color = Pal.White;
+                SceneMotion.Attach(screen, "desktop");
             }
             RectTransform contents = screen.rectTransform;
             Px.Fill(contents, 0, 0, ScreenWidth, 6, Pal.Ink);
@@ -185,6 +187,7 @@ namespace SSD
         /// <summary>0 = 一般辦公室，1 = 螢幕填滿畫面。</summary>
         public void SetZoom(float e)
         {
+            if (roomMotion != null) roomMotion.enabled = e < 0.98f;
             float s = 1f + (ZoomMax - 1f) * e;
             rt.localScale = new Vector3(s, s, 1f);
             Vector2 p = ZoomCenter * (1f - s);

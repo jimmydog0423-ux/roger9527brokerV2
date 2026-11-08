@@ -125,7 +125,11 @@ namespace SSD
             feed.gameObject.AddComponent<RectMask2D>();
             Sprite videoArt = Resources.Load<Sprite>("Computer/video-room-v2");
             if (videoArt != null)
-                Px.Fill(feed, 0, 0, 108, 86, Pal.White).sprite = videoArt;
+            {
+                Image backdrop = Px.Fill(feed, 0, 0, 108, 86, Pal.White);
+                backdrop.sprite = videoArt;
+                SceneMotion.Attach(backdrop, "video");
+            }
             else
             {
                 Px.Tiled(feed, 8, 6, 104, 66, PixelSprites.Blinds, Pal.White);

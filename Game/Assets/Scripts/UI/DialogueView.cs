@@ -124,7 +124,11 @@ namespace SSD
                 storyBg.color = Pal.Hex("#0d0b14");
                 if (NightArt.Paint(storyBg, "story")) storyBg.color = Pal.Hex("#c6bad4");
             }
-            else if (bg == "office") storyBg.color = Pal.Alpha(Pal.Ink, 120);
+            else
+            {
+                SceneMotion.Attach(storyBg, null);
+                if (bg == "office") storyBg.color = Pal.Alpha(Pal.Ink, 120);
+            }
         }
 
         public void Say(string who, string name, string text, string focus, Action onDone)

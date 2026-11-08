@@ -36,6 +36,7 @@ namespace SSD
             {
                 bg.sprite = office;
                 bg.color = Color.white;
+                SceneMotion.Attach(bg, "title");
             }
 
             RectTransform badge = Px.Box(rt, "Version", MenuX, 30, 28, 17, Pal.PlumDeep, Pal.Orange);

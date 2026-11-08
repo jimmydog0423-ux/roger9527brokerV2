@@ -79,6 +79,7 @@ namespace SSD
             {
                 bg.sprite = wallpaper;
                 bg.color = Pal.White;
+                SceneMotion.Attach(bg, "desktop");
             }
             else Px.Tiled(rt, 0, 18, 640, 342, PixelSprites.Grid16, Pal.DeskGrid);
             Color32 panel = wallpaper != null ? Pal.Alpha(Pal.PlumDeep, 218) : Pal.PlumDeep;

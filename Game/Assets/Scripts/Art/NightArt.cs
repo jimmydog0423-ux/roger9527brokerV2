@@ -17,6 +17,7 @@ namespace SSD
                 Sprites.Add(id, sprite);
             }
             image.sprite = sprite;
+            SceneMotion.Attach(image, sprite != null ? id : null);
             if (sprite == null) return false;
             image.color = Pal.White;
             return true;
