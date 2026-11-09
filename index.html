@@ -184,9 +184,9 @@
     layout();
 
     const config = {
-      dataUrl: "Build/22f9b53dff17ca633f4bde44cb17e77b.data.unityweb",
-      frameworkUrl: "Build/4929914c4c7bf77736786136b969bb43.framework.js.unityweb",
-      codeUrl: "Build/2aa356aaa3373977faa07cbba326bf7b.wasm.unityweb",
+      dataUrl: "Build/60231a07fef1d38ec24c730d954b0256.data.unityweb",
+      frameworkUrl: "Build/4a8a2b1d8250eb2bd85f95e77b7b1c15.framework.js.unityweb",
+      codeUrl: "Build/817e2f47539f3def18a5c149dacdc9f6.wasm.unityweb",
       streamingAssetsUrl: "StreamingAssets",
       fullscreenElementID: "game",
       companyName: "SSD Studio",
@@ -201,12 +201,19 @@
     }
 
     const loader = document.createElement("script");
-    loader.src = "Build/fc5427af5b1085d9367ecb538d486e29.loader.js";
+    loader.src = "Build/6a3558bc8a6c19da6b1f1b5e55e95641.loader.js";
     loader.onerror = showLoadError;
     loader.onload = () => {
       createUnityInstance(canvas, config, progress => {
         status.textContent = `正在載入水蛇洞經紀人… ${Math.round(progress * 100)}%`;
       }).then(game => {
+        function enableAudio() {
+          document.removeEventListener("pointerup", enableAudio, true);
+          document.removeEventListener("keydown", enableAudio, true);
+          game.SendMessage("GameRoot", "EnableAudio");
+        }
+        document.addEventListener("pointerup", enableAudio, true);
+        document.addEventListener("keydown", enableAudio, true);
         status.hidden = true;
         fullscreen.disabled = false;
         fullscreen.onclick = () => game.SetFullscreen(1);
